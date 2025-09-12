@@ -18,7 +18,7 @@ We makin' a game, my dudez!
   Programming and stuff \
   Fave Bug: Orchid Mantis
   
-* **Harlow** *(They/Them) \
+* **Harlow** *(They/Them)* \
   Environment/Critter Art \
   Fave Bug: probably the obscure bumble bee but like. Roly pollies/pillbugs are also fave (even tho theyre crustaceans) and jumping spiders \
   Also moths i love them even tho i always fear they will fly in my eyes
