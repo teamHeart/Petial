@@ -22,6 +22,11 @@ We makin' a game, my dudez!
   Environment/Critter Art \
   Fave Bug: probably the obscure bumble bee but like. Roly pollies/pillbugs are also fave (even tho theyre crustaceans) and jumping spiders \
   Also moths i love them even tho i always fear they will fly in my eyes
+
+* **Tre/Terran** *(They/Them)* \
+  Writer of Romance \
+  Fave bug: cuckoo wasp (also a big fan of Moths)
+
 ---
 
 # Useful Links
