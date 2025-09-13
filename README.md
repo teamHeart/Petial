@@ -1,5 +1,5 @@
-#<img width="157" height="265" alt="ghfl" src="https://github.com/user-attachments/assets/2218d8f3-9dad-4b3d-9cb7-119893cbe17b" />
- team-heart
+<img width="157" height="265" alt="ghfl" src="https://github.com/user-attachments/assets/2218d8f3-9dad-4b3d-9cb7-119893cbe17b" />
+# team-heart
 We makin' a game, my dudez!
 
 # Our Cast
