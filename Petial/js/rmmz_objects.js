@@ -5452,7 +5452,7 @@ Game_Party.prototype.allBattleMembers = function() {
 };
 
 Game_Party.prototype.maxBattleMembers = function() {
-    return 4;
+    return 3;
 };
 
 Game_Party.prototype.leader = function() {
