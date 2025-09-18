@@ -1,0 +1,74 @@
+@icon("res://img/DualGrid.svg")
+class_name DualGrid
+extends Node2D
+
+@export var WorldMap: TileMapLayer
+@export var DisplayMap: TileMapLayer
+@export var BaseAtlasCoord: Vector2i
+@export var FillAtlasCoord: Vector2i
+
+enum TileType {
+	Empty,
+	Fill
+}
+
+const Neighbors: Array[Vector2i] = [Vector2i.ZERO, Vector2i.RIGHT, Vector2i.DOWN, Vector2i.ONE] 
+const corners: Dictionary = {Vector4i(0,0,1,0): Vector2i(0,0),
+							 Vector4i(0,1,0,1): Vector2i(1,0),
+							 Vector4i(1,0,1,1): Vector2i(2,0),
+							 Vector4i(0,0,1,1): Vector2i(3,0),
+							
+							 Vector4i(1,0,0,1): Vector2i(0,1),
+							 Vector4i(0,1,1,1): Vector2i(1,1),
+							 Vector4i(1,1,1,1): Vector2i(2,1),
+							 Vector4i(1,1,1,0): Vector2i(3,1),
+							
+							 Vector4i(0,1,0,0): Vector2i(0,2),
+							 Vector4i(1,1,0,0): Vector2i(1,2),
+							 Vector4i(1,1,0,1): Vector2i(2,2),
+							 Vector4i(1,0,1,0): Vector2i(3,2),
+							 
+							 Vector4i(0,0,0,0): Vector2i(0,3),
+							 Vector4i(0,0,0,1): Vector2i(1,3),
+							 Vector4i(0,1,1,0): Vector2i(2,3),
+							 Vector4i(1,0,0,0): Vector2i(3,3),
+							 }
+
+func _ready() -> void:
+	calc()
+		
+func calc():
+	for coord: Vector2i in WorldMap.get_used_cells():
+		setDisplayTile(coord)
+	WorldMap.hide()
+		
+func setDisplayTile(pos):
+	for coord: Vector2i in Neighbors:
+		var newPos = coord+pos
+		var newCell = calculateDisplayTile(newPos)
+		DisplayMap.set_cell(newPos,1,newCell)
+	return 
+
+func calculateDisplayTile(pos: Vector2i) -> Vector2i:
+	var tl = getWorldTile(pos+Neighbors[0])
+	var tR = getWorldTile(pos+Neighbors[1])
+	var bl = getWorldTile(pos+Neighbors[2])
+	var br = getWorldTile(pos+Neighbors[3])
+	return corners[Vector4i(tl,tR,bl,br)]
+
+func getWorldTile(pos: Vector2i) -> int:
+	var coord = WorldMap.get_cell_atlas_coords(pos)
+	if coord == FillAtlasCoord:
+		return 1
+	return 0
+
+
+
+func _on_world_map_layer_changed() -> void:
+	calc()
+	pass # Replace with function body.
+
+
+func _on_world_map_layer_visibility_changed() -> void:
+	calc()
+	pass # Replace with function body.
