@@ -4,3 +4,4 @@
 *.code-workspace
 /.vscode/
 .editorconfig
+/addons/godot-git-plugin/*
