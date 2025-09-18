@@ -1,1 +1,6 @@
-/Builds/*
+# Godot 4+ specific ignores
+.godot/
+/android/
+*.code-workspace
+.vscode/
+.editorconfig
