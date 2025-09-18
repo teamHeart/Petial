@@ -1,8 +1,9 @@
 [gd_scene load_steps=8 format=4 uid="uid://iv21rcjy6lvr"]
 
 [ext_resource type="Script" uid="uid://owmw1vwqex8o" path="res://src/DualGrid.gd" id="1_xhfb8"]
-[ext_resource type="Texture2D" uid="uid://is3vu6f8ctwq" path="res://img/tileset2.png" id="2_xhfb8"]
+[ext_resource type="Texture2D" uid="uid://is3vu6f8ctwq" path="res://img/Temp Images/tileset2.png" id="2_xhfb8"]
 [ext_resource type="Texture2D" uid="uid://b0k2ugnx4vifg" path="res://img/PathAtlas.png" id="3_2eqhc"]
+
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_1b7yq"]
 texture = ExtResource("2_xhfb8")

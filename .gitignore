@@ -2,6 +2,6 @@
 .godot/
 /android/
 *.code-workspace
-/.vscode/
+.vscode/
 .editorconfig
-/addons/godot-git-plugin/*
+addons/godot-git-plugin/

@@ -1,0 +1,154 @@
+[gd_scene load_steps=17 format=3 uid="uid://d27cc372esw4s"]
+
+[ext_resource type="Script" uid="uid://bnfor7qmf86ah" path="res://src/PlayerMovementController.gd" id="1_4jtwa"]
+[ext_resource type="Texture2D" uid="uid://cinrjjl37v117" path="res://img/Temp Images/WalkCycle.png" id="2_m45gt"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_tx0tn"]
+radius = 10.338708
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v7gqg"]
+atlas = ExtResource("2_m45gt")
+region = Rect2(0, 60, 14, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wjtap"]
+atlas = ExtResource("2_m45gt")
+region = Rect2(14, 60, 14, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_chwn1"]
+atlas = ExtResource("2_m45gt")
+region = Rect2(28, 60, 14, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2ooml"]
+atlas = ExtResource("2_m45gt")
+region = Rect2(0, 20, 14, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hvaui"]
+atlas = ExtResource("2_m45gt")
+region = Rect2(14, 20, 14, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p20hg"]
+atlas = ExtResource("2_m45gt")
+region = Rect2(28, 20, 14, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_85gyg"]
+atlas = ExtResource("2_m45gt")
+region = Rect2(0, 40, 14, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_he4j0"]
+atlas = ExtResource("2_m45gt")
+region = Rect2(14, 40, 14, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c32x4"]
+atlas = ExtResource("2_m45gt")
+region = Rect2(28, 40, 14, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gwne5"]
+atlas = ExtResource("2_m45gt")
+region = Rect2(0, 0, 14, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fg7i4"]
+atlas = ExtResource("2_m45gt")
+region = Rect2(14, 0, 14, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hpu6p"]
+atlas = ExtResource("2_m45gt")
+region = Rect2(28, 0, 14, 20)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_op2xg"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v7gqg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wjtap")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_chwn1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wjtap")
+}],
+"loop": true,
+"name": &"WalkLeft",
+"speed": 4.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2ooml")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hvaui")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_p20hg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hvaui")
+}],
+"loop": true,
+"name": &"WalkRight",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_85gyg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_he4j0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c32x4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_he4j0")
+}],
+"loop": true,
+"name": &"WalkUp",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gwne5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fg7i4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hpu6p")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fg7i4")
+}],
+"loop": true,
+"name": &"walkDown",
+"speed": 5.0
+}]
+
+[node name="CharacterBody2D" type="CharacterBody2D" node_paths=PackedStringArray("cam")]
+collision_layer = 0
+motion_mode = 1
+floor_constant_speed = true
+script = ExtResource("1_4jtwa")
+cam = NodePath("Camera2D")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 8)
+scale = Vector2(3, 3)
+shape = SubResource("CircleShape2D_tx0tn")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+scale = Vector2(4, 4)
+sprite_frames = SubResource("SpriteFrames_op2xg")
+animation = &"WalkLeft"
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(0, 3.0517578e-05)
+scale = Vector2(4, 4)
+limit_enabled = false
+position_smoothing_enabled = true
+drag_horizontal_enabled = true
+drag_vertical_enabled = true
+editor_draw_limits = true
+editor_draw_drag_margin = true
