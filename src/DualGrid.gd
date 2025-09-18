@@ -1,11 +1,23 @@
+
+@tool
 @icon("res://img/DualGrid.svg")
 class_name DualGrid
 extends Node2D
 
+
 @export var WorldMap: TileMapLayer
 @export var DisplayMap: TileMapLayer
-@export var BaseAtlasCoord: Vector2i
-@export var FillAtlasCoord: Vector2i
+@export var TileAtlas: TileSet
+const BaseAtlasCoord: Vector2i = Vector2i.ZERO
+const FillAtlasCoord:= Vector2i.RIGHT
+
+@export_tool_button("Bake") var calc_action: Callable = calc
+
+func calc():
+	DisplayMap.set_tile_set(TileAtlas)
+	for coord: Vector2i in WorldMap.get_used_cells():
+		setDisplayTile(coord)
+	WorldMap.hide()
 
 enum TileType {
 	Empty,
@@ -35,18 +47,15 @@ const corners: Dictionary = {Vector4i(0,0,1,0): Vector2i(0,0),
 							 }
 
 func _ready() -> void:
-	calc()
+	pass
 		
-func calc():
-	for coord: Vector2i in WorldMap.get_used_cells():
-		setDisplayTile(coord)
-	WorldMap.hide()
+
 		
 func setDisplayTile(pos):
 	for coord: Vector2i in Neighbors:
 		var newPos = coord+pos
 		var newCell = calculateDisplayTile(newPos)
-		DisplayMap.set_cell(newPos,1,newCell)
+		DisplayMap.set_cell(newPos,0,newCell)
 	return 
 
 func calculateDisplayTile(pos: Vector2i) -> Vector2i:

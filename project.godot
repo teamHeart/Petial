@@ -13,7 +13,12 @@ config_version=5
 config/name="Roses of Petial"
 run/main_scene="uid://drr2ei2e86qms"
 config/features=PackedStringArray("4.5", "GL Compatibility")
+boot_splash/image="uid://dawm4xqwk7fka"
 config/icon="res://icon.svg"
+
+[display]
+
+window/size/mode=3
 
 [editor]
 
