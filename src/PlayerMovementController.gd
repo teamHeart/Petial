@@ -1,10 +1,14 @@
 class_name PlayerMovementController
 extends CharacterBody2D
 
+@export_range(0,500,10,"or_greater") var walkSpeed = 200
+
+var speed := 0.
+
 func _physics_process(delta: float) -> void:
 	#velocity = Vector2i.ZERO
 
-	var speed := 300 if Input.is_action_pressed("Sprint") else 200
+	speed = walkSpeed * (1.5 if Input.is_action_pressed("Sprint") else 1.)
 
 	var vel := Vector2.ZERO
 	if Input.is_action_pressed("ui_up") || Input.is_action_just_released("ui_down"):

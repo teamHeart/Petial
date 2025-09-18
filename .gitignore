@@ -5,3 +5,4 @@
 .vscode/
 .editorconfig
 addons/godot-git-plugin/
+*.tmp
