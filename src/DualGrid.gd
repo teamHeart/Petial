@@ -4,9 +4,11 @@
 class_name DualGrid
 extends Node2D
 
-
+@export_group("DO NOT TOUCH")
 @export var WorldMap: TileMapLayer
 @export var DisplayMap: TileMapLayer
+
+@export_group("")
 @export var TileAtlas: TileSet
 const BaseAtlasCoord: Vector2i = Vector2i.ZERO
 const FillAtlasCoord:= Vector2i.RIGHT
@@ -18,6 +20,13 @@ func calc():
 	for coord: Vector2i in WorldMap.get_used_cells():
 		setDisplayTile(coord)
 	WorldMap.hide()
+	DisplayMap.show()
+
+@export_tool_button("Unbake") var unbake: Callable = _unbake
+
+func _unbake():
+	DisplayMap.hide()
+	WorldMap.show()
 
 enum TileType {
 	Empty,
