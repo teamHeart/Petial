@@ -10,11 +10,10 @@ func _ready():
 	pass
 
 func _physics_process(delta: float) -> void:
-	delta = delta
 	var vel: float = pow((self.position.distance_to(_PartyLeader.position)),1.25)
 	var dir:= Vector2.from_angle(self.position.angle_to_point(_PartyLeader.position))
 	
-	var velocity = vel * dir
+	var velocity = (vel if vel >= 2 else 0. ) * dir
 	self.position += velocity * delta
 
 	return

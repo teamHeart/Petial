@@ -1,40 +1,51 @@
 class_name PlayerMovementController
 extends CharacterBody2D
 
-@export_range(0,500,10,"or_greater") var walkSpeed = 200
 
 var speed := 0.
+var _sprite: AnimatedSprite2D
+var _collider: CollisionShape2D
 
-func _physics_process(delta: float) -> void:
+func _ready() -> void:
+	_collider = get_child(0) as CollisionShape2D
+	_sprite = get_child(1) as AnimatedSprite2D
+
+func _physics_process(_delta: float) -> void:
 	#velocity = Vector2i.ZERO
-
-	speed = walkSpeed * (1.5 if Input.is_action_pressed("Sprint") else 1.)
-
-	var vel := Vector2.ZERO
-	if Input.is_action_pressed("ui_up") || Input.is_action_just_released("ui_down"):
-		vel.y -= 1
-	if Input.is_action_pressed("ui_down") || Input.is_action_just_released("ui_up"):
-		vel.y += 1
-	if Input.is_action_pressed("ui_left")|| Input.is_action_just_released("ui_right"):
-		vel.x -= 1;
-	if Input.is_action_pressed("ui_right") || Input.is_action_just_released("ui_left"):
-		vel.x += 1
-	delta = delta
-	velocity = speed * vel.normalized()
-
-	var dir := vel.normalized()
-	if dir:
-		match dir:
-			_ when dir.x > dir.y && dir.x > -dir.y:
-				$AnimatedSprite2D.play("WalkRight")
-				
-			_:
-				pass
-	else:
-		$AnimatedSprite2D.pause()
-		$AnimatedSprite2D.set_frame_and_progress(3, 1.)
-
 	move_and_slide()
+	var vel := Vector2.ZERO
+	if Input.is_action_pressed("ui_up"):
+		vel.y -= 1
+	if Input.is_action_pressed("ui_down"):
+		vel.y += 1
+	if Input.is_action_pressed("ui_left"):
+		vel.x -= 1;
+	if Input.is_action_pressed("ui_right"):
+		vel.x += 1
+	velocity = speed * vel.normalized()
+	if _collider != null:
+		var collision = get_last_slide_collision()
+		if collision != null:
+				if collision.get_collider() is PartyFollower:
+					velocity /= 1.
+					
+	if _sprite != null:
+		if velocity.length() > 25.:
+			var angle = velocity.angle()
+			if angle > -PI/4. and angle <= PI/4.:
+				_sprite.animation = "WalkRight"
+			elif angle > PI/4. and angle <= 3*PI/4.:
+				_sprite.animation = "WalkDown"
+			elif angle > -3*PI/4. and angle <= -PI/4.:
+				_sprite.animation = "WalkUp"
+			else:
+				_sprite.animation = "WalkLeft"	
+		else:
+			_sprite.frame = 0
+			_sprite.frame_progress = .999
+		_sprite.play()
+
+	
 #
 #const SPEED = 300.0
 #const JUMP_VELOCITY = -400.0

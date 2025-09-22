@@ -14,12 +14,22 @@ config/name="Roses of Petial"
 run/main_scene="uid://drr2ei2e86qms"
 config/features=PackedStringArray("4.5", "GL Compatibility")
 boot_splash/image="uid://dawm4xqwk7fka"
-config/icon="res://icon.svg"
+config/icon="uid://dawm4xqwk7fka"
+boot_splash/minimum_display_time=1000
+
+[autoload]
+
+SignalLens="*res://addons/signal_lens/autoload/signal_lens_autoload.gd"
+Data="*res://Data/util/Database.gd"
 
 [editor]
 
 version_control/plugin_name="GitPlugin"
 version_control/autoload_on_startup=true
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/gdLinter/plugin.cfg", "res://addons/signal_lens/plugin.cfg", "res://addons/simple_gdscript_formatter/plugin.cfg")
 
 [input]
 
