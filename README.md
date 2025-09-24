@@ -1,5 +1,5 @@
 <img width="157" height="265" alt="GitHub for Lesbians" src="https://github.com/user-attachments/assets/2218d8f3-9dad-4b3d-9cb7-119893cbe17b" />   <br/> 
-# team-heart 
+# teamHeart 
 We makin' a game, my dudez!
 
 # Our Cast
@@ -18,20 +18,24 @@ We makin' a game, my dudez!
 * **Claire** *(She/Her)* \
   Programming and stuff \
   Fave Bug: Orchid Mantis
+
+* **Amanda** *(She/They)* \
+  Programming Support \
+  Fave Bug: Praying Mantis
   
 * **Harlow** *(They/Them)* \
   Environment/Critter Art \
-  Fave Bug: probably the obscure bumble bee but like. Roly pollies/pillbugs are also fave (even tho theyre crustaceans) and jumping spiders \
+  Fave Bug: probably the obscure bumble bee but like. Roly pollies/pillbugs \
+   are also fave (even tho theyre crustaceans) and jumping spiders \
   Also moths i love them even tho i always fear they will fly in my eyes
 
 * **Tre/Terran** *(They/Them)* \
   Writer of Romance \
-  Fave bug: cuckoo wasp (also a big fan of Moths)
+  Fave Bug: cuckoo wasp (also a big fan of Moths)
 
 * **Nicole** *(whatever's funniest/probably non-binary but I don't actually care.)* \
   Artist (and I'll help out whenever I can) \
-  Favorite bug: mosquitoes... JK, it's bumblebees.
-
+  Fave Bug: Mosquitoes... JK, it's bumblebees.
 ---
 
 # Useful Links
