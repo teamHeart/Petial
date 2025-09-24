@@ -3,39 +3,44 @@
 We makin' a game, my dudez!
 
 # Our Cast
+## Story/Writing
 * **Rayla Heart** *(Fey/Fem/Feir)* \
   Our lovely Supreme Leader \
   Fave Bug: Common Bluet Damselfly
   
-* **Kanna** *(She/Her)* \
-  Combat Designer/Music extraorinaire \
-  Fave Bug: Velvet Worm
+* **Tre/Terran** *(They/Them)* \
+  Writer of Romance \
+  Fave Bug: cuckoo wasp (also a big fan of Moths
   
+## Art
 * **Zero** *(He/It/None)* \
   Maker of Art \
   Fave Bug: **[[REDACTED]]**
   
+* **Harlow** *(They/Them)* \
+  Environment/Critter Art \
+  Fave Bug: probably the obscure bumble bee but like. Roly pollies/pillbugs \
+  are also fave (even tho theyre crustaceans) and jumping spiders \
+  Also moths i love them even tho i always fear they will fly in my eyes
+  
+* **Nicole** *(whatever's funniest/probably non-binary but I don't actually care.)* \
+  Artist (and I'll help out whenever I can) \
+  Fave Bug: Mosquitoes... JK, it's bumblebees.
+  
+## Music
+* **Kanna** *(She/Her)* \
+  Combat Designer/Music extraorinaire \
+  Fave Bug: Velvet Worm
+  
+## Programming
 * **Claire** *(She/Her)* \
   Programming and stuff \
   Fave Bug: Orchid Mantis
-
+  
 * **Amanda** *(She/They)* \
   Programming Support \
   Fave Bug: Praying Mantis
   
-* **Harlow** *(They/Them)* \
-  Environment/Critter Art \
-  Fave Bug: probably the obscure bumble bee but like. Roly pollies/pillbugs \
-   are also fave (even tho theyre crustaceans) and jumping spiders \
-  Also moths i love them even tho i always fear they will fly in my eyes
-
-* **Tre/Terran** *(They/Them)* \
-  Writer of Romance \
-  Fave Bug: cuckoo wasp (also a big fan of Moths)
-
-* **Nicole** *(whatever's funniest/probably non-binary but I don't actually care.)* \
-  Artist (and I'll help out whenever I can) \
-  Fave Bug: Mosquitoes... JK, it's bumblebees.
 ---
 
 # Useful Links
