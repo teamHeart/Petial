@@ -1,92 +1,87 @@
-
 @tool
 @icon("res://img/DualGrid.svg")
 class_name DualGrid
-extends Node2D
+extends TileMapLayer
 
-@export_group("DO NOT TOUCH")
-@export var WorldMap: TileMapLayer
-@export var DisplayMap: TileMapLayer
-
-@export_group("")
-@export var TileAtlas: TileSet
-const BaseAtlasCoord: Vector2i = Vector2i.ZERO
-const FillAtlasCoord:= Vector2i.RIGHT
-
-@export_tool_button("Bake") var calc_action: Callable = calc
+@export var pathTileSet: TileSet
+@export var PathLayer: TileMapLayer
+@onready var pathLayer = $PathLayer
 
 func calc():
-	DisplayMap.set_tile_set(TileAtlas)
-	for coord: Vector2i in WorldMap.get_used_cells():
+	for coord: Vector2i in get_used_cells():
 		setDisplayTile(coord)
-	WorldMap.hide()
-	DisplayMap.show()
+		set_cell(coord, 1, Vector2i(get_cell_atlas_coords(coord).x, 1))
 
-@export_tool_button("Unbake") var unbake: Callable = _unbake
 
-func _unbake():
-	DisplayMap.hide()
-	WorldMap.show()
+const Neighbors: Array[Vector2i] = [-Vector2i.ONE, Vector2i.UP, Vector2i.LEFT, Vector2i.ZERO]
+const corners: Dictionary = {
+							Vector4i(0,0,1,0): Vector2i(0,0),
+							Vector4i(0,1,0,1): Vector2i(1,0),
+							Vector4i(1,0,1,1): Vector2i(2,0),
+							Vector4i(0,0,1,1): Vector2i(3,0),
 
-enum TileType {
-	Empty,
-	Fill
-}
+							Vector4i(1,0,0,1): Vector2i(0,1),
+							Vector4i(0,1,1,1): Vector2i(1,1),
+							Vector4i(1,1,1,1): Vector2i(2,1),
+							Vector4i(1,1,1,0): Vector2i(3,1),
 
-const Neighbors: Array[Vector2i] = [Vector2i.ZERO, Vector2i.RIGHT, Vector2i.DOWN, Vector2i.ONE] 
-const corners: Dictionary = {Vector4i(0,0,1,0): Vector2i(0,0),
-							 Vector4i(0,1,0,1): Vector2i(1,0),
-							 Vector4i(1,0,1,1): Vector2i(2,0),
-							 Vector4i(0,0,1,1): Vector2i(3,0),
-							
-							 Vector4i(1,0,0,1): Vector2i(0,1),
-							 Vector4i(0,1,1,1): Vector2i(1,1),
-							 Vector4i(1,1,1,1): Vector2i(2,1),
-							 Vector4i(1,1,1,0): Vector2i(3,1),
-							
-							 Vector4i(0,1,0,0): Vector2i(0,2),
-							 Vector4i(1,1,0,0): Vector2i(1,2),
-							 Vector4i(1,1,0,1): Vector2i(2,2),
-							 Vector4i(1,0,1,0): Vector2i(3,2),
-							 
-							 Vector4i(0,0,0,0): Vector2i(0,3),
-							 Vector4i(0,0,0,1): Vector2i(1,3),
-							 Vector4i(0,1,1,0): Vector2i(2,3),
-							 Vector4i(1,0,0,0): Vector2i(3,3),
-							 }
+							Vector4i(0,1,0,0): Vector2i(0,2),
+							Vector4i(1,1,0,0): Vector2i(1,2),
+							Vector4i(1,1,0,1): Vector2i(2,2),
+							Vector4i(1,0,1,0): Vector2i(3,2),
 
-func _ready() -> void:
-	pass
-		
+							Vector4i(0,0,0,0): Vector2i(0,3),
+							Vector4i(0,0,0,1): Vector2i(1,3),
+							Vector4i(0,1,1,0): Vector2i(2,3),
+							Vector4i(1,0,0,0): Vector2i(3,3),
+							}
 
-		
+
+
 func setDisplayTile(pos):
 	for coord: Vector2i in Neighbors:
 		var newPos = coord+pos
 		var newCell = calculateDisplayTile(newPos)
-		DisplayMap.set_cell(newPos,0,newCell)
-	return 
+		PathLayer.set_cell(newPos,0,newCell)
+	return
 
 func calculateDisplayTile(pos: Vector2i) -> Vector2i:
-	var tl = getWorldTile(pos+Neighbors[0])
-	var tR = getWorldTile(pos+Neighbors[1])
-	var bl = getWorldTile(pos+Neighbors[2])
-	var br = getWorldTile(pos+Neighbors[3])
+	var tl = 1 if getWorldTile(pos+Neighbors[0]) == 1 else 0
+	var tR = 1 if getWorldTile(pos+Neighbors[1]) == 1 else 0
+	var bl = 1 if getWorldTile(pos+Neighbors[2]) == 1 else 0
+	var br = 1 if getWorldTile(pos+Neighbors[3]) == 1 else 0
 	return corners[Vector4i(tl,tR,bl,br)]
 
 func getWorldTile(pos: Vector2i) -> int:
-	var coord = WorldMap.get_cell_atlas_coords(pos)
-	if coord == FillAtlasCoord:
-		return 1
-	return 0
+	return get_cell_atlas_coords(pos).x
 
+func _process(_delta: float) -> void:
+	if Engine.is_editor_hint():
+		if get_used_cells().is_empty():
+			set_cell(Vector2i.ZERO,1,Vector2i(0,1))
+		for cell in get_used_cells():
+			if get_cell_tile_data(cell).has_custom_data("Changed") and get_cell_tile_data(cell).get_custom_data("Changed"):
+				_on_changed()
+				return
 
+func _on_changed() -> void:
+	if PathLayer == null:
+		return
+	PathLayer.tile_set = pathTileSet
+	var minX:= 0
+	var minY:= 0
+	var maxX:= 0
+	var maxY:= 0
+	for t in get_used_cells():
+		if get_cell_tile_data(t) != null and get_cell_tile_data(t).has_custom_data("Changed") and get_cell_tile_data(t).get_custom_data("Changed"):
+			minX = min(t.x, minX)
+			minY = min(t.y,  minY)
+			maxX = max(t.x, maxX)
+			maxY = max(t.y, maxY)
+	for x in range(minX-1, maxX+2):
+		for y in range(minY-1, maxY+2):
+			if get_cell_atlas_coords(Vector2i(x,y)).x == -1:
+				set_cell(Vector2i(x,y),1,Vector2i(0,1))
 
-func _on_world_map_layer_changed() -> void:
-	calc()
-	pass # Replace with function body.
-
-
-func _on_world_map_layer_visibility_changed() -> void:
-	calc()
-	pass # Replace with function body.
+	if Engine.is_editor_hint():
+		calc()
