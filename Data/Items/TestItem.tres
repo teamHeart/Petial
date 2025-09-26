@@ -1,0 +1,9 @@
+[gd_resource type="JSON" script_class="Item" load_steps=2 format=3 uid="uid://ddh5fviqpt2cu"]
+
+[ext_resource type="Script" uid="uid://2krjfnq8wy6t" path="res://Data/util/Item.gd" id="1_50k2r"]
+
+[resource]
+data = null
+script = ExtResource("1_50k2r")
+price = 5
+targetAlly = true

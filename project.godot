@@ -19,8 +19,9 @@ boot_splash/minimum_display_time=1000
 
 [autoload]
 
-SignalLens="*res://addons/signal_lens/autoload/signal_lens_autoload.gd"
+SignalLens="res://addons/signal_lens/autoload/signal_lens_autoload.gd"
 Data="*res://Data/util/Database.gd"
+PartyContainer="*res://src/party_container.gd"
 
 [editor]
 
@@ -73,5 +74,12 @@ Sprint={
 
 [rendering]
 
+textures/canvas_textures/default_texture_filter=0
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"
+
+[steam]
+
+initialization/app_id=0
+initialization/initialize_on_startup=false
+initialization/embed_callbacks=false

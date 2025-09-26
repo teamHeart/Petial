@@ -1,0 +1,42 @@
+[gd_scene load_steps=7 format=4 uid="uid://coteu2wi3o76p"]
+
+[ext_resource type="Script" uid="uid://hgvnk7n6vp8r" path="res://src/battle_scene.gd" id="1_e5vbs"]
+[ext_resource type="Texture2D" uid="uid://6sxf5kmuqwjl" path="res://img/Temp Images/Grassland.png" id="2_3gnqe"]
+[ext_resource type="Texture2D" uid="uid://coi1nevog4ih1" path="res://img/Temp Images/Forest.png" id="3_gt16y"]
+[ext_resource type="Texture2D" uid="uid://c81bqqeqpj4oh" path="res://img/Temp Images/battlegridcell.png" id="4_e5vbs"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_3gnqe"]
+texture = ExtResource("4_e5vbs")
+texture_region_size = Vector2i(64, 48)
+0:0/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_ed262"]
+tile_size = Vector2i(64, 48)
+sources/1 = SubResource("TileSetAtlasSource_3gnqe")
+
+[node name="BattleScene" type="Node2D"]
+script = ExtResource("1_e5vbs")
+allies = [null, null, null]
+
+[node name="HUD" type="CanvasLayer" parent="."]
+layer = 2
+
+[node name="BattleBack" type="Sprite2D" parent="."]
+scale = Vector2(1.2, 1.2)
+texture = ExtResource("2_3gnqe")
+centered = false
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(1.2, 1.2)
+texture = ExtResource("3_gt16y")
+centered = false
+
+[node name="TileMapLayer" type="TileMapLayer" parent="."]
+position = Vector2(201, 369.99997)
+skew = 0.2617994
+tile_map_data = PackedByteArray("AAAAAAAAAQAAAAAAAAABAAAAAQAAAAAAAAAAAAEAAQAAAAAAAAAAAAIAAQAAAAAAAAAAAAMAAQAAAAAAAAAAAAQAAQAAAAAAAAABAAEAAQAAAAAAAAABAAIAAQAAAAAAAAABAAMAAQAAAAAAAAABAAQAAQAAAAAAAAACAAAAAQAAAAAAAAACAAEAAQAAAAAAAAACAAIAAQAAAAAAAAACAAMAAQAAAAAAAAACAAQAAQAAAAAAAAADAAAAAQAAAAAAAAADAAEAAQAAAAAAAAADAAIAAQAAAAAAAAADAAMAAQAAAAAAAAADAAQAAQAAAAAAAAAEAAAAAQAAAAAAAAAEAAEAAQAAAAAAAAAEAAIAAQAAAAAAAAAEAAMAAQAAAAAAAAAEAAQAAQAAAAAAAAAFAAAAAQAAAAAAAAAFAAEAAQAAAAAAAAAFAAIAAQAAAAAAAAAFAAMAAQAAAAAAAAAFAAQAAQAAAAAAAAAGAAAAAQAAAAAAAAAGAAEAAQAAAAAAAAAGAAIAAQAAAAAAAAAGAAMAAQAAAAAAAAAGAAQAAQAAAAAAAAAHAAAAAQAAAAAAAAAHAAEAAQAAAAAAAAAHAAIAAQAAAAAAAAAHAAMAAQAAAAAAAAAHAAQAAQAAAAAAAAAIAAAAAQAAAAAAAAAIAAEAAQAAAAAAAAAIAAIAAQAAAAAAAAAIAAMAAQAAAAAAAAAIAAQAAQAAAAAAAAAJAAAAAQAAAAAAAAAJAAEAAQAAAAAAAAAJAAIAAQAAAAAAAAAJAAMAAQAAAAAAAAAJAAQAAQAAAAAAAAAKAAAAAQAAAAAAAAAKAAEAAQAAAAAAAAAKAAIAAQAAAAAAAAAKAAMAAQAAAAAAAAAKAAQAAQAAAAAAAAALAAAAAQAAAAAAAAALAAEAAQAAAAAAAAALAAIAAQAAAAAAAAALAAMAAQAAAAAAAAALAAQAAQAAAAAAAAAMAAAAAQAAAAAAAAAMAAEAAQAAAAAAAAAMAAIAAQAAAAAAAAAMAAMAAQAAAAAAAAAMAAQAAQAAAAAAAAA=")
+tile_set = SubResource("TileSet_ed262")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+skew = -0.14486241
+anchor_mode = 0
