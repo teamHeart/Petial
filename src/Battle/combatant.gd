@@ -1,11 +1,9 @@
-extends Sprite2D
 class_name Combatant
+extends Sprite2D
 
 var grid_cell: BattleCell
 
-
-func _init():
-	pass
+@export var battler: Battler
 
 func _init(data: Battler):
 	load_from_data(data)

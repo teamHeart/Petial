@@ -1,10 +1,10 @@
+class_name BattleScene
 extends Node2D
-const BattleGrid = preload("res://src/BattleGrid.gd")
 
 @export var grid_size: Vector2i = Vector2i(8, 6)
 @export var cell_size: Vector2 = Vector2(64, 64)
-@export var enemies:= []
-@export var allies:= []
+@export var enemies: Array[Combatant] = []
+@export var allies: Array[Combatant] = []
 @export var battle_back: Texture2D
 @export var battle_music: AudioStream
 

@@ -9,7 +9,7 @@ var _name := "New Element"
 	get():
 		return _id
 
-@export var name: String = "New Element":
+@export_placeholder("Name of the element") var name: String = "New Element":
 	set(newname):
 		_name = newname
 	get():
