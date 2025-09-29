@@ -29,6 +29,9 @@ func calculate_move_range():
 	for row in get_parent().grid:
 		for cell in row:
 			cell._processed = false
+			if cell.is_occupied():
+				cell._processed = true
+				cell.move_range = 999
 	move_range = 0
 	_processed = true
 	_move_range_processing_queue.append(self)
