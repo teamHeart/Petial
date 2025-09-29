@@ -23,8 +23,14 @@ SignalLens="res://addons/signal_lens/autoload/signal_lens_autoload.gd"
 Data="*res://Data/util/Database.gd"
 PartyContainer="*res://src/party_container.gd"
 
+[display]
+
+window/stretch/mode="canvas_items"
+
 [editor]
 
+movie_writer/movie_file="D:/Petial/Movies/video_proof.mp4"
+naming/script_name_casing=2
 version_control/plugin_name="GitPlugin"
 version_control/autoload_on_startup=true
 

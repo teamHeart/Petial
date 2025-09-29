@@ -6,3 +6,4 @@
 .editorconfig
 addons/godot-git-plugin/
 *.tmp
+/Movies/

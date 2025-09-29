@@ -1,20 +1,16 @@
-[gd_scene load_steps=10 format=4 uid="uid://coteu2wi3o76p"]
+[gd_scene load_steps=16 format=4 uid="uid://coteu2wi3o76p"]
 
 [ext_resource type="Script" uid="uid://cnrlqe4q7gj5e" path="res://src/Battle/battle_scene.gd" id="1_e5vbs"]
 [ext_resource type="Texture2D" uid="uid://6sxf5kmuqwjl" path="res://img/Temp Images/Grassland.png" id="2_3gnqe"]
-[ext_resource type="Script" uid="uid://do4rfhvgpqeif" path="res://Data/util/Battler.gd" id="2_gt16y"]
 [ext_resource type="Texture2D" uid="uid://coi1nevog4ih1" path="res://img/Temp Images/Forest.png" id="3_gt16y"]
 [ext_resource type="Texture2D" uid="uid://c81bqqeqpj4oh" path="res://img/Temp Images/battlegridcell.png" id="4_e5vbs"]
-
-[sub_resource type="JSON" id="JSON_20f6w"]
-data = null
-script = ExtResource("2_gt16y")
-metadata/_custom_type_script = "uid://do4rfhvgpqeif"
-
-[sub_resource type="JSON" id="JSON_w4764"]
-data = null
-script = ExtResource("2_gt16y")
-metadata/_custom_type_script = "uid://do4rfhvgpqeif"
+[ext_resource type="Texture2D" uid="uid://cv8mglryj72i1" path="res://img/Temp Images/dotpict_20250922_150218.png" id="5_w4764"]
+[ext_resource type="Script" uid="uid://bx7cd0vs3ih5j" path="res://src/Battle/combatant.gd" id="6_ed262"]
+[ext_resource type="Texture2D" uid="uid://bfxrbki40j5yv" path="res://img/Temp Images/Astra_1.png" id="7_f4ggb"]
+[ext_resource type="Texture2D" uid="uid://b1jcjreuwhnf0" path="res://img/Temp Images/Blue_1.png" id="7_ms847"]
+[ext_resource type="Script" uid="uid://bfjepneb0wluw" path="res://src/Battle/ally.gd" id="8_f4ggb"]
+[ext_resource type="Texture2D" uid="uid://cnege86pdq55x" path="res://img/Temp Images/Nim_1.png" id="8_wb0gu"]
+[ext_resource type="Texture2D" uid="uid://bricijwq5ou23" path="res://img/HighlightLayerTileSet.png" id="11_f4ggb"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_3gnqe"]
 texture = ExtResource("4_e5vbs")
@@ -22,13 +18,70 @@ texture_region_size = Vector2i(64, 48)
 0:0/0 = 0
 
 [sub_resource type="TileSet" id="TileSet_ed262"]
+tile_layout = 2
 tile_size = Vector2i(64, 48)
 sources/1 = SubResource("TileSetAtlasSource_3gnqe")
 
-[node name="BattleScene" type="Node2D"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_wb0gu"]
+texture = ExtResource("11_f4ggb")
+texture_region_size = Vector2i(1, 1)
+1:0/0 = 0
+2:0/0 = 0
+3:0/0 = 0
+4:0/0 = 0
+5:0/0 = 0
+6:0/0 = 0
+7:0/0 = 0
+8:0/0 = 0
+9:0/0 = 0
+0:0/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_84vmf"]
+tile_size = Vector2i(1, 1)
+sources/2 = SubResource("TileSetAtlasSource_wb0gu")
+
+[node name="BattleScene" type="Node2D" node_paths=PackedStringArray("enemies", "allies")]
 script = ExtResource("1_e5vbs")
-allies = [SubResource("JSON_20f6w"), SubResource("JSON_w4764"), null]
+grid_size = Vector2i(13, 5)
+cell_size = Vector2(64, 48)
+enemies = [NodePath("Combatants Layer/Combatant")]
+allies = [NodePath("Combatants Layer/Ally1"), NodePath("Combatants Layer/Ally2"), NodePath("Combatants Layer/Ally3")]
 battle_back = ExtResource("2_3gnqe")
+
+[node name="Combatants Layer" type="CanvasLayer" parent="."]
+
+[node name="Combatant" type="Sprite2D" parent="Combatants Layer"]
+y_sort_enabled = true
+texture = ExtResource("5_w4764")
+offset = Vector2(0, -32)
+script = ExtResource("6_ed262")
+occupied_cell_pos = Vector2i(2, 2)
+metadata/_custom_type_script = "uid://bx7cd0vs3ih5j"
+
+[node name="Ally1" type="Sprite2D" parent="Combatants Layer"]
+y_sort_enabled = true
+texture = ExtResource("7_ms847")
+offset = Vector2(0, -32)
+script = ExtResource("8_f4ggb")
+occupied_cell_pos = Vector2i(10, 2)
+
+[node name="Ally2" type="Sprite2D" parent="Combatants Layer"]
+y_sort_enabled = true
+texture = ExtResource("7_f4ggb")
+offset = Vector2(0, -32)
+script = ExtResource("8_f4ggb")
+occupied_cell_pos = Vector2i(11, 1)
+move_range = 4
+metadata/_custom_type_script = "uid://bfjepneb0wluw"
+
+[node name="Ally3" type="Sprite2D" parent="Combatants Layer"]
+y_sort_enabled = true
+texture = ExtResource("8_wb0gu")
+offset = Vector2(0, -32)
+script = ExtResource("8_f4ggb")
+occupied_cell_pos = Vector2i(11, 3)
+move_range = 4
+metadata/_custom_type_script = "uid://bfjepneb0wluw"
 
 [node name="Battleground" type="CanvasLayer" parent="."]
 layer = 0
@@ -43,16 +96,29 @@ scale = Vector2(1.2, 1.2)
 texture = ExtResource("3_gt16y")
 centered = false
 
-[node name="TileMapLayer" type="TileMapLayer" parent="Battleground"]
-position = Vector2(201, 369.99997)
+[node name="GridOverlay" type="TileMapLayer" parent="Battleground"]
+position = Vector2(212, 385)
 scale = Vector2(1, 0.99999994)
-skew = 0.26179934
+skew = 0.3926991
 tile_map_data = PackedByteArray("AAAAAAAAAQAAAAAAAAABAAAAAQAAAAAAAAAAAAEAAQAAAAAAAAAAAAIAAQAAAAAAAAAAAAMAAQAAAAAAAAAAAAQAAQAAAAAAAAABAAEAAQAAAAAAAAABAAIAAQAAAAAAAAABAAMAAQAAAAAAAAABAAQAAQAAAAAAAAACAAAAAQAAAAAAAAACAAEAAQAAAAAAAAACAAIAAQAAAAAAAAACAAMAAQAAAAAAAAACAAQAAQAAAAAAAAADAAAAAQAAAAAAAAADAAEAAQAAAAAAAAADAAIAAQAAAAAAAAADAAMAAQAAAAAAAAADAAQAAQAAAAAAAAAEAAAAAQAAAAAAAAAEAAEAAQAAAAAAAAAEAAIAAQAAAAAAAAAEAAMAAQAAAAAAAAAEAAQAAQAAAAAAAAAFAAAAAQAAAAAAAAAFAAEAAQAAAAAAAAAFAAIAAQAAAAAAAAAFAAMAAQAAAAAAAAAFAAQAAQAAAAAAAAAGAAAAAQAAAAAAAAAGAAEAAQAAAAAAAAAGAAIAAQAAAAAAAAAGAAMAAQAAAAAAAAAGAAQAAQAAAAAAAAAHAAAAAQAAAAAAAAAHAAEAAQAAAAAAAAAHAAIAAQAAAAAAAAAHAAMAAQAAAAAAAAAHAAQAAQAAAAAAAAAIAAAAAQAAAAAAAAAIAAEAAQAAAAAAAAAIAAIAAQAAAAAAAAAIAAMAAQAAAAAAAAAIAAQAAQAAAAAAAAAJAAAAAQAAAAAAAAAJAAEAAQAAAAAAAAAJAAIAAQAAAAAAAAAJAAMAAQAAAAAAAAAJAAQAAQAAAAAAAAAKAAAAAQAAAAAAAAAKAAEAAQAAAAAAAAAKAAIAAQAAAAAAAAAKAAMAAQAAAAAAAAAKAAQAAQAAAAAAAAALAAAAAQAAAAAAAAALAAEAAQAAAAAAAAALAAIAAQAAAAAAAAALAAMAAQAAAAAAAAALAAQAAQAAAAAAAAAMAAAAAQAAAAAAAAAMAAEAAQAAAAAAAAAMAAIAAQAAAAAAAAAMAAMAAQAAAAAAAAAMAAQAAQAAAAAAAAA=")
 tile_set = SubResource("TileSet_ed262")
 
+[node name="HighlightOverlay" type="TileMapLayer" parent="Battleground"]
+position = Vector2(212, 385)
+scale = Vector2(64, 47.999996)
+skew = 0.39269912
+tile_map_data = PackedByteArray("AAAAAAAAAAAAAAAAAAABAAEAAAAAAAAAAAACAAEAAAAAAAAAAAADAAEAAAAAAAAAAAAEAAEAAAAAAAAAAAAFAAEAAAAAAAAAAAAGAAEAAAAAAAAAAAAGAAIAAAAAAAAAAAAGAAMAAAAAAAAAAAAFAAMAAAAAAAAAAAAFAAQAAAAAAAAAAAAEAAMAAAAAAAAAAAADAAMAAAAAAAAAAAACAAMAAAAAAAAAAAABAAMAAAAAAAAAAAABAAIAAAAAAAAAAAACAAIAAAAAAAAAAAADAAIAAAAAAAAAAAAEAAIAAAAAAAAAAAAFAAIAAAAAAAAAAAABAAQAAAAAAAAAAAACAAQAAAAAAAAAAAADAAQAAAAAAAAAAAAEAAQAAAAAAAAAAAAGAAQAAAAAAAAAAAAHAAQAAAAAAAAAAAAHAAMAAAAAAAAAAAAHAAIAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAMAAAAAAAAAAAAAAAQAAAAAAAAAAAABAAAAAAAAAAAAAAACAAAAAAAAAAAAAAADAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAFAAAAAAAAAAAAAAAGAAAAAAAAAAAAAAAHAAAAAAAAAAAAAAAHAAEAAAAAAAAAAAAIAAAAAAAAAAAAAAAIAAEAAAAAAAAAAAAIAAIAAAAAAAAAAAAIAAMAAAAAAAAAAAAIAAQAAAAAAAAAAAAJAAAAAAAAAAAAAAAJAAEAAAAAAAAAAAAJAAIAAAAAAAAAAAAJAAMAAAAAAAAAAAAJAAQAAAAAAAAAAAAKAAAAAAAAAAAAAAAKAAEAAAAAAAAAAAAKAAIAAAAAAAAAAAAKAAMAAAAAAAAAAAAKAAQAAAAAAAAAAAALAAAAAAAAAAAAAAALAAEAAAAAAAAAAAALAAIAAAAAAAAAAAALAAMAAAAAAAAAAAALAAQAAAAAAAAAAAAMAAAAAAAAAAAAAAAMAAEAAAAAAAAAAAAMAAIAAAAAAAAAAAAMAAMAAAAAAAAAAAAMAAQAAAAAAAAAAAAJAP//AAAAAAAAAAAKAP//AAAAAAAAAAALAP//AAAAAAAAAAAMAP//AAAAAAAAAAANAP//AAAAAAAAAAANAAAAAAAAAAAAAAANAAEAAAAAAAAAAAANAAIAAAAAAAAAAAANAAMAAAAAAAAAAAANAAQAAAAAAAAAAAA=")
+tile_set = SubResource("TileSet_84vmf")
+
+[node name="TargetOverlay" type="TileMapLayer" parent="Battleground"]
+position = Vector2(212, 385)
+scale = Vector2(1, 0.9999999)
+skew = 0.39269912
+
 [node name="HUD" type="CanvasLayer" parent="."]
 layer = 2
+follow_viewport_enabled = true
 
 [node name="Camera2D" type="Camera2D" parent="."]
-skew = -0.14486241
 anchor_mode = 0
+limit_enabled = false
