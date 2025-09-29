@@ -71,7 +71,6 @@ texture = ExtResource("7_f4ggb")
 offset = Vector2(0, -32)
 script = ExtResource("8_f4ggb")
 occupied_cell_pos = Vector2i(11, 1)
-move_range = 4
 metadata/_custom_type_script = "uid://bfjepneb0wluw"
 
 [node name="Ally3" type="Sprite2D" parent="Combatants Layer"]
@@ -80,7 +79,6 @@ texture = ExtResource("8_wb0gu")
 offset = Vector2(0, -32)
 script = ExtResource("8_f4ggb")
 occupied_cell_pos = Vector2i(11, 3)
-move_range = 4
 metadata/_custom_type_script = "uid://bfjepneb0wluw"
 
 [node name="Battleground" type="CanvasLayer" parent="."]
