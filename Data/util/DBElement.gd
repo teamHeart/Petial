@@ -1,5 +1,5 @@
 class_name DBElement
-extends JSON
+extends Resource
 
 var _id := 0
 var _name := "New Element"

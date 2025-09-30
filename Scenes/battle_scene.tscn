@@ -1,16 +1,24 @@
-[gd_scene load_steps=16 format=4 uid="uid://coteu2wi3o76p"]
+[gd_scene load_steps=20 format=4 uid="uid://coteu2wi3o76p"]
 
 [ext_resource type="Script" uid="uid://cnrlqe4q7gj5e" path="res://src/Battle/battle_scene.gd" id="1_e5vbs"]
 [ext_resource type="Texture2D" uid="uid://6sxf5kmuqwjl" path="res://img/Temp Images/Grassland.png" id="2_3gnqe"]
 [ext_resource type="Texture2D" uid="uid://coi1nevog4ih1" path="res://img/Temp Images/Forest.png" id="3_gt16y"]
 [ext_resource type="Texture2D" uid="uid://c81bqqeqpj4oh" path="res://img/Temp Images/battlegridcell.png" id="4_e5vbs"]
-[ext_resource type="Texture2D" uid="uid://cv8mglryj72i1" path="res://img/Temp Images/dotpict_20250922_150218.png" id="5_w4764"]
+[ext_resource type="Resource" uid="uid://dbm8kjj815q20" path="res://Data/Enemies/Enemies/temp_bee.tres" id="5_f856b"]
 [ext_resource type="Script" uid="uid://bx7cd0vs3ih5j" path="res://src/Battle/combatant.gd" id="6_ed262"]
-[ext_resource type="Texture2D" uid="uid://bfxrbki40j5yv" path="res://img/Temp Images/Astra_1.png" id="7_f4ggb"]
-[ext_resource type="Texture2D" uid="uid://b1jcjreuwhnf0" path="res://img/Temp Images/Blue_1.png" id="7_ms847"]
+[ext_resource type="JSON" uid="uid://d1gg56edo62gq" path="res://Data/Characters/blue.tres" id="7_wb0gu"]
 [ext_resource type="Script" uid="uid://bfjepneb0wluw" path="res://src/Battle/ally.gd" id="8_f4ggb"]
-[ext_resource type="Texture2D" uid="uid://cnege86pdq55x" path="res://img/Temp Images/Nim_1.png" id="8_wb0gu"]
+[ext_resource type="JSON" uid="uid://fs3uprg81xxk" path="res://Data/Characters/astra.tres" id="10_778cw"]
 [ext_resource type="Texture2D" uid="uid://bricijwq5ou23" path="res://img/HighlightLayerTileSet.png" id="11_f4ggb"]
+[ext_resource type="Resource" uid="uid://0tkmtuieqm2q" path="res://Data/Characters/nim.tres" id="12_vuvll"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_f4ggb"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_wb0gu"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_84vmf"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_xdap8"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_3gnqe"]
 texture = ExtResource("4_e5vbs")
@@ -44,40 +52,38 @@ sources/2 = SubResource("TileSetAtlasSource_wb0gu")
 script = ExtResource("1_e5vbs")
 grid_size = Vector2i(13, 5)
 cell_size = Vector2(64, 48)
-enemies = [NodePath("Combatants Layer/Combatant")]
+enemies = [NodePath("Combatants Layer/Combatant2")]
 allies = [NodePath("Combatants Layer/Ally1"), NodePath("Combatants Layer/Ally2"), NodePath("Combatants Layer/Ally3")]
 battle_back = ExtResource("2_3gnqe")
 
 [node name="Combatants Layer" type="CanvasLayer" parent="."]
 
-[node name="Combatant" type="Sprite2D" parent="Combatants Layer"]
-y_sort_enabled = true
-texture = ExtResource("5_w4764")
-offset = Vector2(0, -32)
+[node name="Combatant2" type="AnimatedSprite2D" parent="Combatants Layer"]
+sprite_frames = SubResource("SpriteFrames_f4ggb")
 script = ExtResource("6_ed262")
+battler = ExtResource("5_f856b")
 occupied_cell_pos = Vector2i(2, 2)
+move_range = 3
 metadata/_custom_type_script = "uid://bx7cd0vs3ih5j"
 
-[node name="Ally1" type="Sprite2D" parent="Combatants Layer"]
-y_sort_enabled = true
-texture = ExtResource("7_ms847")
-offset = Vector2(0, -32)
+[node name="Ally1" type="AnimatedSprite2D" parent="Combatants Layer"]
+sprite_frames = SubResource("SpriteFrames_wb0gu")
 script = ExtResource("8_f4ggb")
+battler = ExtResource("7_wb0gu")
 occupied_cell_pos = Vector2i(10, 2)
+metadata/_custom_type_script = "uid://bfjepneb0wluw"
 
-[node name="Ally2" type="Sprite2D" parent="Combatants Layer"]
-y_sort_enabled = true
-texture = ExtResource("7_f4ggb")
-offset = Vector2(0, -32)
+[node name="Ally2" type="AnimatedSprite2D" parent="Combatants Layer"]
+sprite_frames = SubResource("SpriteFrames_84vmf")
 script = ExtResource("8_f4ggb")
+battler = ExtResource("10_778cw")
 occupied_cell_pos = Vector2i(11, 1)
 metadata/_custom_type_script = "uid://bfjepneb0wluw"
 
-[node name="Ally3" type="Sprite2D" parent="Combatants Layer"]
-y_sort_enabled = true
-texture = ExtResource("8_wb0gu")
-offset = Vector2(0, -32)
+[node name="Ally3" type="AnimatedSprite2D" parent="Combatants Layer"]
+sprite_frames = SubResource("SpriteFrames_xdap8")
 script = ExtResource("8_f4ggb")
+battler = ExtResource("12_vuvll")
 occupied_cell_pos = Vector2i(11, 3)
 metadata/_custom_type_script = "uid://bfjepneb0wluw"
 

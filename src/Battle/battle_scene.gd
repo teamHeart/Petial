@@ -91,4 +91,4 @@ func  highlight_cell(cell_pos: Vector2i, highlight_type: HighlightTypes):
 	if not highlight_grid:
 		return
 	highlight_grid.set_cell(cell_pos, 2, Vector2i(highlight_type,0))
-	print("Highlighting cell at ", cell_pos, " with type ", highlight_type)
+	# print("Highlighting cell at ", cell_pos, " with type ", highlight_type)
