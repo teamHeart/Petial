@@ -1,0 +1,2 @@
+extends DBElement
+class_name Skill

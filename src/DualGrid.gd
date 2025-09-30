@@ -5,7 +5,7 @@ extends TileMapLayer
 
 @export var pathTileSet: TileSet
 @export var PathLayer: TileMapLayer
-@onready var pathLayer = $PathLayer
+@onready var pathLayer = self.get_child(0) as TileMapLayer
 
 func calc():
 	for coord: Vector2i in get_used_cells():

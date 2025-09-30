@@ -1,0 +1,30 @@
+[gd_resource type="JSON" script_class="DBAlly" load_steps=5 format=3 uid="uid://d1gg56edo62gq"]
+
+[ext_resource type="Texture2D" uid="uid://b1jcjreuwhnf0" path="res://img/Temp Images/Blue_1.png" id="1_5n4yb"]
+[ext_resource type="Script" uid="uid://ct83xewko01pm" path="res://Data/util/ally.gd" id="1_8onlp"]
+[ext_resource type="Script" uid="uid://cleb8n2kll7jy" path="res://Data/util/skill.gd" id="2_5n4yb"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_picw5"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_5n4yb")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[resource]
+data = null
+script = ExtResource("1_8onlp")
+level = 1
+attack = 10
+defense = 5
+max_hp = 50
+speed = 7
+move_speed = 3
+animation = SubResource("SpriteFrames_picw5")
+id = 1
+name = "Blue"
+metadata/_custom_type_script = "uid://ct83xewko01pm"

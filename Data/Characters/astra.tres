@@ -1,0 +1,34 @@
+[gd_resource type="JSON" script_class="DBAlly" load_steps=6 format=3 uid="uid://fs3uprg81xxk"]
+
+[ext_resource type="Texture2D" uid="uid://bfxrbki40j5yv" path="res://img/Temp Images/Astra_1.png" id="1_8vogn"]
+[ext_resource type="Script" uid="uid://ct83xewko01pm" path="res://Data/util/ally.gd" id="1_oei81"]
+[ext_resource type="Script" uid="uid://cleb8n2kll7jy" path="res://Data/util/skill.gd" id="2_8vogn"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2qvlx"]
+atlas = ExtResource("1_8vogn")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_vyxfh"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2qvlx")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[resource]
+data = null
+script = ExtResource("1_oei81")
+level = 1
+attack = 5
+defense = 10
+max_hp = 75
+speed = 4
+move_speed = 3
+animation = SubResource("SpriteFrames_vyxfh")
+id = 2
+name = "Astra"
+metadata/_custom_type_script = "uid://ct83xewko01pm"
