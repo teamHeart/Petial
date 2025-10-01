@@ -11,6 +11,7 @@ var grid_cell: BattleCell
 @export var max_hp : int
 var current_hp : int
 @export var speed : int
+var turn_timer: float = 0.0
 
 @export var skill_list: Array[Skill] = []
 
@@ -27,6 +28,7 @@ func _ready():
 		offset = Vector2.ZERO
 	y_sort_enabled = true
 	play(animation)
+	turn_timer = 1.0 / sqrt(speed)
 
 func load_from_data(data: Battler) -> bool:
 	if not data:
