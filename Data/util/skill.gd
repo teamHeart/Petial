@@ -1,4 +1,4 @@
-extends DBElement
+extends Action
 class_name Skill
 
 var damage: int = 0

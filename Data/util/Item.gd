@@ -1,5 +1,5 @@
 class_name Item
-extends "res://Data/util/DBElement.gd"
+extends "res://Data/util/action.gd"
 
 @export_placeholder( "Item description" ) var description: String = ""
 @export var price: int = 0
