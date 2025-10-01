@@ -49,7 +49,7 @@ var turn_count: int = 0
 var current_turn_change_value: int = 0
 
 
-_ready():
+func _ready():
 	instance = self
 	battle_state = BattleState.START
 	turn_state = TurnState.MOVE
@@ -63,13 +63,17 @@ func change_battle_state(new_state: int) -> void:
 		BattleState.START:
 			_start_battle()
 		BattleState.PLAYER_TURN:
-			_start_player_turn()
+			# _start_player_turn()
+			pass
 		BattleState.ENEMY_TURN:
-			_start_enemy_turn()
+			# _start_enemy_turn()
+			pass
 		BattleState.VICTORY:
-			_end_battle(true)
+			# _end_battle(true)
+			pass
 		BattleState.DEFEAT:
-			_end_battle(false)
+			# _end_battle(false)
+			pass
 	return 
 
 func change_turn_state(new_state: int) -> bool:
@@ -79,82 +83,82 @@ func change_turn_state(new_state: int) -> bool:
 		TurnState.START_TURN:
 			if new_state == TurnState.MOVE:
 				turn_state = new_state
-				_start_turn()
+				# _start_turn()
 				return true
 		TurnState.MOVE:
 			if new_state in [TurnState.MOVING, TurnState.SELECT_COMMAND]:
 				turn_state = new_state
-				_start_moving()
+				# _start_moving()
 				return true
 		TurnState.MOVING:
 			if new_state == TurnState.MOVE:
 				turn_state = new_state
-				_end_moving()
+				# _end_moving()
 				return true
 		TurnState.SELECT_COMMAND:
 			if new_state in [TurnState.MOVE, TurnState.ATTACK, TurnState.ITEM_SELECT, TurnState.SKILL_SELECT, TurnState.GUARDING, TurnState.END_TURN, TurnState.RUNNING]:
 				turn_state = new_state
-				_select_command()
+				# _select_command()
 				return true
 		TurnState.ATTACK:
 			if new_state in [TurnState.ATTACKING, TurnState.SELECT_COMMAND]:
 				turn_state = new_state
-				_start_attacking()
+				# _start_attacking()
 				return true
 		TurnState.ATTACKING:
 			if new_state == TurnState.END_TURN:
 				turn_state = new_state
-				_end_attacking()
+				# _end_attacking()
 				return true
 		TurnState.ITEM_SELECT:
 			if new_state in [TurnState.ITEM_TARGET, TurnState.SELECT_COMMAND]:
 				turn_state = new_state
-				_start_item_targeting()
+				# _start_item_targeting()
 				return true
 		TurnState.ITEM_TARGET:
 			if new_state in [TurnState.ITEM_USE, TurnState.ITEM_SELECT]:
 				turn_state = new_state
-				_start_item_use()
+				# _start_item_use()
 				return true
 		TurnState.ITEM_USE:
 			if new_state == TurnState.END_TURN:
 				turn_state = new_state
-				_end_item_use()
+				# _end_item_use()
 				return true
 		TurnState.SKILL_SELECT:
 			if new_state in [TurnState.SKILL_TARGET, TurnState.SELECT_COMMAND]:
 				turn_state = new_state
-				_start_skill_targeting()
+				# _start_skill_targeting()
 				return true
 		TurnState.SKILL_TARGET:
 			if new_state in [TurnState.SKILL_USE, TurnState.SKILL_SELECT]:
 				turn_state = new_state
-				_start_skill_use()
+				# _start_skill_use()
 				return true
 		TurnState.SKILL_USE:
 			if new_state == TurnState.END_TURN:
 				turn_state = new_state
-				_end_skill_use()
+				# _end_skill_use()
 				return true
 		TurnState.GUARDING:
 			if new_state == TurnState.END_TURN:
 				turn_state = new_state
-				_end_guarding()
+				# _end_guarding()
 				return true
 		TurnState.END_TURN:
 			if new_state == TurnState.WAITING:
 				turn_state = new_state
-				_end_turn()
+				# _end_turn()
 				return true	
 		TurnState.WAITING:
 			if new_state == TurnState.START_TURN:
 				turn_state = new_state
-				_waiting()
+				# _waiting()
 				return true
 		TurnState.RUNNING:
 			if new_state == TurnState.END_TURN:
 				turn_state = new_state
-				_end_running()
+				# _end_running()
 				return true
 	return false
 
@@ -162,7 +166,7 @@ func _start_battle():
 	emit_signal("battle_started")
 	_initialize_combatants()
 	_calculate_turn_order()
-	if turn_order_queue[0]. is Ally:
+	if turn_order_queue[0] is Ally:
 		change_battle_state(BattleState.PLAYER_TURN)
 	else:
 		change_battle_state(BattleState.ENEMY_TURN)
@@ -170,7 +174,7 @@ func _start_battle():
 func _calculate_turn_order():
 	turn_order_queue.clear()
 	turn_order_display_queue.clear()
-	while turn_order_queue.size() < turn_order_queue_size():
+	while turn_order_queue.size() < turn_order_queue_size:
 		var min_turn_timer = 9999
 		var next_combatant: Combatant = null
 		# Find the combatant with the lowest turn timer
@@ -186,17 +190,17 @@ func _calculate_turn_order():
 				combatant.turn_timer = 1.0/sqrt(combatant.speed)
 	turn_order_display_queue = turn_order_queue.duplicate() 
 	turn_order_display_queue.resize(turn_order_display_size)
-	_update_turn_order_display()
+	update_turn_order_display()
 	return
 
 func update_turn_order_display():
+	pass
 """
 	var hud = get_node("/root/Main/HUD")
 	if hud:
   	hud.update_turn_order(turn_order_display_queue)
   return	
 """
-	pass
 
 func _initialize_combatants():
 	combatants.clear()
