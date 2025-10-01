@@ -47,21 +47,20 @@ func _ready() -> void:
 	turn_start(selected_combatant)
 
 
-func _process(_delta: float) -> void:
-	if Input.is_action_just_pressed("ui_left"):
+func _unhandled_input(event: InputEvent) -> void:
+	if event.is_action_pressed("ui_left"):
 		selected_combatant.move_to_cell(selected_combatant.occupied_cell.neighbors[BattleGrid.Neighbors.LEFT])
-	elif Input.is_action_just_pressed("ui_right"):
+	elif event.is_action_pressed("ui_right"):
 		selected_combatant.move_to_cell(selected_combatant.occupied_cell.neighbors[BattleGrid.Neighbors.RIGHT])
-	elif Input.is_action_just_pressed("ui_up"):
+	elif event.is_action_pressed("ui_up"):
 		selected_combatant.move_to_cell(selected_combatant.occupied_cell.neighbors[BattleGrid.Neighbors.UP])
-	elif Input.is_action_just_pressed("ui_down"):
+	elif event.is_action_pressed("ui_down"):
 		selected_combatant.move_to_cell(selected_combatant.occupied_cell.neighbors[BattleGrid.Neighbors.DOWN])
-	elif Input.is_action_just_pressed("ui_accept"):
+	elif event.is_action_pressed("ui_accept"):
 		if allies.size() > 0:
 			_selected_combatant_index = (_selected_combatant_index + 1) % allies.size()
 			selected_combatant = allies[_selected_combatant_index]
 			turn_start(selected_combatant)
-	pass
 
 func set_position_in_grid(combatant: Combatant, cell_pos: Vector2i):
 	if not combatant or not battle_grid:

@@ -57,6 +57,7 @@ func move_to_cell(cell: BattleCell):
 		_tween = null
 	)
 	_tween.play()
-	occupied_cell.occupant = null
+	if occupied_cell:
+		occupied_cell.occupant = null
 	occupied_cell = cell
 	cell.occupant = self
