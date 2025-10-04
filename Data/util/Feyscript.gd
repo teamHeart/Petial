@@ -233,22 +233,3 @@ static func execute_commands(commands: Array, context: Dictionary):
 				print("Unknown command: %s" % cmd["command"])
 
 
-"""
-# Example usage:
-# var feyscript_code = """
-# # This is a comment
-# set health 100
-# print Player health is
-# get health
-# end
-# """
-# var commands = Feyscript.parse_feyscript(feyscript_code)
-# var context = {}
-# Feyscript.execute_commands(commands, context)
-# Output:
-# Player health is
-#	100
-# Context now contains: {"health": "100"}
-# Note: All values are treated as strings in this simple implementation.
-# You can extend this by adding more commands and handling different data types as needed.
-"""
