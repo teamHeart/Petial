@@ -41,7 +41,7 @@ enum TurnState {
 @export var turn_order_queue_size: int = 33
 @export var turn_order_display_size: int = 9
 
-static var instance: BattleManager = self
+static var instance: BattleManager
 
 var turn_order_queue: Array = []
 var turn_order_display_queue: Array = []
