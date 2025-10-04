@@ -134,7 +134,7 @@ get variable_name
 - Avoid using reserved keywords as variable names.
 ### Variable Types
 - **Numbers**: Integers and floating-point values (e.g., `42`, `3.14`).
-- **Strings**: Text enclosed in double quotes (e.g., `"Hello, World!").
+- **Strings**: Text enclosed in double quotes (e.g., `"Hello, World!"`).
 - **Booleans**: The boolean values are `true` and `false`.
 
 ## Operators
