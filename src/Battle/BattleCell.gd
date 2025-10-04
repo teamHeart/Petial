@@ -11,7 +11,7 @@ var default_color: Color = Color(1, 1, 1, 0) # Transparent by default
 var move_range:= 0
 var attack_range:= 0
 
-static var _move_range_processing_queue := []
+var _move_range_processing_queue := []
 var _processed:= false
 
 enum Neighbors { UP, RIGHT, DOWN, LEFT }
