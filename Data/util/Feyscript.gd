@@ -37,7 +37,7 @@ static func execute_commands(commands: Array, context: Dictionary):
 					if context.has(var_name):
 						print(context[var_name])
 					else:
-						print("Variable " var_name " not found in context.")
+						print("Variable " + var_name + " not found in context.")
 			
 			## add command: adds two numbers and stores the result in the context
 			"add":
