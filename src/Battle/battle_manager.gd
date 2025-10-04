@@ -37,7 +37,7 @@ enum TurnState {
 @export var battle_state: int = BattleState.START
 @export var turn_state: int = TurnState.MOVE
 @export var current_combatant: Combatant = null
-@export var combatants: Array = []
+@export var combatants: Array[Combatant] = []
 @export var turn_order_queue_size: int = 33
 @export var turn_order_display_size: int = 9
 
