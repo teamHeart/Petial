@@ -92,7 +92,7 @@ Feyscript includes a variety of commands that can be used to create interactive 
 - [**endbattle**](pages/endbattle.md): Ends the current battle sequence.
 - [**setturn**](pages/setturn.md): Sets the turn in the battle to a specified entity. \
  \
-**Enemy-spcific Commands**
+**Enemy-specific Commands**
 - [**attack**](pages/attack.md): Performs a standard attack on a specified target.
 - [**cast**](pages/cast.md): Casts a spell or ability on a specified target.
 - [**use**](pages/use.md): Uses an item on a specified target.
