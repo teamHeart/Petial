@@ -1,12 +1,23 @@
 # Print
-([Back to Index](../Feyscript%20Docs.md#print))
+([Back to Index](../Feyscript%20Docs.md#commands)) \
 Prints a string to the console.
 ## Syntax
-`print` `string`
 ```feyscript
-print "Hello, World!"
+print <string>
+print <number>
+print <expression>
 ```
-This will output:
-```
-Hello, World!
+
+## Parameters
+- `string`: The string to be printed.
+- `number`: A number to be printed.
+- `expression`: An expression whose result will be printed.
+
+## Examples
+```feyscript
+print "Hello, World!"                # Outputs: Hello, World!
+print 42                             # Outputs: 42
+print 3.14                           # Outputs: 3.14
+print 5 + 10                         # Outputs: 15
+print "The result is: " + (5 * 2)    # Outputs: The result is: 10
 ```	

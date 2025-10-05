@@ -51,21 +51,21 @@ Feyscript includes a variety of commands that can be used to create interactive 
 ### Basic Commands
 - [**print**](pages/print.md): Outputs text to the console or log.
 - [**set**](pages/set.md): Assigns a value to a variable.
-- [**get**](pages/get.md): Retrieves the value of a variable and prints it to the console or log.
 - [**if**](pages/if.md): Starts a conditional block that executes if a specified condition is true.
-- [**else**](pages/else.md): Specifies the block of code to execute if the preceding `if` condition is false.
-- [**done**](pages/done.md): Ends a conditional block started by `if`.
+	- [**elif**](pages/if.md): Specifies an additional condition to check if the preceding `if` condition is false.
+	- [**else**](pages/if.md): Specifies the block of code to execute if the preceding `if` condition is false.
+	- [**done**](pages/if.md): Ends a conditional block started by `if`.
 - [**loop**](pages/loop.md): Starts a loop that repeats a block of code, and defines a specified number of times or a condition that repeats the loop if true.
-- [**endloop**](pages/endloop.md): Ends a loop block started by `loop` 
-- [**stoploop**](pages/stoploop.md): Exits the current loop immediately.
+	- [**endloop**](pages/loop.md): Ends a loop block started by `loop` 
+	- [**stoploop**](pages/loop.md): Exits the current loop immediately.
 
 ### General Commands
-- [**wait**](pages/wait.md): Pauses the script for a specified duration (in seconds).
+- [**wait**](pages/wait.md): Pauses the script for user input, or for a specified duration (in seconds).
 - [**say**](pages/say.md): Displays dialogue text for a specified character and wait for input before continuing.
 - [**ask**](pages/ask.md): Prompts the user with a question and waits for input.
-- [**option**](pages/option.md): Presents a choice to the user and waits for selection.
+	- [**option**](pages/option.md): Presents a choice to the user and waits for selection.
+	- [**label**](pages/label.md): Defines a label that can be jumped to using the `goto` command.
 - [**goto**](pages/goto.md): Jumps to a specified label in the script.
-- [**label**](pages/label.md): Defines a label that can be jumped to using the `goto` command.
 - [**playmusic**](pages/playmusic.md): Starts playing a specified music track.
 - [**stopmusic**](pages/stopmusic.md): Stops the currently playing music track.
 - [**playsound**](pages/playsound.md): Plays a specified sound effect.
@@ -102,12 +102,14 @@ Feyscript includes a variety of commands that can be used to create interactive 
 - **chance**: Specifies the probability of a command executing (e.g., `chance 50` for a 50% chance(`%` is optional)).
 - **duration**: Specifies the duration for status effects. (e.g., `duration 5` for 5 turns).
 - **as**: Specifies the element or type of an action (e.g., `as fire` for fire damage).
+- **clear**: Dismisses the current dialogue box before displaying new text.
 
 ## Control Structures
 ([Back to Top](#feyscript-reference-documentation)) \
 Feyscript provides several control structures to manage the flow of execution in a script. These include conditional statements and loops.
 ### Conditional Statements
 - **if**: Starts a conditional block that executes if a specified condition is true.
+- **elif**: Specifies an additional condition to check if the preceding `if` condition is false.
 - **else**: Specifies the block of code to execute if the preceding `if` condition is false.
 - **done**: Ends a conditional block started by `if`.
 ### Loops
@@ -188,9 +190,9 @@ say character_name "Let's embark on an adventure together!"
 # This script demonstrates the use of conditional statements
 set player_health 50
 if player_health < 20
-		say none "Warning! Your health is low!"
+		say none none "Warning! Your health is low!"
 else
-		say none "You are in good health."
+		say none none "You are in good health."
 done
 ```	
 ### Example 3: Loops
