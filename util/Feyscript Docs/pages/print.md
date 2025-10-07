@@ -2,6 +2,7 @@
 ([Back to Index](../Feyscript%20Docs.md#commands)) \
 Prints a string to the console.
 ## Syntax
+
 ```feyscript
 print <string>
 print <number>
@@ -20,4 +21,13 @@ print 42                             # Outputs: 42
 print 3.14                           # Outputs: 3.14
 print 5 + 10                         # Outputs: 15
 print "The result is: " + (5 * 2)    # Outputs: The result is: 10
-```	
+```
+
+## Notes
+
+- Use `print` liberally while developing scripts to inspect values; remove or
+	disable verbose prints in release builds if needed.
+
+## See also
+
+- [**set**](pages/set.md) — assign values to variables

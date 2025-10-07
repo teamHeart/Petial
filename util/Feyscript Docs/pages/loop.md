@@ -73,3 +73,9 @@ endloop
 - The `stoploop` command can be used within the loop to exit the loop based on a specific condition.
 - Nested loops are supported, allowing for complex iteration patterns.
 - Be cautious with resource-intensive operations within loops, as they can lead to performance issues if not managed properly.
+
+## See also
+
+- [**if**](pages/if.md) — conditional execution of code blocks
+- [**wait**](pages/wait.md) — pause execution for a duration or until a condition is met
+- [**set**](pages/set.md) — assign values to variables

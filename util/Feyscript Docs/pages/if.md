@@ -110,9 +110,19 @@ done
 ```
 
 ## Notes
-- Conditions in `if`, `elif`, and `else` statements can include comparison operators (e.g., `==`, `!=`, `<`, `>`, `<=`, `>=`) and logical operators (e.g., `and`, `or`, `not`, `is`).
+
+- Supported operators: `==`, `!=`, `<`, `>`, `<=`, `>=`, `and`, `or`, `not`, `is`.
+- Expressions resolve game variables (e.g., `player.hp`, `Global.flags.foo`).
+- Use `elif` for multiple branches instead of nested `if` statements.
+
 - Indentation is important for readability, but the language does not enforce it.
 - The `done` statement is mandatory to indicate the end of the `if` block.
 - You can nest `if` statements within other `if`, `elif`, or `else` blocks for more complex logic.
 - The `elif` and `else` blocks are optional and can be omitted if not needed.
 - Only one `else` block is allowed per `if` statement, but multiple `elif` blocks can be used.
+- Ensure that the conditions in `if` and `elif` statements evaluate to boolean values (true or false).
+
+## See also
+
+- [**ask**](pages/ask.md) — present choices to the player
+- [**loop**](pages/loop.md) — repeat code blocks

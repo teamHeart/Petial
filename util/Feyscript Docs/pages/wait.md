@@ -1,7 +1,9 @@
 # Wait
 ([Back to Index](../Feyscript%20Docs.md#commands)) \
 The `wait` command pauses the execution of the script for a specified duration or until user input is received.
+
 ## Syntax
+
 ```feyscript
 wait             # Pauses until user input is received (e.g., pressing [Confirm] or [Cancel])
 wait <duration>  # Pauses for the specified duration in seconds (e.g., wait 5)
@@ -13,6 +15,7 @@ wait <duration>  # Pauses for the specified duration in seconds (e.g., wait 5)
 wait 3           # Pauses for 3 seconds
 wait             # Pauses until the user presses [Confirm] or [Cancel]
 ```
+
 ## Notes
 - The `wait` command is useful for creating delays in the script or waiting for user interaction
 - When using `wait` without a duration, the script will resume execution only after the user provides input

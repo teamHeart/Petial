@@ -10,7 +10,7 @@ The `ask` command presents the player with a simple choice prompt and stores the
 ask <variable_name> "<prompt text>"
     option "<option text>" [<value>]
     option "<option text>" [<value>]
-endask
+
 ```
 
 Multiple `option` lines can be provided to define choices. Each `option` may optionally include a single token following the text which will be used as the stored value for that option. When omitted the option's index (0-based) or the option text may be stored depending on interpreter configuration.
@@ -22,14 +22,16 @@ ask choice "What will you do?"
     option "Fight" "fight"
     option "Run" "run"
     option "Talk" "talk"
-endask
+
 ```
 
 ## Parameters
 
 - `<variable_name>` — the name of the variable that will receive the player's selection.
 - `"<prompt text>"` — the message shown to the player.
--- `option "<option text>" [<value>]` — a line defining a selectable choice. You may optionally include a single value token after the quoted option text to control what gets written to the variable.
+- `option "<option text>" [<value>]` — a line defining a selectable choice. You may optionally include a single value token after the quoted option text to control what gets written to the variable.
+	- `"<option text>"` — the text displayed for this choice.
+	- `[<value>]` (optional) — a single token (string or number) that will be stored in `<variable_name>` if this option is selected. If omitted, the interpreter will store the text itself in `<variable_name>`.
 
 ## Examples
 
@@ -38,7 +40,7 @@ ask action "What will you do?"
     option "Attack" "attack"
     option "Defend" "defend"
     option "Item" "item"
-endask
+
 
 if action == "attack"
     say Narrator "You chose to attack."
@@ -50,15 +52,15 @@ done
 ```
 
 ```feyscript
-# Simple numeric choices (value omitted -> index stored)
+# Simple choices (value omitted -> text stored)
 ask pick "Choose a direction"
     option "North"
     option "East"
     option "South"
     option "West"
-endask
 
-# `pick` will now contain 0 (North), 1 (East), 2 (South) or 3 (West)
+
+# `pick` will now contain "North", "East", "South" or "West"
 ```
 
 ### Branching with if/elif (recommended)
@@ -72,7 +74,7 @@ ask choice "What will you do?"
     option "Attack" "attack"
     option "Run" "run"
     option "Talk" "talk"
-endask
+
 
 if choice == "attack"
     say Narrator "You chose to attack."
@@ -88,7 +90,8 @@ done
 ## Notes
 
 - The presentation of the choice UI is implementation-dependent; ensure your game's UI system listens for `ask` instructions and displays a modal prompt.
--- If no optional value is specified, interpreters may store either the option's index (0-based) or the option text; prefer passing explicit values for predictable logic.
+	- If no optional value is specified, interpreters will store the option's text.
+	- If a value is specified, it will be stored instead.
 - `ask` blocks execution until the player makes a selection; use sparingly inside performance-critical loops.
 
 ## See also
