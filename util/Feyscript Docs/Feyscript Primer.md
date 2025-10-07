@@ -19,7 +19,6 @@ Plain-English Feyscript (overview)
 	- if target.hp <= 0 then revive target
 	- if user.level >= 5 { add atk 10 to user duration 3 }
 - repeat n times { ... } runs statements n times
-- sequence { ... } ensures statements are treated as one atomic effect
 
 ## Common patterns
 - Flat damage: do damage 50 to target
@@ -42,12 +41,16 @@ Plain-English Feyscript (overview)
 - damage 50 to target
 - heal 30 to self
 - apply poison to target chance 25 duration 3
-- damage 20 to target as fire \
+- 
 	if target is frozen \
-	then \
-	remove frozen from target \
+	&emsp;remove frozen from target \
+	&emsp;say "Fire melts ice!" \
 	else \
-	apply burning to target chance 25% duration 3 \
+	&emsp;apply burning to target chance 25% duration 3 \
+	&emsp;do damage 40 to target as fire \
+	&emsp;if target is burning \
+	&emsp;&emsp;say "Target is burning!" \
+	&emsp;done \
 	done
 
 Keep it plain and restartable: prefer short verbs, explicit targets, and optional clauses at the end (if/chance/duration).\
