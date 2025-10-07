@@ -6,11 +6,11 @@ var grid_cell: BattleCell
 @export var battler: Battler
 @export var occupied_cell_pos: Vector2i
 @export_range(1, 5, 1) var move_range: int
-@export var attack : int
-@export var defense : int
-@export var max_hp : int
-var current_hp : int
-@export var speed : int
+@export var attack: int
+@export var defense: int
+@export var max_hp: int
+var current_hp: int
+@export var speed: int
 var turn_timer: float = 0.0
 
 @export var skill_list: Array[Skill] = []
@@ -23,7 +23,7 @@ var _tween: Tween
 func _ready():
 	load_from_data(battler)
 	if sprite_frames:
-		offset = Vector2(0, -sprite_frames.get_frame_texture(animation, frame).get_size().y/2.0)
+		offset = Vector2(0, -sprite_frames.get_frame_texture(animation, frame).get_size().y / 2.0)
 	else:
 		offset = Vector2.ZERO
 	y_sort_enabled = true

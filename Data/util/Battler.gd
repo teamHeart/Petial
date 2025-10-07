@@ -1,5 +1,5 @@
 class_name Battler
-extends "res://Data/util/DBElement.gd"
+extends DBElement
 
 @export var level: int
 @export var experience: int

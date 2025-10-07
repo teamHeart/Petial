@@ -71,7 +71,7 @@ func _tokenize(text: String) -> Array:
 			s2 += cj
 			j += 1
 		# strip trailing commas or backslashes used for line continuation
-		s2 = s2.strip_edges(",\\")
+		s2 = s2.strip_edges(",\\ ")
 		if s2 != "":
 			# makeoperators consistent: keep as-is but lowercase for keywords
 			toks.append(s2.to_lower())
