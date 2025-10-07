@@ -24,7 +24,7 @@ signal battle_started
 signal turn_ended(combatant: Combatant)
 signal turn_started(combatant: Combatant)
 
-## BattleState
+# BattleState
 # High level battle phases. Use `change_battle_state()` to transition.
 enum BattleState {
 	START,
@@ -34,7 +34,7 @@ enum BattleState {
 	DEFEAT
 }
 
-## TurnState
+# TurnState
 # Granular per-combatant turn states. These represent sub-steps during a
 # single combatant's turn (movement, selecting commands, using skills/items,
 # attacking, waiting, guarding, etc.). UI and input code should switch behavior
@@ -77,8 +77,6 @@ enum TurnState {
 # How many upcoming turns to precompute and keep in the queue. Increasing
 # this makes the turn preview longer but costs a bit more CPU.
 @export var turn_order_queue_size: int = 10
-@export var combatants: Array[Combatant] = []
-@export var turn_order_queue_size: int = 33
 @export var turn_order_display_size: int = 9
 
 static var instance: BattleManager
