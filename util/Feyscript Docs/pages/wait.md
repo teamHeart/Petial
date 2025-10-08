@@ -1,6 +1,6 @@
 # Wait
 
-([Back to Index](../Feyscript%20Docs.md#commands)) \
+([Back to Index](../README.md#commands)) \
 The `wait` command pauses the execution of the script for a specified duration or until user input is received.
 
 ## Syntax

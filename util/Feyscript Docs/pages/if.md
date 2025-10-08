@@ -1,7 +1,7 @@
 # If
 
-([Back to Index](../Feyscript%20Docs.md#commands)) \
-([Back to Control Flow](../Feyscript%20Docs.md#Control-Structures)) \
+([Back to Index](../README.md#commands)) \
+([Back to Control Flow](../README.md#Control-Structures)) \
 The `if` statement is used to execute a block of code conditionally, based on whether a specified condition evaluates to true or false. It can be used in conjunction with `else` and `elif` statements to provide alternative code paths. The `if` statement must be terminated with an `done` statement.
 
 ## Syntax

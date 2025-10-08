@@ -1,6 +1,6 @@
 # Say
 
-([Back to Index](../Feyscript%20Docs.md#commands))
+([Back to Index](../README.md#commands))
 
 Display dialogue text in a message box with an optional portrait. The `say`
 command is the primary way to show spoken lines and narration to the player.

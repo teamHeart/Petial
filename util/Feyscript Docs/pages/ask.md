@@ -1,7 +1,7 @@
 # Ask
 
-([Back to Index](../Feyscript%20Docs.md#commands)) \
-([Back to Control Flow](../Feyscript%20Docs.md#Control-Structures))
+([Back to Index](../README.md#commands)) \
+([Back to Control Flow](../README.md#Control-Structures))
 
 The `ask` command presents the player with a simple choice prompt and stores the result in a variable. It's useful for branching dialogue, simple menus, and getting quick input from the player during scripts. The command pauses execution until the player chooses an option.
 

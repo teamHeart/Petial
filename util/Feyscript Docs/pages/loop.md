@@ -1,7 +1,7 @@
 # Loop
 
-([Back to Index](../Feyscript%20Docs.md#commands)) \
-([Back to Control Flow](../Feyscript%20Docs.md#Control-Structures)) \
+([Back to Index](../README.md#commands)) \
+([Back to Control Flow](../README.md#Control-Structures)) \
 The `loop` command is used to create a loop that repeats a block of code a specified number of times or while a certain condition is true. It is useful for iterating over a set of instructions multiple times without having to write the same code repeatedly. If no condition or number is provided, it will loop indefinitely until a `stoploop` command is encountered.
 
 ## Syntax

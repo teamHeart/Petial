@@ -1,5 +1,5 @@
 # Get
-([Back to Index](../Feyscript%20Docs.md#commands)) \
+([Back to Index](../README.md#commands)) \
 The `get` command is used to retrieve the value of a variable or a property from an object and print it to the console. This command is useful for debugging and inspecting the state of variables during script execution.
 ## Syntax
 ```feyscript

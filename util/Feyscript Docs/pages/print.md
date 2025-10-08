@@ -1,6 +1,6 @@
 # Print
 
-([Back to Index](../Feyscript%20Docs.md#commands)) \
+([Back to Index](../README.md#commands)) \
 Prints a string to the console.
 
 ## Syntax

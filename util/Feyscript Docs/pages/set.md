@@ -1,6 +1,6 @@
 # Set
 
-([Back to Index](../Feyscript%20Docs.md#commands))
+([Back to Index](../README.md#commands))
 
 The `set` command assigns a value to a variable. Use it to create or update
 local or global variables; prefix a variable with `Global.` to target the
