@@ -1,110 +1,124 @@
 # If
+
 ([Back to Index](../Feyscript%20Docs.md#commands)) \
 ([Back to Control Flow](../Feyscript%20Docs.md#Control-Structures)) \
 The `if` statement is used to execute a block of code conditionally, based on whether a specified condition evaluates to true or false. It can be used in conjunction with `else` and `elif` statements to provide alternative code paths. The `if` statement must be terminated with an `done` statement.
+
 ## Syntax
+
 ```feyscript
 if <condition>
-	<code to execute if condition is true>
+  <code to execute if condition is true>
 done
 ```
-```feyscript	
+
+```feyscript
 if <condition>
-	<code to execute if condition is true>
+  <code to execute if condition is true>
 else
-	<code to execute if condition is false>
+  <code to execute if condition is false>
 done
 ```
+
 ```feyscript
 if <condition>
-	<code to execute if condition is true>
+  <code to execute if condition is true>
 elif <another condition>
-	<code to execute if the first condition is false and the second condition is true>
+  <code to execute if the first condition is false and the second condition is true>
 else
-	<code to execute if all conditions are false>
+  <code to execute if all conditions are false>
 done
 ```
+
 ## Example
+
 ```feyscript
 set age to 20
 if age >= 18
-	print "You are an adult."
+  print "You are an adult."
 else
-	print "You are a minor."
+  print "You are a minor."
 done
 # Output: You are an adult.
 ```
+
 ```feyscript
 set score to 85
 if score >= 90
-	print "You got an A."
+  print "You got an A."
 elif score >= 80
-	print "You got a B."
+  print "You got a B."
 elif score >= 70
-	print "You got a C."
+  print "You got a C."
 else
-	print "You need to improve."
+  print "You need to improve."
 done
 # Output: You got a B.
 ```
+
 ```feyscript
 set temperature to 30
 if temperature > 30
-	print "It's a hot day."
+  print "It's a hot day."
 elif temperature > 20
-	print "It's a warm day."
+  print "It's a warm day."
 elif temperature > 10
-	print "It's a cool day."
+  print "It's a cool day."
 else
-	print "It's a cold day."
+  print "It's a cold day."
 done
 # Output: It's a warm day.
 ```
+
 ```feyscript
 set number to 5
 if number % 2 == 0
-	print "The number is even."
+  print "The number is even."
 else
-	print "The number is odd."
+  print "The number is odd."
 done
 # Output: The number is odd.
 ```
+
 ```feyscript
 set day to "Saturday"
 if day == "Saturday" or day == "Sunday"
-	print "It's the weekend!"
+  print "It's the weekend!"
 else
-	print "It's a weekday."
+  print "It's a weekday."
 done
 # Output: It's the weekend!
 ```
+
 ```feyscript
 set x to 10
 set y to 20
 if x < y and y < 30
-	print "x is less than y and y is less than 30."
+  print "x is less than y and y is less than 30."
 else
-	print "The condition is not met."
+  print "The condition is not met."
 done
 # Output: x is less than y and y is less than 30.
 ```
+
 ```feyscript
 set password to "secret"
 if password == "secret"
-	print "Access granted."
+  print "Access granted."
 else
-	print "Access denied."
+  print "Access denied."
 done
 # Output: Access granted.
 ```
-```feyscript	
+
+```feyscript
 set number to -5
 if number > 0
-	print "The number is positive."
+  print "The number is positive."
 elif number < 0
-	print "The number is negative."
+  print "The number is negative."
 else
-	print "The number is zero."
+  print "The number is zero."
 done
 # Output: The number is negative.
 ```
@@ -124,5 +138,5 @@ done
 
 ## See also
 
-- [**ask**](pages/ask.md) — present choices to the player
-- [**loop**](pages/loop.md) — repeat code blocks
+- [**ask**](ask.md) — present choices to the player
+- [**loop**](loop.md) — repeat code blocks

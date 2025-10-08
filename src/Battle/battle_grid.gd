@@ -52,5 +52,5 @@ func _initialize_grid():
 
 func get_cell(pos: Vector2i) -> BattleCell:
 	if pos.y < 0 or pos.y >= grid_height or pos.x < 0 or pos.x >= grid_width:
-		return null
+		return grid[0][0]
 	return grid[pos.y][pos.x]

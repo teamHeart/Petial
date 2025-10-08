@@ -1,8 +1,6 @@
 class_name Combatant
 extends AnimatedSprite2D
 
-var grid_cell: BattleCell
-
 @export var battler: Battler
 @export var occupied_cell_pos: Vector2i
 @export_range(1, 5, 1) var move_range: int
@@ -12,6 +10,8 @@ var grid_cell: BattleCell
 var current_hp: int
 @export var speed: int
 var turn_timer: float = 0.0
+var turn_counter: int = 0
+var is_dead: bool = false
 
 @export var skill_list: Array[Skill] = []
 
@@ -32,19 +32,19 @@ func _ready():
 
 func load_from_data(data: Battler) -> bool:
 	if not data:
-		print("Invalid battler data")
+		# print("Invalid battler data")
 		return false
 	move_range = data.move_speed
-	print("Move range set to ", move_range, " for ", data.name)
+	# print("Move range set to ", move_range, " for ", data.name)
 	attack = data.attack
-	print("Attack set to ", attack, " for ", data.name)
+	# print("Attack set to ", attack, " for ", data.name)
 	defense = data.defense
-	print("Defense set to ", defense, " for ", data.name)
+	# print("Defense set to ", defense, " for ", data.name)
 	max_hp = data.max_hp
 	current_hp = max_hp
-	print("Max HP set to ", max_hp, " for ", data.name)
+	# print("Max HP set to ", max_hp, " for ", data.name)
 	speed = data.speed
-	print("Speed set to ", speed, " for ", data.name)
+	# print("Speed set to ", speed, " for ", data.name)
 	if data.animation:
 		sprite_frames = data.animation
 	return true

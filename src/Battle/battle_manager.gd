@@ -23,7 +23,7 @@ signal battle_started
 # Optional: emit battle_ended(victory: bool) when battle finishes
 signal turn_ended(combatant: Combatant)
 signal turn_started(combatant: Combatant)
-
+signal turn_order_updated(order: Array)
 # BattleState
 # High level battle phases. Use `change_battle_state()` to transition.
 enum BattleState {
@@ -114,7 +114,7 @@ func change_battle_state(new_state: int):
 		BattleState.START:
 			_start_battle()
 		BattleState.PLAYER_TURN:
-			# _start_player_turn()
+			emit_signal("turn_started", current_combatant)
 			pass
 		BattleState.ENEMY_TURN:
 			# _start_enemy_turn()
@@ -229,12 +229,13 @@ func change_turn_state(new_state: int):
 # - collects combatants and seeds their timers
 # - builds initial turn order and triggers the first high-level state
 func _start_battle():
-	emit_signal("battle_started")
 	_initialize_combatants()
 	turn_order_queue.clear()
 	turn_order_display_queue.clear()
 	_calculate_turn_order()
-	if turn_order_queue.size() > 0 and turn_order_queue[0] is Ally:
+	emit_signal("battle_started")
+	current_combatant = turn_order_queue[0][0]
+	if turn_order_queue.size() > 0 and turn_order_queue[0][0] is Ally:
 		change_battle_state(BattleState.PLAYER_TURN)
 	else:
 		change_battle_state(BattleState.ENEMY_TURN)
@@ -253,43 +254,31 @@ func _calculate_turn_order():
 		var next_combatant: Combatant = null
 		# Find the combatant with the lowest turn timer
 		for combatant in combatants:
-			if combatant.turn_timer < min_turn_timer and not combatant.is_dead():
+			if combatant.turn_timer < min_turn_timer and not combatant.is_dead:
 				min_turn_timer = combatant.turn_timer
 				next_combatant = combatant
 		if next_combatant:
-			turn_order_queue.append(next_combatant)
+			turn_order_queue.append([next_combatant, next_combatant.turn_counter])
+			next_combatant.turn_counter += 1
+			turn_count += 1
 		for combatant in combatants:
-			if not combatant.is_dead():
+			if not combatant.is_dead:
 				combatant.turn_timer -= min_turn_timer
 			if combatant == next_combatant:
 				combatant.turn_timer = 1.0/sqrt(combatant.speed)
 	turn_order_display_queue = turn_order_queue.duplicate() 
-	update_turn_order_display()
-	return
-
-## update_turn_order_display()
-# HUD/scene integration hook. Override or connect to this function to update
-# on-screen turn order UI with `turn_order_display_queue`.
-func update_turn_order_display():
-	pass
-"""
-	var hud = get_node("/root/Main/HUD")
-	if hud:
-  	hud.update_turn_order(turn_order_display_queue)
-  return	
-"""
-
 
 # Called when the active combatant completes their turn. Expected behavior:
 # - If the finished combatant is at the front of the queued turns, remove it.
 # - Recalculate the queue to refill upcoming entries.
 # - Emit `turn_started` for the new front combatant so UI/scene can react.
 func _on_turn_ended(combatant: Combatant):
-	if turn_order_queue.size() > 0 and combatant == turn_order_queue[0]:
+	if turn_order_queue.size() > 0 and combatant == turn_order_queue[0][0]:
 		turn_order_queue.pop_front()
 		_calculate_turn_order()
+		emit_signal("turn_order_updated", turn_order_queue)
 		if turn_order_queue.size() > 0:
-			emit_signal("turn_started", turn_order_queue[0])
+			emit_signal("turn_started", turn_order_queue[0][0])
 	return
 
 
@@ -301,6 +290,7 @@ func _on_turn_started(combatant: Combatant):
 		change_battle_state(BattleState.PLAYER_TURN)
 	else:
 		change_battle_state(BattleState.ENEMY_TURN)
+	(get_parent() as BattleScene).call_deferred("turn_start", combatant)
 	return
 
 
@@ -319,15 +309,12 @@ func _process_status_effects():
 # `turn_timer` with 1.0 / sqrt(speed) as the initial interval.
 func _initialize_combatants():
 	combatants.clear()
-	var allies = get_tree().get_nodes_in_group("Allies")
-	var enemies = get_tree().get_nodes_in_group("Enemies")
-	for ally in allies:
-		if ally is Combatant:
-			ally.turn_timer = 1.0 / sqrt(ally.speed)
-			combatants.append(ally)
-	for enemy in enemies:
-		if enemy is Combatant:
-			enemy.turn_timer = 1.0 / sqrt(enemy.speed)
-			combatants.append(enemy)
+	combatants.append_array((get_parent() as BattleScene).allies)
+	combatants.append_array((get_parent() as BattleScene).enemies)
+	for combatant in combatants:
+		if combatant is Combatant:
+			combatant.turn_timer = 1.0 / sqrt(combatant.speed)
+			combatant.turn_counter = 0
+	combatants.shuffle()
+	
 	return
-

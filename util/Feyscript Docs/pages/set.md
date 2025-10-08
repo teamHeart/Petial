@@ -1,5 +1,6 @@
 # Set
-([Back to Index](../Feyscript%20Docs.md#commands)) 
+
+([Back to Index](../Feyscript%20Docs.md#commands))
 
 The `set` command assigns a value to a variable. Use it to create or update
 local or global variables; prefix a variable with `Global.` to target the
@@ -20,6 +21,7 @@ set Global.<variable_name> <expression>
 - `Global.` — optional prefix to write to the global namespace.
 - `<value>` — a literal value (string/number/boolean) or an expression.
 - `<expression>` — any valid Feyscript expression (math, logic, function calls, etc.).
+
 ## Examples
 
 ```feyscript
@@ -39,4 +41,4 @@ set Global.globalSum (Global.globalVar + myVar)    # sets global variable global
 
 ## See also
 
-- [**print**](pages/print.md) — inspect variable values
+- [**print**](print.md) — inspect variable values
