@@ -149,6 +149,61 @@ offset_bottom = 450.0
 script = ExtResource("14_f856b")
 slots = [null]
 
+[node name="NinePatchRect" type="NinePatchRect" parent="HUD"]
+anchors_preset = -1
+anchor_left = 0.057000004
+anchor_right = 1.0
+anchor_bottom = 0.105000004
+offset_left = 0.33599854
+offset_bottom = -0.040000916
+texture = ExtResource("12_84vmf")
+patch_margin_left = 4
+patch_margin_top = 4
+patch_margin_right = 4
+patch_margin_bottom = 4
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HUD/NinePatchRect"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.002
+anchor_top = 0.037
+anchor_right = 0.998
+anchor_bottom = 0.9710001
+offset_left = -0.17200017
+offset_top = -0.07200003
+offset_right = 0.17199707
+offset_bottom = -0.028007507
+
+[node name="Button" type="Button" parent="HUD/NinePatchRect/HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "  Attack  "
+
+[node name="Button2" type="Button" parent="HUD/NinePatchRect/HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "  Skill  "
+
+[node name="Button3" type="Button" parent="HUD/NinePatchRect/HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "  Item  "
+
+[node name="Button5" type="Button" parent="HUD/NinePatchRect/HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "  End Turn  "
+
+[node name="Button4" type="Button" parent="HUD/NinePatchRect/HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "  Flee  "
+
+[node name="Button6" type="Button" parent="HUD/NinePatchRect/HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "  Instant Victory  "
+
 [node name="Camera2D" type="Camera2D" parent="."]
 anchor_mode = 0
 enabled = false
