@@ -4,6 +4,6 @@
 *.code-workspace
 .vscode/
 .editorconfig
-addons/godot-git-plugin/
 *.tmp
 /Movies/
+**/*.import
