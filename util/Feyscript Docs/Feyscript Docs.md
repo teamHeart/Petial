@@ -79,8 +79,11 @@ Feyscript includes a variety of commands that can be used to create interactive 
 - [**music**](pages/music.md): Controls background music playback.
 - [**sound**](pages/sound.md): Controls sound effect playback.
 - [**animation**](pages/animation.md): Controls animations for characters or objects.
-- [**setactor**](pages/setactor.md): Changes the actor sprite to a specified image.
 - [**setbackground**](pages/setbackground.md): Changes the background image to a specified image.
+- [**camera**](pages/camera.md): Moves or zooms the camera to a specified position or area, as well as other camera effects.
+- [**setactor**](pages/setactor.md): Changes the actor sprite to a specified image.
+- [**createactor**](pages/createactor.md): Creates a new actor sprite on the screen.
+- [**deleteactor**](pages/deleteactor.md): Deletes an actor sprite from the screen.
 - [**showactor**](pages/showactor.md): Displays an actor sprite on the screen.
 - [**hideactor**](pages/hideactor.md): Hides an actor sprite from the screen.
 - [**moveactor**](pages/moveactor.md): Moves an actor sprite to a specified position on the screen.
@@ -111,7 +114,6 @@ Feyscript includes a variety of commands that can be used to create interactive 
 - **chance**: Specifies the probability of a command executing (e.g., `chance 50` for a 50% chance(`%` is optional)).
 - **duration**: Specifies the duration for status effects. (e.g., `duration 5` for 5 turns).
 - **as**: Specifies the element or type of an action (e.g., `as fire` for fire damage).
-- **clear**: Dismisses the current dialogue box before displaying new text.
 
 ## Control Structures
 
