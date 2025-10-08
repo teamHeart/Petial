@@ -6,4 +6,4 @@
 .editorconfig
 *.tmp
 /Movies/
-**/*.import
+*.import
