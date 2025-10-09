@@ -16,7 +16,7 @@ func _physics_process(_delta: float) -> void:
 	var vel := Vector2.ZERO
 	# print(Input.get_joy_axis(0, JoyAxis.JOY_AXIS_LEFT_X))
 	# print(Input.get_joy_axis(0, JoyAxis.JOY_AXIS_LEFT_Y))
-	if abs(Input.get_joy_axis(0, JoyAxis.JOY_AXIS_LEFT_X)) > 0.1 and abs(Input.get_joy_axis(0, JoyAxis.JOY_AXIS_LEFT_Y)) > 0.1:
+	if abs(Input.get_joy_axis(0, JoyAxis.JOY_AXIS_LEFT_X)) > 0.1 or abs(Input.get_joy_axis(0, JoyAxis.JOY_AXIS_LEFT_Y)) > 0.1:
 		vel.y += Input.get_joy_axis(0, JoyAxis.JOY_AXIS_LEFT_Y)
 		vel.x += Input.get_joy_axis(0, JoyAxis.JOY_AXIS_LEFT_X)
 	else:

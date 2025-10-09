@@ -2,7 +2,7 @@ class_name Feyscript
 
 static func parse_feyscript(input: String) -> Array:
 	var lines = input.split("\n", false)
-	var commands: Array = []
+	var commands = []
 	for line in lines:
 		line = line.strip_edges()
 		if line == "" or line.begins_with("#"):

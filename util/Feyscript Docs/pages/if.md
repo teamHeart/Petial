@@ -33,7 +33,7 @@ done
 ## Example
 
 ```feyscript
-set age to 20
+set age 20
 if age >= 18
   print "You are an adult."
 else
