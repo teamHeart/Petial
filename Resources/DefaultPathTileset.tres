@@ -259,7 +259,7 @@ texture_region_size = Vector2i(64, 64)
 [resource]
 tile_size = Vector2i(64, 64)
 uv_clipping = true
-physics_layer_0/collision_layer = 65
+physics_layer_0/collision_layer = 1
 terrain_set_0/mode = 0
 terrain_set_0/terrain_0/name = "Contiguous"
 terrain_set_0/terrain_0/color = Color(0.5, 0.34375, 0.25, 1)

@@ -29,7 +29,7 @@ func _ready() -> void:
 
 func _process(_delta: float) -> void:
 
-	if leader.velocity.length() < 50.:
+	if leader.velocity.length() > 50.:
 		follow1.springyness += randf_range(-0.03, 0.03)
 		follow2.springyness += randf_range(-0.03, 0.03)
 		follow1.springyness = clamp(follow1.springyness, 1.2, 1.5)
