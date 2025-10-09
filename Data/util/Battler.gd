@@ -10,3 +10,4 @@ extends DBElement
 @export var move_speed: int
 @export var skill_list: Array[Skill]
 @export var animation: SpriteFrames
+@export var turn_order_sprite: Texture2D

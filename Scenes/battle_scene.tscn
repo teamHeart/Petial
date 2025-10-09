@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=4 uid="uid://coteu2wi3o76p"]
+[gd_scene load_steps=26 format=4 uid="uid://coteu2wi3o76p"]
 
 [ext_resource type="Script" uid="uid://cnrlqe4q7gj5e" path="res://src/Battle/battle_scene.gd" id="1_e5vbs"]
 [ext_resource type="Texture2D" uid="uid://6sxf5kmuqwjl" path="res://img/Temp Images/Grassland.png" id="2_3gnqe"]
@@ -8,13 +8,14 @@
 [ext_resource type="Script" uid="uid://bx7cd0vs3ih5j" path="res://src/Battle/combatant.gd" id="6_ed262"]
 [ext_resource type="JSON" uid="uid://d1gg56edo62gq" path="res://Data/Characters/blue.tres" id="7_wb0gu"]
 [ext_resource type="Script" uid="uid://bfjepneb0wluw" path="res://src/Battle/ally.gd" id="8_f4ggb"]
-[ext_resource type="JSON" uid="uid://fs3uprg81xxk" path="res://Data/Characters/astra.tres" id="10_778cw"]
+[ext_resource type="Resource" uid="uid://fs3uprg81xxk" path="res://Data/Characters/astra.tres" id="10_778cw"]
 [ext_resource type="Texture2D" uid="uid://bricijwq5ou23" path="res://img/HighlightLayerTileSet.png" id="11_f4ggb"]
 [ext_resource type="Texture2D" uid="uid://dncsftn41r5lb" path="res://img/Temp Images/menu_panel.png" id="12_84vmf"]
 [ext_resource type="Resource" uid="uid://0tkmtuieqm2q" path="res://Data/Characters/nim.tres" id="12_vuvll"]
 [ext_resource type="Script" uid="uid://crx0ee5d5l06u" path="res://src/Battle/battle_manager.gd" id="12_wb0gu"]
 [ext_resource type="Script" uid="uid://dfb6jav4wt782" path="res://src/Battle/turn_order_display.gd" id="13_xdap8"]
 [ext_resource type="Script" uid="uid://dsd6ntixc03ia" path="res://src/Battle/turn_order_container.gd" id="14_f856b"]
+[ext_resource type="Theme" path="res://util/Themes/button_theme.tres" id="15_778cw"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_f4ggb"]
 
@@ -51,6 +52,8 @@ texture_region_size = Vector2i(1, 1)
 [sub_resource type="TileSet" id="TileSet_84vmf"]
 tile_size = Vector2i(1, 1)
 sources/2 = SubResource("TileSetAtlasSource_wb0gu")
+
+[sub_resource type="Theme" id="Theme_778cw"]
 
 [node name="BattleScene" type="Node2D" node_paths=PackedStringArray("enemies", "allies")]
 script = ExtResource("1_e5vbs")
@@ -129,27 +132,30 @@ follow_viewport_enabled = true
 [node name="TurnOrderDisplay" type="NinePatchRect" parent="HUD"]
 clip_contents = true
 offset_right = 68.0
-offset_bottom = 452.0
+offset_bottom = 324.0
 texture = ExtResource("12_84vmf")
-patch_margin_left = 4
-patch_margin_top = 4
-patch_margin_right = 44
-patch_margin_bottom = 44
-axis_stretch_horizontal = 2
-axis_stretch_vertical = 2
+patch_margin_left = 3
+patch_margin_top = 3
+patch_margin_right = 3
+patch_margin_bottom = 3
 script = ExtResource("13_xdap8")
 
-[node name="TurnOrderContainer" type="VBoxContainer" parent="HUD/TurnOrderDisplay" node_paths=PackedStringArray("slots")]
+[node name="TurnOrderContainer" type="VBoxContainer" parent="HUD/TurnOrderDisplay"]
 clip_contents = true
-layout_mode = 0
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
 offset_left = 2.0
 offset_top = 2.0
-offset_right = 66.0
-offset_bottom = 450.0
+offset_right = -2.0
+offset_bottom = -2.0
+grow_horizontal = 2
+theme_override_constants/separation = 0
 script = ExtResource("14_f856b")
-slots = [null]
 
 [node name="NinePatchRect" type="NinePatchRect" parent="HUD"]
+clip_contents = true
 anchors_preset = -1
 anchor_left = 0.057000004
 anchor_right = 1.0
@@ -163,6 +169,7 @@ patch_margin_right = 4
 patch_margin_bottom = 4
 
 [node name="HBoxContainer" type="HBoxContainer" parent="HUD/NinePatchRect"]
+clip_contents = true
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.002
@@ -173,40 +180,40 @@ offset_left = -0.17200017
 offset_top = -0.07200003
 offset_right = 0.17199707
 offset_bottom = -0.028007507
+theme = ExtResource("15_778cw")
 
-[node name="Button" type="Button" parent="HUD/NinePatchRect/HBoxContainer"]
+[node name="Attack" type="Button" parent="HUD/NinePatchRect/HBoxContainer"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 24
-text = "  Attack  "
+theme = SubResource("Theme_778cw")
+text = " Attack "
 
-[node name="Button2" type="Button" parent="HUD/NinePatchRect/HBoxContainer"]
+[node name="Skill" type="Button" parent="HUD/NinePatchRect/HBoxContainer"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 24
-text = "  Skill  "
+theme = ExtResource("15_778cw")
+text = " Skill "
 
-[node name="Button3" type="Button" parent="HUD/NinePatchRect/HBoxContainer"]
+[node name="Item" type="Button" parent="HUD/NinePatchRect/HBoxContainer"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 24
-text = "  Item  "
+theme = ExtResource("15_778cw")
+text = " Item "
 
-[node name="Button5" type="Button" parent="HUD/NinePatchRect/HBoxContainer"]
+[node name="EndTurn" type="Button" parent="HUD/NinePatchRect/HBoxContainer"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 24
-text = "  End Turn  "
+theme = ExtResource("15_778cw")
+text = " End Turn "
 
-[node name="Button4" type="Button" parent="HUD/NinePatchRect/HBoxContainer"]
+[node name="Flee" type="Button" parent="HUD/NinePatchRect/HBoxContainer"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 24
-text = "  Flee  "
+theme = ExtResource("15_778cw")
+text = " Flee "
 
-[node name="Button6" type="Button" parent="HUD/NinePatchRect/HBoxContainer"]
+[node name="InstantVictory" type="Button" parent="HUD/NinePatchRect/HBoxContainer"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 24
-text = "  Instant Victory  "
+theme = ExtResource("15_778cw")
+text = " Instant Victory "
 
 [node name="Camera2D" type="Camera2D" parent="."]
 anchor_mode = 0
-enabled = false
 limit_enabled = false
 
 [node name="BattleManager" type="Node2D" parent="."]

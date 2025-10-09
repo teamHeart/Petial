@@ -11,6 +11,7 @@ var current_hp: int
 @export var speed: int
 var turn_timer: float = 0.0
 var turn_counter: int = 0
+var predicted_turn_timer: float = 0.0
 var is_dead: bool = false
 
 @export var skill_list: Array[Skill] = []

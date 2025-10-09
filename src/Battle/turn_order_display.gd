@@ -2,89 +2,54 @@ class_name TurnOrderDisplay
 extends NinePatchRect
 
 @onready var turn_order_container = $TurnOrderContainer
-var display_slots: Array[Sprite2D] = []
+var display_slots: Array[TurnOrderSlot] = []
 var combatants_in_order: Array = []
 var prev_order: Array = []
 
 func _ready():
-	pass
-
-
-func _on_battle_manager_turn_order_updated(order: Array) -> void:
-	if combatants_in_order == order:
-		return # No change in order
-	prev_order = combatants_in_order.duplicate()
-	combatants_in_order = order.duplicate()
-	var change_array = []
-	for combatant in combatants_in_order:
-		if prev_order.has(combatant):
-			change_array.append(prev_order.find(combatant) - combatants_in_order.find(combatant))
-		else:
-			change_array.append(null) # New combatant added
-	print("Change array: ", change_array)
-
-	_update_display(change_array)
-
-func _update_display(_change_array):
-	# Clear existing slots
-	for slot in display_slots:
-		slot.queue_free()
+	turn_order_container = $TurnOrderContainer
+	turn_order_container.slots.clear()
 	display_slots.clear()
-	# Create new slots based on combatants_in_order
+	combatants_in_order.clear()
+	prev_order.clear()
+
+func _on_battle_manager_battle_started(turn_order: Array) -> void:
+	combatants_in_order = turn_order.duplicate()
 	for i in range(combatants_in_order.size()):
-		var combatant = combatants_in_order[i][0]
-		var slot = Sprite2D.new()
-		if combatant:
-			slot.texture = combatant.sprite_frames.get_frame_texture(combatant.animation, 0)
-		else:
-			slot.texture = null
-		if i == 0:
-			slot.scale = Vector2(1, 1) # Larger for the next combatant
-			slot.position = Vector2(34, 34)
-		else:
-			slot.scale = Vector2(0.75, 0.75) # Smaller for others
-			slot.position = Vector2(26, 40 + (i * 48)) # Adjust spacing as needed
+		var slot = load("res://Prefab/turn_order_slot.tscn").instantiate() as TurnOrderSlot
+		slot.combatant = combatants_in_order[i]
 		turn_order_container.add_child(slot)
 		display_slots.append(slot)
 
-func move_slot(index: int, change: int) -> void:
-	if index < 0 or index >= display_slots.size():
-		return
-	var slot = display_slots[index]
-	var target_y = slot.position.y - (change * 48) # Assuming each slot is 48 pixels apart
-	var tween = create_tween()
-	tween.tween_property(slot, "position:y", target_y, 0.5).as_relative()
+func _on_battle_manager_turn_order_updated(turn_order: Array) -> void:
+	# Implementation for updating the turn order display will go here
+		# Remove the front slot to make room for the new turn
+		# turn_order_container.slots[0].queue_free()
+	combatants_in_order = turn_order.duplicate()
+	if display_slots.size() < combatants_in_order.size():
+		# Add new slots if there are more combatants
+		for i in range(display_slots.size(), combatants_in_order.size()):
+			var slot = load("res://Prefab/turn_order_slot.tscn").instantiate() as TurnOrderSlot
+			slot.combatant = combatants_in_order[i-1]
+			turn_order_container.add_child(slot)
+			display_slots.append(slot)
+	elif display_slots.size() > combatants_in_order.size():
+		# Remove excess slots if there are fewer combatants
+		for i in range(display_slots.size() - 1, combatants_in_order.size() - 1, -1):
+			var slot = display_slots[i]
+			slot.queue_free()
+			display_slots.remove_at(i)
+	#Animate the slots to reflect the new order
+	var tween = create_tween().bind_node(display_slots[0])
+	tween.tween_property(display_slots[0], "custom_minimum_size", Vector2(64,0), 0.5).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
+	tween.parallel().tween_property(display_slots[0], "size", Vector2.RIGHT, 0.5).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
+	tween.chain().tween_callback(Callable(self, "pop_front_slot"))
+	display_slots[0].index = -1
 
-func add_slot(combatant) -> void:
-	var slot = Sprite2D.new()
-	if combatant:
-		slot.texture = combatant.sprite_frames.get_frame_texture(combatant.animation, 0)
-	else:
-		slot.texture = null
-	slot.scale = Vector2(0.75, 0.75)
-	slot.position = Vector2(26, 40 + (display_slots.size() * 48)) # Adjust spacing as needed
-	turn_order_container.add_child(slot)
-	display_slots.append(slot)
 
-func remove_slot(index: int) -> void:
-	if index < 0 or index >= display_slots.size():
-		return
-	var slot = display_slots[index]
-	slot.queue_free()
-	display_slots.remove_at(index)
 
-func clear_slots() -> void:
-	for slot in display_slots:
-		slot.queue_free()
-	display_slots.clear()
-
-func _on_battle_manager_battle_ended():
-	clear_slots()
-	combatants_in_order.clear()
-	prev_order.clear()
-
-func _on_battle_manager_battle_started():
-	clear_slots()
-	combatants_in_order.clear()
-	prev_order.clear()
-
+func pop_front_slot() -> void:
+	if display_slots.size() > 0:
+		var front_slot = display_slots[0]
+		front_slot.queue_free()
+		display_slots.remove_at(0)

@@ -1,0 +1,36 @@
+[gd_scene load_steps=5 format=3 uid="uid://jtaqobh1skgl"]
+
+[ext_resource type="Theme" uid="uid://cj80owka82cc2" path="res://util/Themes/button_theme.tres" id="1_0rc75"]
+[ext_resource type="Texture2D" uid="uid://bfxrbki40j5yv" path="res://img/Temp Images/Astra_1.png" id="2_1nyj0"]
+[ext_resource type="Script" uid="uid://cq5rieyh3hafy" path="res://Prefab/turn_order_slot.gd" id="2_pkpu4"]
+[ext_resource type="Texture2D" uid="uid://c81bqqeqpj4oh" path="res://img/Temp Images/battlegridcell.png" id="3_pkpu4"]
+
+[node name="Panel" type="Panel"]
+clip_contents = true
+custom_minimum_size = Vector2(64, 32)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_0rc75")
+script = ExtResource("2_pkpu4")
+
+[node name="Icon" type="Sprite2D" parent="."]
+texture = ExtResource("2_1nyj0")
+centered = false
+
+[node name="Frame" type="NinePatchRect" parent="."]
+custom_minimum_size = Vector2(64, 32)
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_pkpu4")
+draw_center = false
+patch_margin_left = 1
+patch_margin_top = 1
+patch_margin_right = 1
+patch_margin_bottom = 1

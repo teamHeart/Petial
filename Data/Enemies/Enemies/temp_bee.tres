@@ -1,8 +1,9 @@
-[gd_resource type="Resource" script_class="Battler" load_steps=8 format=3 uid="uid://dbm8kjj815q20"]
+[gd_resource type="Resource" script_class="Battler" load_steps=9 format=3 uid="uid://dbm8kjj815q20"]
 
 [ext_resource type="Script" uid="uid://do4rfhvgpqeif" path="res://Data/util/Battler.gd" id="1_03aiv"]
 [ext_resource type="Texture2D" uid="uid://8ie12ymporo2" path="res://img/Temp Images/Nature.png" id="1_ptfgb"]
 [ext_resource type="Script" uid="uid://cleb8n2kll7jy" path="res://Data/util/skill.gd" id="2_ptfgb"]
+[ext_resource type="Texture2D" uid="uid://7c3m5bbptca8" path="res://img/Temp Images/dotpict_20250922_170129.png" id="4_37pt6"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_37pt6"]
 atlas = ExtResource("1_ptfgb")
@@ -45,6 +46,7 @@ max_hp = 20
 speed = 3
 move_speed = 3
 animation = SubResource("SpriteFrames_rnn4q")
+turn_order_sprite = ExtResource("4_37pt6")
 id = 1
 name = "temp_bee"
 metadata/_custom_type_script = "uid://do4rfhvgpqeif"

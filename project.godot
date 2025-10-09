@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Roses of Petial"
-run/main_scene="uid://drr2ei2e86qms"
+run/main_scene="uid://dw1r26w55mwbu"
 run/enable_alt_space_menu=true
 config/features=PackedStringArray("4.5", "GL Compatibility")
 run/flush_stdout_on_print=true
