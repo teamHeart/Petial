@@ -1,5 +1,5 @@
 class_name Battler
-extends "res://Data/util/DBElement.gd"
+extends DBElement
 
 @export var level: int
 @export var experience: int
@@ -10,3 +10,4 @@ extends "res://Data/util/DBElement.gd"
 @export var move_speed: int
 @export var skill_list: Array[Skill]
 @export var animation: SpriteFrames
+@export var turn_order_sprite: Texture2D

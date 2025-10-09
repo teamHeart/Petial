@@ -24,6 +24,7 @@ max_hp = 40
 speed = 6
 move_speed = 3
 animation = SubResource("SpriteFrames_5gwv4")
+turn_order_sprite = ExtResource("1_ctwut")
 id = 3
 name = "Nim"
 metadata/_custom_type_script = "uid://ct83xewko01pm"

@@ -1,0 +1,3 @@
+set gay "hello world"
+print gay
+end

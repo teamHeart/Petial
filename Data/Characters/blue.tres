@@ -25,6 +25,7 @@ max_hp = 50
 speed = 7
 move_speed = 3
 animation = SubResource("SpriteFrames_picw5")
+turn_order_sprite = ExtResource("1_5n4yb")
 id = 1
 name = "Blue"
 metadata/_custom_type_script = "uid://ct83xewko01pm"

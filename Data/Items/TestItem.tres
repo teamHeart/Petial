@@ -1,9 +1,15 @@
-[gd_resource type="JSON" script_class="Item" load_steps=2 format=3 uid="uid://ddh5fviqpt2cu"]
+[gd_resource type="JSON" script_class="Item" load_steps=3 format=3 uid="uid://ddh5fviqpt2cu"]
 
+[ext_resource type="Texture2D" uid="uid://cv8mglryj72i1" path="res://img/Temp Images/dotpict_20250922_150218.png" id="1_8fx0k"]
 [ext_resource type="Script" uid="uid://2krjfnq8wy6t" path="res://Data/util/Item.gd" id="1_50k2r"]
 
 [resource]
 data = null
 script = ExtResource("1_50k2r")
+description = "This is a test. How did you even get this?"
 price = 5
 targetAlly = true
+icon = ExtResource("1_8fx0k")
+action_type = 2
+effect = "heal self 50"
+name = "Test Item"

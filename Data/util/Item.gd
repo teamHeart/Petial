@@ -1,7 +1,7 @@
 class_name Item
-extends "res://Data/util/action.gd"
+extends Action
 
-@export_placeholder( "Item description" ) var description: String = ""
+@export_multiline var description: String = ""
 @export var price: int = 0
 @export var consumable: bool = true
 @export var targetSelf: bool = true
@@ -14,4 +14,5 @@ extends "res://Data/util/action.gd"
 @export var fieldAnimation: String = "Heal"
 @export var effects: Array = []
 @export var icon: Texture2D
+@export var maxStack: int = 99
 

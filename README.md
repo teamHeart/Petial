@@ -50,4 +50,4 @@ We makin' a game, my dudez!
 * [Milanote Board](https://app.milanote.com/1V0RD01qpvJEbP?p=AUwTV7Kdxpn)
 * [Discord Server](https://discord.com/channels/1414261417300988069/)
 * [Feyscript Primer](util/Feyscript%20Docs/Feyscript%20Primer.md)
-* [Feyscript Reference](util/Feyscript%20Docs/Feyscript%20Docs.md)
+* [Feyscript Reference](util/Feyscript%20Docs/README.md)

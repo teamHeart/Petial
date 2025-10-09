@@ -14,14 +14,20 @@ func _physics_process(_delta: float) -> void:
 	#velocity = Vector2i.ZERO
 	move_and_slide()
 	var vel := Vector2.ZERO
-	if Input.is_action_pressed("ui_up"):
-		vel.y -= 1
-	if Input.is_action_pressed("ui_down"):
-		vel.y += 1
-	if Input.is_action_pressed("ui_left"):
-		vel.x -= 1;
-	if Input.is_action_pressed("ui_right"):
-		vel.x += 1
+	# print(Input.get_joy_axis(0, JoyAxis.JOY_AXIS_LEFT_X))
+	# print(Input.get_joy_axis(0, JoyAxis.JOY_AXIS_LEFT_Y))
+	if abs(Input.get_joy_axis(0, JoyAxis.JOY_AXIS_LEFT_X)) > 0.1 or abs(Input.get_joy_axis(0, JoyAxis.JOY_AXIS_LEFT_Y)) > 0.1:
+		vel.y += Input.get_joy_axis(0, JoyAxis.JOY_AXIS_LEFT_Y)
+		vel.x += Input.get_joy_axis(0, JoyAxis.JOY_AXIS_LEFT_X)
+	else:
+		if Input.is_action_pressed("Up"):
+			vel.y -= 1
+		if Input.is_action_pressed("Down"):
+			vel.y += 1
+		if Input.is_action_pressed("Left"):
+			vel.x -= 1;
+		if Input.is_action_pressed("Right"):
+			vel.x += 1
 	velocity = speed * vel.normalized()
 	if _collider != null:
 		var collision = get_last_slide_collision()
@@ -32,14 +38,16 @@ func _physics_process(_delta: float) -> void:
 	if _sprite != null:
 		if velocity.length() > 25.:
 			var angle = velocity.angle()
-			if angle > -PI/4. and angle <= PI/4.:
+			if angle > -PI/4. and angle < PI/4.:
 				_sprite.animation = "WalkRight"
-			elif angle > PI/4. and angle <= 3*PI/4.:
+			elif angle > PI/4. and angle < 3*PI/4.:
 				_sprite.animation = "WalkDown"
-			elif angle > -3*PI/4. and angle <= -PI/4.:
+			elif angle > -3*PI/4. and angle < -PI/4.:
 				_sprite.animation = "WalkUp"
-			else:
+			elif angle > 3*PI/4. or angle < -3*PI/4.:
 				_sprite.animation = "WalkLeft"	
+			else:
+				_sprite.animation = _sprite.animation
 		else:
 			_sprite.frame = 0
 			_sprite.frame_progress = .999

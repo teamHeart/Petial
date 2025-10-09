@@ -4,11 +4,12 @@ extends Node2D
 enum HighlightTypes {
 	NONE = 0,
 	MOVE = 5,
+	START = 6,
 	ATTACK = 1
 }
 
-@export var grid_size: Vector2i = Vector2i(8, 6)
-@export var cell_size: Vector2 = Vector2(64, 64)
+@export var grid_size: Vector2i = Vector2i(13, 6)
+@export var cell_size: Vector2 = Vector2(64, 48)
 @export var enemies: Array[Combatant] = []
 @export var allies: Array[Ally] = []
 @export var battle_back: Texture2D
@@ -17,9 +18,10 @@ enum HighlightTypes {
 var battle_grid: BattleGrid
 var highlight_grid: TileMapLayer
 var selected_combatant: Combatant
-var _selected_combatant_index := 0
 
 # Called when the node enters the scene tree for the first time.
+
+@onready var battle_manager = $BattleManager
 
 func _ready() -> void:
 	highlight_grid = find_child("HighlightOverlay") as TileMapLayer
@@ -34,7 +36,7 @@ func _ready() -> void:
 		var music_player = AudioStreamPlayer.new()
 		music_player.stream = battle_music
 		music_player.autoplay = true
-		add_child(music_player) 
+		add_child(music_player)
 	for ally in allies:
 		ally.position = battle_grid.get_cell(ally.occupied_cell_pos).position
 		ally.occupied_cell = battle_grid.get_cell(ally.occupied_cell_pos)
@@ -43,8 +45,9 @@ func _ready() -> void:
 		enemy.position = battle_grid.get_cell(enemy.occupied_cell_pos).position
 		enemy.occupied_cell = battle_grid.get_cell(enemy.occupied_cell_pos)
 		enemy.occupied_cell.occupant = enemy
-	selected_combatant = allies[0] if allies.size() > 0 else null
+	selected_combatant = allies[0]
 	turn_start(selected_combatant)
+	battle_manager._start_battle()
 
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -56,11 +59,13 @@ func _unhandled_input(event: InputEvent) -> void:
 		selected_combatant.move_to_cell(selected_combatant.occupied_cell.neighbors[BattleGrid.Neighbors.UP])
 	elif event.is_action_pressed("ui_down"):
 		selected_combatant.move_to_cell(selected_combatant.occupied_cell.neighbors[BattleGrid.Neighbors.DOWN])
-	elif event.is_action_pressed("ui_accept"):
-		if allies.size() > 0:
-			_selected_combatant_index = (_selected_combatant_index + 1) % allies.size()
-			selected_combatant = allies[_selected_combatant_index]
-			turn_start(selected_combatant)
+	elif event.is_action_pressed("Confirm"):
+		if selected_combatant in allies:
+			battle_manager.emit_signal("turn_ended", selected_combatant)
+		# if allies.size() > 0:
+		# 	_selected_combatant_index = (_selected_combatant_index + 1) % allies.size()
+		# 	selected_combatant = allies[_selected_combatant_index]
+		# 	turn_start(selected_combatant)
 
 func set_position_in_grid(combatant: Combatant, cell_pos: Vector2i):
 	if not combatant or not battle_grid:
@@ -71,9 +76,10 @@ func set_position_in_grid(combatant: Combatant, cell_pos: Vector2i):
 	combatant.position = cell.position
 	battle_grid.occupy_cell(cell_pos, combatant)
 
-	
+
 func turn_start(combatant: Combatant):
-	if combatant is Ally:
+	selected_combatant = combatant
+	if combatant:
 		# for cell_row in battle_grid.grid:
 		# 	for cell in cell_row:
 		# 		cell.move_range = 999
@@ -83,9 +89,18 @@ func turn_start(combatant: Combatant):
 				var cell = battle_grid.grid[y][x]
 				if cell.move_range <= selected_combatant.move_range:
 					highlight_cell(Vector2i(x,y), HighlightTypes.MOVE)
+					if cell.move_range == 0:
+						highlight_cell(Vector2i(x,y), HighlightTypes.START)
 				else:
 					highlight_cell(Vector2i(x,y), HighlightTypes.NONE)
-				
+		if combatant in enemies:
+
+			var rng = randi_range(0,3) as BattleCell.Neighbors
+			await get_tree().create_timer(0.25).timeout
+			combatant.move_to_cell(combatant.occupied_cell.neighbors[rng])
+			await get_tree().create_timer(0.25).timeout
+			battle_manager.emit_signal("turn_ended", selected_combatant)
+
 func  highlight_cell(cell_pos: Vector2i, highlight_type: HighlightTypes):
 	if not highlight_grid:
 		return

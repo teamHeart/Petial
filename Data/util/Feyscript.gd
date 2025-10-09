@@ -2,7 +2,7 @@ class_name Feyscript
 
 static func parse_feyscript(input: String) -> Array:
 	var lines = input.split("\n", false)
-	var commands: Dictionary = []
+	var commands = []
 	for line in lines:
 		line = line.strip_edges()
 		if line == "" or line.begins_with("#"):
@@ -78,7 +78,7 @@ static func execute_commands(commands: Array, context: Dictionary):
 			## if command: conditional execution based on variable value
 			"if":
 				# This is a placeholder for future implementation
-				_if(cmd["args"], context)
+				# _if(cmd["args"], context)
 				pass
 			
 			## then command: marks the start of the then block
@@ -110,25 +110,25 @@ static func execute_commands(commands: Array, context: Dictionary):
 			## damage command: applies damage to a target
 			"damage":
 				# This is a placeholder for future implementation
-				_damage(cmd["args"], context)
+				# _damage(cmd["args"], context)
 				pass
 
 			## heal command: heals a target
 			"heal":
 				# This is a placeholder for future implementation
-				_heal(cmd["args"], context)
+				# _heal(cmd["args"], context)
 				pass
 
 			## remove command: removes a status effect from a target
 			"remove":
 				# This is a placeholder for future implementation
-				_remove(cmd["args"], context)
+				# _remove(cmd["args"], context)
 				pass
 
 			## apply command: applies a status effect to a target
 			"apply":
 				# This is a placeholder for future implementation
-				_apply(cmd["args"], context)
+				# _apply(cmd["args"], context)
 				pass
 
 			## wait command: pauses execution for a specified duration
@@ -139,55 +139,55 @@ static func execute_commands(commands: Array, context: Dictionary):
 			## play command: plays a sound effect or animation
 			"play":
 				# This is a placeholder for future implementation
-				_play(cmd["args"], context)
+				# _play(cmd["args"], context)
 				pass
 
 			## spawn command: spawns an entity in the game world
 			"spawn":
 				# This is a placeholder for future implementation
-				_spawn(cmd["args"], context)
+				# _spawn(cmd["args"], context)
 				pass
 
 			## despawn command: removes an entity from the game world
 			"despawn":
 				# This is a placeholder for future implementation
-				_despawn(cmd["args"], context)
+				# _despawn(cmd["args"], context)
 				pass
 
 			## move command: moves an entity to a specified location
 			"move":
 				# This is a placeholder for future implementation
-				_move(cmd["args"], context)
+				# _move(cmd["args"], context)
 				pass
 
 			## attack command: makes an entity perform an attack
 			"attack":
 				# This is a placeholder for future implementation
-				_attack(cmd["args"], context)
+				# _attack(cmd["args"], context)
 				pass
 
 			## defend command: makes an entity perform a defensive action
 			"defend":
 				# This is a placeholder for future implementation
-				_defend(cmd["args"], context)
+				# _defend(cmd["args"], context)
 				pass
 
 			## cast command: makes an entity cast a spell or ability
 			"cast":
 				# This is a placeholder for future implementation
-				_cast(cmd["args"], context)
+				# _cast(cmd["args"], context)
 				pass
 
 			## do command: makes an entity perform a special action
 			"do":
 				# This is a placeholder for future implementation
-				_do(cmd["args"], context)
+				# _do(cmd["args"], context)
 				pass
 
 			## use command: makes an entity use an item
 			"use":
 				# This is a placeholder for future implementation
-				_use(cmd["args"], context)
+				# _use(cmd["args"], context)
 				pass
 
 			## waitfor command: waits for a specific event or condition
@@ -198,13 +198,13 @@ static func execute_commands(commands: Array, context: Dictionary):
 			## say command: makes an entity say a line of dialogue
 			"say":
 				# This is a placeholder for future implementation
-				_say(cmd["args"], context)
+				# _say(cmd["args"], context)
 				pass
 
 			## ask command: prompts the player with a question
 			"ask":
 				# This is a placeholder for future implementation
-				_ask(cmd["args"], context)
+				# _ask(cmd["args"], context)
 				pass
 
 			## option command: presents the player with a choice
@@ -215,13 +215,13 @@ static func execute_commands(commands: Array, context: Dictionary):
 			## goto command: jumps to a specified label in the script
 			"goto":
 				# This is a placeholder for future implementation
-				_goto(cmd["args"], context)
+				# _goto(cmd["args"], context)
 				pass
 
 			## label command: defines a label for use with goto
 			"label":
 				# This is a placeholder for future implementation
-				_label(cmd["args"], context)
+				# _label(cmd["args"], context)
 				pass
 
 			## end command: marks the end of a sequence of actions

@@ -1,4 +1,4 @@
-# A small Feyscript -> AST parser in GDScript
+'''# A small Feyscript -> AST parser in GDScript
 # Usage:
 #   var p = FeyscriptParser.new()
 #   var ast = p.parse("apply poison to target chance 25 duration 3")
@@ -71,7 +71,7 @@ func _tokenize(text: String) -> Array:
 			s2 += cj
 			j += 1
 		# strip trailing commas or backslashes used for line continuation
-		s2 = s2.strip_edges(",\\")
+		s2 = s2.strip_edges(",\\ ")
 		if s2 != "":
 			# makeoperators consistent: keep as-is but lowercase for keywords
 			toks.append(s2.to_lower())
@@ -315,3 +315,4 @@ static func example_inputs() -> Array:
 		"if target is frozen then remove frozen from target else apply burning to target chance 25 duration 3 done",
 		"if user.hp < 50 { heal 40 to user }"
 	]
+	'''# ----- IGNORE -----

@@ -8,13 +8,13 @@ var occupant: Combatant = null
 var highlighted: bool = false
 var highlight_color: Color = Color(1, 1, 0, 0.5) # Yellow highlight by default
 var default_color: Color = Color(1, 1, 1, 0) # Transparent by default
-var move_range:= 0
-var attack_range:= 0
+var move_range := 0
+var attack_range := 0
 
 var _move_range_processing_queue := []
-var _processed:= false
+var _processed := false
 
-enum Neighbors { UP, RIGHT, DOWN, LEFT }
+enum Neighbors {UP, RIGHT, DOWN, LEFT}
 var neighbors: Array = [null, null, null, null] # UP, RIGHT, DOWN, LEFT
 
 func _init(tpos: Vector2i):
@@ -45,13 +45,11 @@ func calculate_move_range():
 				_move_range_processing_queue.append(neighbor)
 		
 
-
 	# for neighbor in neighbors:
 	# 	if neighbor and not neighbor._processed:
 	# 		_move_range_processing_queue.append(neighbor)
 	# 		neighbor._processed = true
 	# 		neighbor.move_range = mrange + 1
-
 
 
 	# for cell in _move_range_processing_queue:
