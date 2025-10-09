@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://dw1r26w55mwbu"]
 
 [ext_resource type="Script" uid="uid://e1dma4llcu5r" path="res://Scenes/start_scene/start_scene.gd" id="1_8turk"]
-[ext_resource type="Texture2D" uid="uid://dvno8v0xsrog" path="res://img/Temp Images/Petial_World_Map.png" id="1_82sop"]
+[ext_resource type="Texture2D" uid="uid://cxfu0j2vu3kwg" path="res://img/Temp Images/Petial_World_Map.png" id="1_82sop"]
 [ext_resource type="Theme" uid="uid://c6ym5lmrssndh" path="res://util/Themes/button_theme.tres" id="2_aeweq"]
 
 [sub_resource type="StyleBoxLine" id="StyleBoxLine_u4q12"]
@@ -68,7 +68,6 @@ limit_enabled = false
 editor_draw_screen = false
 
 [node name="PanelContainer2" type="PanelContainer" parent="."]
-visible = false
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -84,14 +83,19 @@ theme_override_styles/panel = SubResource("StyleBoxLine_u4q12")
 
 [node name="ItemList" type="ItemList" parent="PanelContainer2"]
 layout_mode = 2
+auto_width = true
+auto_height = true
 
 [node name="Button" type="Button" parent="PanelContainer2/ItemList"]
 layout_mode = 0
-offset_right = 8.0
-offset_bottom = 8.0
+offset_left = 591.0
+offset_top = 293.0
+offset_right = 693.0
+offset_bottom = 351.0
 theme = ExtResource("2_aeweq")
 text = "Back"
 
 [connection signal="pressed" from="PanelContainer/AspectRatioContainer/VBoxContainer/Quit" to="." method="_quit_game"]
 [connection signal="pressed" from="PanelContainer/AspectRatioContainer/VBoxContainer/SelectScene" to="." method="_on_select_scene_button_pressed"]
+[connection signal="item_clicked" from="PanelContainer2/ItemList" to="." method="_on_item_clicked"]
 [connection signal="pressed" from="PanelContainer2/ItemList/Button" to="." method="_on_back_button_pressed"]

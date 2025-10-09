@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://jtaqobh1skgl"]
 
-[ext_resource type="Theme" uid="uid://cj80owka82cc2" path="res://util/Themes/button_theme.tres" id="1_0rc75"]
+[ext_resource type="Theme" uid="uid://c6ym5lmrssndh" path="res://util/Themes/button_theme.tres" id="1_0rc75"]
 [ext_resource type="Texture2D" uid="uid://bfxrbki40j5yv" path="res://img/Temp Images/Astra_1.png" id="2_1nyj0"]
 [ext_resource type="Script" uid="uid://cq5rieyh3hafy" path="res://Prefab/turn_order_slot.gd" id="2_pkpu4"]
 [ext_resource type="Texture2D" uid="uid://c81bqqeqpj4oh" path="res://img/Temp Images/battlegridcell.png" id="3_pkpu4"]

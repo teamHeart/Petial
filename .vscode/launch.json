@@ -9,7 +9,7 @@
             "type": "godot",
             "request": "launch",
             "project": "${workspaceFolder}",
-            "scene": "C:\\team Heart\\Petial\\Scenes\\battle_scene.tscn",
+            "scene": "main",
             "debug_collisions": false,
             "debug_paths": false,
             "debug_navigation": false,

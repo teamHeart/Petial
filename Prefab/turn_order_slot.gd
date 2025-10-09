@@ -1,7 +1,7 @@
 class_name TurnOrderSlot
 extends Panel
 
-var _acc: float = 0
+# var _acc: float = 0
 
 @export var combatant: Combatant
 @onready var icon: Sprite2D = $Icon

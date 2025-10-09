@@ -16,6 +16,7 @@ func _ready() -> void:
 		add_child(debug_label)
 	else:
 		select_scene.disabled = true
+	_populate_scene_list()
 
 func _on_select_scene_button_pressed() -> void:
 	select_panel.visible = false
@@ -31,3 +32,28 @@ func _quit_game() -> void:
 
 func _on_button_pressed() -> void:
 	pass # Replace with function body.
+
+func _populate_scene_list() -> void:
+	var scenes := []
+	var dir = DirAccess.open("res://Scenes/")
+	if dir:
+		dir.list_dir_begin()
+		var file_name = dir.get_next()
+		while file_name != "":
+			if file_name.ends_with(".tscn"):
+				scenes.append("res://Scenes/" + file_name)
+			file_name = dir.get_next()
+		dir.list_dir_end()
+	print(scenes)
+	for scene_path in scenes:
+		var scene_name = scene_path.get_file().get_basename().capitalize()
+		item_list.add_item(scene_name)
+		item_list.set_item_metadata(item_list.get_item_count() - 1, scene_path)
+
+func _on_item_clicked(index: int, _pos, _button) -> void:
+	var scene_path = item_list.get_item_metadata(index)
+	var new_scene = ResourceLoader.load(scene_path)
+	if new_scene:
+		get_tree().change_scene_to_file(scene_path)
+	else:
+		print("Failed to load scene: " + scene_path)
