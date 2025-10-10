@@ -19,12 +19,14 @@ class_name BattleManager
 # - Call `change_battle_state()` to start or change states (e.g. START -> PLAYER_TURN)
 
 # Signals
-signal battle_started(turn_order: Array)
+signal exited_state(old_state: TurnState) #():
+signal entered_state(new_state: TurnState) #():
+signal battle_started(turn_order: Array) #():
 # Optional: emit battle_ended(victory: bool) when battle finishes
-signal turn_ended(combatant: Combatant)
-signal turn_started(combatant: Combatant)
-signal turn_order_updated(turn_order: Array)
-signal turn_order_altered
+signal turn_ended(combatant: Combatant) #():
+signal turn_started(combatant: Combatant) #():
+signal turn_order_updated(turn_order: Array) #():
+signal turn_order_altered() #():
 
 # BattleState
 # High level battle phases. Use `change_battle_state()` to transition.
@@ -36,11 +38,12 @@ enum BattleState {
 	DEFEAT
 }
 
-# TurnState
+'''# TurnState
 # Granular per-combatant turn states. These represent sub-steps during a
 # single combatant's turn (movement, selecting commands, using skills/items,
 # attacking, waiting, guarding, etc.). UI and input code should switch behavior
-# based on the current `turn_state`.
+# based on the current `turn_state`.'''
+
 enum TurnState {
 	START_TURN,
 	MOVE,
@@ -65,7 +68,7 @@ enum TurnState {
 @export var battle_state: int = BattleState.START
 
 # Current granular turn state used during a combatant's turn.
-@export var turn_state: int = TurnState.MOVE
+@export var turn_state: int = TurnState.WAITING
 
 # The combatant whose turn is currently active. Updated when `turn_started`
 # is emitted and consumed by UI and input code.
@@ -95,7 +98,7 @@ var turn_count: int = 0
 func _ready():
 	instance = self
 	battle_state = BattleState.START
-	turn_state = TurnState.MOVE
+	call_deferred("change_turn_state", TurnState.START_TURN)
 	combatants = []
 
 	# Note: don't call _start_battle() here automatically; the scene or
@@ -139,89 +142,95 @@ func change_turn_state(new_state: int):
 	match turn_state:
 		TurnState.START_TURN:
 			if new_state == TurnState.MOVE:
-				turn_state = new_state
-				# _start_turn()
+				pass				# _start_turn()
+			else:
 				return
 		TurnState.MOVE:
 			if new_state in [TurnState.MOVING, TurnState.SELECT_COMMAND]:
-				turn_state = new_state
-				# _start_moving()
+				pass				# _start_moving()
+			else:
 				return
 		TurnState.MOVING:
 			if new_state == TurnState.MOVE:
-				turn_state = new_state
-				# _end_moving()
+				pass				# _end_moving()
+			else:
 				return
 		TurnState.SELECT_COMMAND:
 			if new_state in [TurnState.MOVE, TurnState.ATTACK, TurnState.ITEM_SELECT, TurnState.SKILL_SELECT, TurnState.GUARDING, TurnState.END_TURN, TurnState.FLEEING, TurnState.INSTANT_WIN]:
-				turn_state = new_state
-				# _select_command()
+				pass				# _select_command()
+			else:
 				return
 		TurnState.ATTACK:
 			if new_state in [TurnState.ATTACKING, TurnState.SELECT_COMMAND]:
-				turn_state = new_state
-				# _start_attacking()
+				pass				# _start_attacking()
+			else:
 				return
 		TurnState.ATTACKING:
 			if new_state == TurnState.END_TURN:
-				turn_state = new_state
-				# _end_attacking()
+				pass				# _end_attacking()
+			else:
 				return
 		TurnState.ITEM_SELECT:
 			if new_state in [TurnState.ITEM_TARGET, TurnState.SELECT_COMMAND]:
-				turn_state = new_state
-				# _start_item_targeting()
+				pass				# _start_item_targeting()
+			else:
 				return
 		TurnState.ITEM_TARGET:
 			if new_state in [TurnState.ITEM_USE, TurnState.ITEM_SELECT]:
-				turn_state = new_state
-				# _start_item_use()
+				pass				# _start_item_use()
+			else:
 				return
 		TurnState.ITEM_USE:
 			if new_state == TurnState.END_TURN:
-				turn_state = new_state
-				# _end_item_use()
+				pass				# _end_item_use()
+			else:
 				return
 		TurnState.SKILL_SELECT:
 			if new_state in [TurnState.SKILL_TARGET, TurnState.SELECT_COMMAND]:
-				turn_state = new_state
-				# _start_skill_targeting()
+				pass				# _start_skill_targeting()
+			else:
 				return
 		TurnState.SKILL_TARGET:
 			if new_state in [TurnState.SKILL_USE, TurnState.SKILL_SELECT]:
-				turn_state = new_state
-				# _start_skill_use()
+				pass				# _start_skill_use()
+			else:
 				return
 		TurnState.SKILL_USE:
 			if new_state == TurnState.END_TURN:
-				turn_state = new_state
-				# _end_skill_use()
+				pass				# _end_skill_use()
+			else:
 				return
 		TurnState.GUARDING:
 			if new_state == TurnState.END_TURN:
-				turn_state = new_state
-				# _end_guarding()
+				pass				# _end_guarding()
+			else:
 				return
 		TurnState.END_TURN:
 			if new_state == TurnState.WAITING:
-				turn_state = new_state
 				emit_signal("turn_ended", current_combatant)
+				pass
+			else:
 				return
 		TurnState.WAITING:
 			if new_state == TurnState.START_TURN:
-				turn_state = new_state
-				# _waiting()
+				pass				# _waiting()
+			else:
 				return
 		TurnState.FLEEING:
 			if new_state == TurnState.END_TURN:
-				turn_state = new_state
-				# _end_running()
+				pass				# _end_running()
+			else:
 				return
 
 		TurnState.INSTANT_WIN:
 			if new_state == TurnState.END_TURN:
-				turn_state = new_state
-				# _end_instant_win()
+				pass				# _end_instant_win()
+			else:
+				return
+
+	emit_signal("exited_state", turn_state)
+	turn_state = new_state
+	emit_signal("entered_state", new_state)
 	return
 
 
@@ -275,6 +284,7 @@ func _calculate_turn_order():
 # - Recalculate the queue to refill upcoming entries.
 # - Emit `turn_started` for the new front combatant so UI/scene can react.
 func _on_turn_ended(combatant: Combatant):
+	turn_state = TurnState.END_TURN
 	if turn_order_queue.size() > 0 and combatant == turn_order_queue[0]:
 		turn_order_queue.pop_front()
 		_calculate_turn_order()
@@ -298,7 +308,9 @@ func _on_turn_started(combatant: Combatant):
 		change_battle_state(BattleState.PLAYER_TURN)
 	else:
 		change_battle_state(BattleState.ENEMY_TURN)
-	(get_parent() as BattleScene).call_deferred("turn_start", combatant)
+	# emit_signal("entered_state", TurnState.START_TURN)
+	change_turn_state(TurnState.START_TURN)
+	# (get_parent() as BattleScene).call_deferred("turn_start", combatant)
 	return
 
 
@@ -323,6 +335,4 @@ func _initialize_combatants():
 		if combatant is Combatant:
 			combatant.turn_timer = 1.0 / sqrt(combatant.speed)
 			combatant.turn_counter = 0
-	combatants.shuffle()
-
 	return

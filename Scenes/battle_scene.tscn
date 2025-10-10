@@ -15,7 +15,7 @@
 [ext_resource type="Script" uid="uid://crx0ee5d5l06u" path="res://src/Battle/battle_manager.gd" id="12_wb0gu"]
 [ext_resource type="Script" uid="uid://dfb6jav4wt782" path="res://src/Battle/turn_order_display.gd" id="13_xdap8"]
 [ext_resource type="Script" uid="uid://dsd6ntixc03ia" path="res://src/Battle/turn_order_container.gd" id="14_f856b"]
-[ext_resource type="Theme" path="res://util/Themes/button_theme.tres" id="15_778cw"]
+[ext_resource type="Theme" uid="uid://c6ym5lmrssndh" path="res://util/Themes/button_theme.tres" id="15_778cw"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_f4ggb"]
 
@@ -149,12 +149,11 @@ anchor_bottom = 1.0
 offset_left = 2.0
 offset_top = 2.0
 offset_right = -2.0
-offset_bottom = -2.0
-grow_horizontal = 2
+offset_bottom = -4.0
 theme_override_constants/separation = 0
 script = ExtResource("14_f856b")
 
-[node name="NinePatchRect" type="NinePatchRect" parent="HUD"]
+[node name="ActionPalette" type="NinePatchRect" parent="HUD"]
 clip_contents = true
 anchors_preset = -1
 anchor_left = 0.057000004
@@ -168,7 +167,7 @@ patch_margin_top = 4
 patch_margin_right = 4
 patch_margin_bottom = 4
 
-[node name="HBoxContainer" type="HBoxContainer" parent="HUD/NinePatchRect"]
+[node name="HBoxContainer" type="HBoxContainer" parent="HUD/ActionPalette"]
 clip_contents = true
 layout_mode = 1
 anchors_preset = -1
@@ -182,32 +181,32 @@ offset_right = 0.17199707
 offset_bottom = -0.028007507
 theme = ExtResource("15_778cw")
 
-[node name="Attack" type="Button" parent="HUD/NinePatchRect/HBoxContainer"]
+[node name="Attack" type="Button" parent="HUD/ActionPalette/HBoxContainer"]
 layout_mode = 2
 theme = SubResource("Theme_778cw")
 text = " Attack "
 
-[node name="Skill" type="Button" parent="HUD/NinePatchRect/HBoxContainer"]
+[node name="Skill" type="Button" parent="HUD/ActionPalette/HBoxContainer"]
 layout_mode = 2
 theme = ExtResource("15_778cw")
 text = " Skill "
 
-[node name="Item" type="Button" parent="HUD/NinePatchRect/HBoxContainer"]
+[node name="Item" type="Button" parent="HUD/ActionPalette/HBoxContainer"]
 layout_mode = 2
 theme = ExtResource("15_778cw")
 text = " Item "
 
-[node name="EndTurn" type="Button" parent="HUD/NinePatchRect/HBoxContainer"]
+[node name="EndTurn" type="Button" parent="HUD/ActionPalette/HBoxContainer"]
 layout_mode = 2
 theme = ExtResource("15_778cw")
 text = " End Turn "
 
-[node name="Flee" type="Button" parent="HUD/NinePatchRect/HBoxContainer"]
+[node name="Flee" type="Button" parent="HUD/ActionPalette/HBoxContainer"]
 layout_mode = 2
 theme = ExtResource("15_778cw")
 text = " Flee "
 
-[node name="InstantVictory" type="Button" parent="HUD/NinePatchRect/HBoxContainer"]
+[node name="InstantVictory" type="Button" parent="HUD/ActionPalette/HBoxContainer"]
 layout_mode = 2
 theme = ExtResource("15_778cw")
 text = " Instant Victory "
@@ -218,9 +217,22 @@ limit_enabled = false
 
 [node name="BattleManager" type="Node2D" parent="."]
 script = ExtResource("12_wb0gu")
+battle_state = null
+turn_state = null
+combatants = null
+turn_order_queue_size = null
+turn_order_display_size = null
 metadata/_custom_type_script = "uid://crx0ee5d5l06u"
 
+[connection signal="pressed" from="HUD/ActionPalette/HBoxContainer/Attack" to="." method="_on_attack_pressed"]
+[connection signal="pressed" from="HUD/ActionPalette/HBoxContainer/Skill" to="." method="_on_skill_pressed"]
+[connection signal="pressed" from="HUD/ActionPalette/HBoxContainer/Item" to="." method="_on_item_pressed"]
+[connection signal="pressed" from="HUD/ActionPalette/HBoxContainer/EndTurn" to="." method="_on_end_turn_pressed"]
+[connection signal="pressed" from="HUD/ActionPalette/HBoxContainer/Flee" to="." method="_on_flee_pressed"]
+[connection signal="pressed" from="HUD/ActionPalette/HBoxContainer/InstantVictory" to="." method="_on_instant_victory_pressed"]
 [connection signal="battle_started" from="BattleManager" to="HUD/TurnOrderDisplay" method="_on_battle_manager_battle_started"]
+[connection signal="entered_state" from="BattleManager" to="." method="_on_state_entered"]
+[connection signal="exited_state" from="BattleManager" to="." method="_on_state_exited"]
 [connection signal="turn_ended" from="BattleManager" to="BattleManager" method="_on_turn_ended"]
 [connection signal="turn_order_updated" from="BattleManager" to="HUD/TurnOrderDisplay" method="_on_battle_manager_turn_order_updated"]
 [connection signal="turn_started" from="BattleManager" to="BattleManager" method="_on_turn_started"]

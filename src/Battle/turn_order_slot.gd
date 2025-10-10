@@ -1,7 +1,7 @@
 class_name TurnOrderSlot
 extends Panel
 
-var _acc: float = 0
+# var _acc: float = 0
 
 @export var combatant: Combatant
 @onready var icon: Sprite2D = $Icon
@@ -26,7 +26,7 @@ func _draw() -> void:
 	icon.scale = Vector2.ONE * remap(size.y, 32, 64, 0.75, 1.0)
 
 func _process(_delta: float) -> void:
-	size.y = max(64-(0.5*position.y), 32)
-	custom_minimum_size.y = max(64-(0.5*position.y), 32)
+	size.y = max(64 - (0.5 * position.y), 32)
+	custom_minimum_size.y = max(64 - (0.5 * position.y), 32)
 	# _acc += delta * 128.0
 	# position.y = pingpong(_acc, 128)

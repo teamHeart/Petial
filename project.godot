@@ -25,6 +25,7 @@ boot_splash/minimum_display_time=1000
 SignalLens="res://addons/signal_lens/autoload/signal_lens_autoload.gd"
 Data="*res://Data/util/Database.gd"
 PartyContainer="*res://src/party_container.gd"
+_Steam="*res://util/Steam/steam.gd"
 
 [display]
 
@@ -144,6 +145,4 @@ renderer/rendering_method.mobile="gl_compatibility"
 
 [steam]
 
-initialization/app_id=0
-initialization/initialize_on_startup=false
-initialization/embed_callbacks=false
+initialization/app_id=480
