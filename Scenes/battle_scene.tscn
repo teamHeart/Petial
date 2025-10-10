@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=4 uid="uid://coteu2wi3o76p"]
+[gd_scene load_steps=27 format=4 uid="uid://coteu2wi3o76p"]
 
 [ext_resource type="Script" uid="uid://cnrlqe4q7gj5e" path="res://src/Battle/battle_scene.gd" id="1_e5vbs"]
 [ext_resource type="Texture2D" uid="uid://6sxf5kmuqwjl" path="res://img/Temp Images/Grassland.png" id="2_3gnqe"]
@@ -16,6 +16,7 @@
 [ext_resource type="Script" uid="uid://dfb6jav4wt782" path="res://src/Battle/turn_order_display.gd" id="13_xdap8"]
 [ext_resource type="Script" uid="uid://dsd6ntixc03ia" path="res://src/Battle/turn_order_container.gd" id="14_f856b"]
 [ext_resource type="Theme" uid="uid://c6ym5lmrssndh" path="res://util/Themes/button_theme.tres" id="15_778cw"]
+[ext_resource type="Script" uid="uid://cd58dt4mmnmau" path="res://src/util/finite_state_machine.gd" id="17_vuvll"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_f4ggb"]
 
@@ -223,6 +224,11 @@ combatants = null
 turn_order_queue_size = null
 turn_order_display_size = null
 metadata/_custom_type_script = "uid://crx0ee5d5l06u"
+
+[node name="FiniteStateMachine" type="Node" parent="." node_paths=PackedStringArray("states")]
+script = ExtResource("17_vuvll")
+states = [NodePath("")]
+metadata/_custom_type_script = "uid://cd58dt4mmnmau"
 
 [connection signal="pressed" from="HUD/ActionPalette/HBoxContainer/Attack" to="." method="_on_attack_pressed"]
 [connection signal="pressed" from="HUD/ActionPalette/HBoxContainer/Skill" to="." method="_on_skill_pressed"]

@@ -1,3 +1,2 @@
-Steam.inputInit()
-Steam.enableDeviceCallbacks()
-SteamControllerInput.init()
+extends Node
+pass

@@ -26,6 +26,7 @@ SignalLens="res://addons/signal_lens/autoload/signal_lens_autoload.gd"
 Data="*res://Data/util/Database.gd"
 PartyContainer="*res://src/party_container.gd"
 _Steam="*res://util/Steam/steam.gd"
+DevkitMessenger="*res://addons/steam_devkit_notifier/devkit_messenger.gd"
 
 [display]
 
@@ -40,7 +41,7 @@ version_control/autoload_on_startup=true
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/gdLinter/plugin.cfg", "res://addons/signal_lens/plugin.cfg", "res://addons/simple_gdscript_formatter/plugin.cfg")
+enabled=PackedStringArray("res://addons/gdLinter/plugin.cfg", "res://addons/signal_lens/plugin.cfg", "res://addons/simple_gdscript_formatter/plugin.cfg", "res://addons/steam_devkit_notifier/plugin.cfg", "res://addons/wingman/plugin.cfg")
 
 [input]
 
@@ -146,3 +147,5 @@ renderer/rendering_method.mobile="gl_compatibility"
 [steam]
 
 initialization/app_id=480
+initialization/initialize_on_startup=true
+initialization/embed_callbacks=false

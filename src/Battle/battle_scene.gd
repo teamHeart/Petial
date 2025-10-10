@@ -24,7 +24,7 @@ var selected_combatant: Combatant
 @onready var battle_manager = $BattleManager
 @onready var action_palette = $HUD/ActionPalette
 
-func _ready() -> void:
+func _ready() -> void:#():
 	highlight_grid = find_child("HighlightOverlay") as TileMapLayer
 	battle_grid = BattleGrid.new(grid_size)
 	add_child(battle_grid)
@@ -53,6 +53,7 @@ func _ready() -> void:
 func _on_state_entered(new_state):
 	match new_state:
 		battle_manager.TurnState.START_TURN:
+			turn_start(battle_manager.current_combatant)
 			battle_manager.change_turn_state(battle_manager.TurnState.MOVE)
 		battle_manager.TurnState.MOVE:
 			_hide_action_palette()
@@ -62,6 +63,7 @@ func _on_state_entered(new_state):
 		battle_manager.TurnState.SELECT_COMMAND:
 			_show_action_palette()
 		battle_manager.TurnState.END_TURN:
+			battle_manager.emit_signal("turn_ended", selected_combatant)
 			battle_manager.change_turn_state(battle_manager.TurnState.WAITING)
 		battle_manager.TurnState.WAITING:
 			battle_manager.change_turn_state(battle_manager.TurnState.START_TURN)
@@ -102,7 +104,8 @@ func _unhandled_input(event: InputEvent) -> void: #():
 
 
 
-func _handle_actor_movement(event: InputEvent) -> void: #():
+func _handle_actor_movement(event: InputEvent) -> void:
+	#():
 	if battle_manager.turn_state == battle_manager.TurnState.MOVE and selected_combatant and not selected_combatant.is_dead:
 		if event.is_action_pressed("ui_left"):
 			selected_combatant.move_to_cell(selected_combatant.occupied_cell.neighbors[BattleGrid.Neighbors.LEFT])
@@ -130,7 +133,7 @@ func set_position_in_grid(combatant: Combatant, cell_pos: Vector2i):
 		return
 	combatant.position = cell.position
 	battle_grid.occupy_cell(cell_pos, combatant)
-
+	
 
 func turn_start(combatant: Combatant):
 	selected_combatant = combatant
@@ -143,8 +146,9 @@ func turn_start(combatant: Combatant):
 			var rng = randi_range(0, 3) as BattleCell.Neighbors
 			await get_tree().create_timer(0.25).timeout
 			combatant.move_to_cell(combatant.occupied_cell.neighbors[rng])
-			await get_tree().create_timer(0.25).timeout
-			battle_manager.emit_signal("turn_ended", selected_combatant)
+			await get_tree().create_timer(0.5).timeout
+			battle_manager.change_turn_state(battle_manager.TurnState.SELECT_COMMAND)
+			battle_manager.change_turn_state(battle_manager.TurnState.END_TURN)
 
 func highlight_cell(cell_pos: Vector2i, highlight_type: HighlightTypes):
 	if not highlight_grid:

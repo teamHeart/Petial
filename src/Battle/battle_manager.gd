@@ -1,6 +1,9 @@
 extends Node2D
 class_name BattleManager
 
+## Gonna refactor this with a proper state machine later
+
+
 # BattleManager
 #
 # Central controller for turn-based battles. Responsibilities:
@@ -38,7 +41,7 @@ enum BattleState {
 	DEFEAT
 }
 
-'''# TurnState
+# TurnState
 # Granular per-combatant turn states. These represent sub-steps during a
 # single combatant's turn (movement, selecting commands, using skills/items,
 # attacking, waiting, guarding, etc.). UI and input code should switch behavior
@@ -207,7 +210,6 @@ func change_turn_state(new_state: int):
 				return
 		TurnState.END_TURN:
 			if new_state == TurnState.WAITING:
-				emit_signal("turn_ended", current_combatant)
 				pass
 			else:
 				return
@@ -284,7 +286,6 @@ func _calculate_turn_order():
 # - Recalculate the queue to refill upcoming entries.
 # - Emit `turn_started` for the new front combatant so UI/scene can react.
 func _on_turn_ended(combatant: Combatant):
-	turn_state = TurnState.END_TURN
 	if turn_order_queue.size() > 0 and combatant == turn_order_queue[0]:
 		turn_order_queue.pop_front()
 		_calculate_turn_order()
