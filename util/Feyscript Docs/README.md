@@ -81,14 +81,15 @@ Feyscript includes a variety of commands that can be used to create interactive 
 - [**animation**](pages/animation.md): Controls animations for characters or objects.
 - [**setbackground**](pages/setbackground.md): Changes the background image to a specified image.
 - [**camera**](pages/camera.md): Moves or zooms the camera to a specified position or area, as well as other camera effects.
-- [**setactor**](pages/setactor.md): Changes the actor sprite to a specified image.
-- [**createactor**](pages/createactor.md): Creates a new actor sprite on the screen.
-- [**deleteactor**](pages/deleteactor.md): Deletes an actor sprite from the screen.
-- [**showactor**](pages/showactor.md): Displays an actor sprite on the screen.
-- [**hideactor**](pages/hideactor.md): Hides an actor sprite from the screen.
-- [**enableactor**](pages/enableactor.md): Enables an actor, making it interactive and allowing its scripts to run.
-- [**disableactor**](pages/disableactor.md): Disables an actor, making it non-interactive and preventing its scripts from running.
-- [**moveactor**](pages/moveactor.md): Moves an actor sprite to a specified position on the screen.
+- [**actor**](pages/actor.md): Unified command for all actor management operations (create, delete, show, hide, enable, disable, move, set).
+- [**setactor**](pages/setactor.md): (Deprecated) Changes the actor sprite to a specified image.
+- [**createactor**](pages/createactor.md): (Deprecated) Creates a new actor sprite on the screen.
+- [**deleteactor**](pages/deleteactor.md): (Deprecated) Deletes an actor sprite from the screen.
+- [**showactor**](pages/showactor.md): (Deprecated) Displays an actor sprite on the screen.
+- [**hideactor**](pages/hideactor.md): (Deprecated) Hides an actor sprite from the screen.
+- [**enableactor**](pages/enableactor.md): (Deprecated) Enables an actor, making it interactive and allowing its scripts to run.
+- [**disableactor**](pages/disableactor.md): (Deprecated) Disables an actor, making it non-interactive and preventing its scripts from running.
+- [**moveactor**](pages/moveactor.md): (Deprecated) Moves an actor sprite to a specified position on the screen.
 - [**fadein**](pages/fadein.md): Fades in the screen from black to the current scene.
 - [**fadeout**](pages/fadeout.md): Fades out the screen to black from the current scene.
 - [**transition**](pages/transition.md): Transitions between two scenes with a specified effect.

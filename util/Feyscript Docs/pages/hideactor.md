@@ -1,6 +1,10 @@
 # Hide Actor
 
+> **⚠️ DEPRECATED**: This command is deprecated. Please use `actor hide` instead. See [**actor**](actor.md) for the unified actor command documentation.
+
 The `hideactor` command is used to hide an actor in the scene. This command is useful for managing the visibility of characters during a scene.
+
+This command has been superseded by the unified `actor` command. Use `actor hide` instead for new scripts.
 
 ## Syntax
 
@@ -29,6 +33,7 @@ In this example, the actor with the local name "Gobdo" will be hidden from the s
 
 ## See Also
 
+- [**actor**](actor.md): Unified command for all actor operations (recommended).
 - [**showactor**](showactor.md): Command to show an actor in the scene.
 - [**moveactor**](moveactor.md): Command to move an actor to a different position in the scene.
 - [**setactor**](setactor.md): Command to set an actor's properties or attributes.

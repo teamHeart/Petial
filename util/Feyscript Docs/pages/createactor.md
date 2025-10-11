@@ -1,6 +1,10 @@
 # Create Actor
 
+> **⚠️ DEPRECATED**: This command is deprecated. Please use `actor create` instead. See [**actor**](actor.md) for the unified actor command documentation.
+
 The `createactor` command is used to create a new actor in the game world. An actor can be a player character, non-player character (NPC), or any other entity that can interact within the game environment.
+
+This command has been superseded by the unified `actor` command. Use `actor create` instead for new scripts.
 
 ## Syntax
 
@@ -36,6 +40,7 @@ This command creates a new enemy actor of type "Goblin" at the coordinates (10, 
 
 ## See Also
 
+- [**actor**](actor.md): Unified command for all actor operations (recommended).
 - [**deleteactor**](deleteactor.md): Command to remove an actor from the game world.
 - [**moveactor**](moveactor.md): Command to change the position of an existing actor.
 - [**setactor**](setactor.md): Command to modify properties of an existing actor.

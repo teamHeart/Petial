@@ -1,6 +1,10 @@
 # Set Actor
 
+> **⚠️ DEPRECATED**: This command is deprecated. Please use `actor set` instead. See [**actor**](actor.md) for the unified actor command documentation.
+
 The `setactor` command is used to change the current sprite of an actor in the scene. This command is useful for updating the visual representation of characters during a scene.
+
+This command has been superseded by the unified `actor` command. Use `actor set` instead for new scripts.
 
 ## Syntax
 
@@ -31,6 +35,7 @@ setactor Nim IdleLeft
 
 ## See Also
 
+- [**actor**](actor.md) - Unified command for all actor operations (recommended).
 - [**showactor**](showactor.md) - Command to display an actor on the screen.
 - [**moveactor**](moveactor.md) - Command to move an actor to a new position.
 - [**hideactor**](hideactor.md) - Command to hide an actor from the screen.

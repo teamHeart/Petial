@@ -1,6 +1,10 @@
 # Enable Actor
 
-The `enable actor` command is used to enable an actor in the game. This makes the actor interactive and able to run its scripts.
+> **⚠️ DEPRECATED**: This command is deprecated. Please use `actor enable` instead. See [**actor**](actor.md) for the unified actor command documentation.
+
+The `enableactor` command is used to enable an actor in the game. This makes the actor interactive and able to run its scripts.
+
+This command has been superseded by the unified `actor` command. Use `actor enable` instead for new scripts.
 
 ## Syntax
 
@@ -27,6 +31,7 @@ This command enables the actor named "Gobdo", making her interactive and allowin
 
 ## See Also
 
+- [**actor**](actor.md): Unified command for all actor operations (recommended).
 - [**disableactor**](disableactor.md): Command to disable an actor.
 - [**setactor**](setactor.md): Command to set or change an actor's properties.
 - [**showactor**](showactor.md): Command to display an actor on the screen.

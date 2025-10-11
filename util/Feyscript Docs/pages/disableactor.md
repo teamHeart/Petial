@@ -1,6 +1,10 @@
 # Disable Actor
 
+> **⚠️ DEPRECATED**: This command is deprecated. Please use `actor disable` instead. See [**actor**](actor.md) for the unified actor command documentation.
+
 The `disableactor` command is used to disable an actor in the game. It suspends the actor's scripts and makes in non-interactive.
+
+This command has been superseded by the unified `actor` command. Use `actor disable` instead for new scripts.
 
 ## Syntax
 
@@ -30,6 +34,7 @@ This command will disable the actor with the local name "Gobdo", suspending her 
 
 ## See Also
 
+- [**actor**](actor.md): Unified command for all actor operations (recommended).
 - [**enableactor**](enableactor.md): Command to re-enable a disabled actor.
 - [**hideactor**](hideactor.md): Command to hide an actor from the game world.
 - [**deleteactor**](deleteactor.md): Command to remove an actor from the game world.

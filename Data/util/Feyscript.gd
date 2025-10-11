@@ -224,6 +224,89 @@ static func execute_commands(commands: Array, context: Dictionary):
 				# _label(cmd["args"], context)
 				pass
 
+			## actor command: unified command for managing actors (create, delete, show, hide, enable, disable, move, set)
+			"actor":
+				if cmd["args"].size() > 0:
+					var subcommand = cmd["args"][0]
+					var subcommand_args = cmd["args"].slice(1)
+					match subcommand:
+						"create":
+							# createactor <actor_type> <database name> <local name> <x position> <y position>
+							# _createactor(subcommand_args, context)
+							pass
+						"delete":
+							# deleteactor <local name>
+							# _deleteactor(subcommand_args, context)
+							pass
+						"show":
+							# showactor <local name>
+							# _showactor(subcommand_args, context)
+							pass
+						"hide":
+							# hideactor <local name>
+							# _hideactor(subcommand_args, context)
+							pass
+						"enable":
+							# enableactor <local name>
+							# _enableactor(subcommand_args, context)
+							pass
+						"disable":
+							# disableactor <local name>
+							# _disableactor(subcommand_args, context)
+							pass
+						"move":
+							# moveactor <local name> <x position> <y position> [<"speed"|"duration">] [<value>]
+							# _moveactor(subcommand_args, context)
+							pass
+						"set":
+							# setactor <actor_id> <sprite_id>
+							# _setactor(subcommand_args, context)
+							pass
+						_:
+							print("Unknown actor subcommand: %s" % subcommand)
+				else:
+					print("actor command requires a subcommand (create, delete, show, hide, enable, disable, move, set)")
+
+			## createactor command: creates a new actor (deprecated - use 'actor create' instead)
+			"createactor":
+				# _createactor(cmd["args"], context)
+				pass
+
+			## deleteactor command: deletes an actor (deprecated - use 'actor delete' instead)
+			"deleteactor":
+				# _deleteactor(cmd["args"], context)
+				pass
+
+			## showactor command: shows an actor (deprecated - use 'actor show' instead)
+			"showactor":
+				# _showactor(cmd["args"], context)
+				pass
+
+			## hideactor command: hides an actor (deprecated - use 'actor hide' instead)
+			"hideactor":
+				# _hideactor(cmd["args"], context)
+				pass
+
+			## enableactor command: enables an actor (deprecated - use 'actor enable' instead)
+			"enableactor":
+				# _enableactor(cmd["args"], context)
+				pass
+
+			## disableactor command: disables an actor (deprecated - use 'actor disable' instead)
+			"disableactor":
+				# _disableactor(cmd["args"], context)
+				pass
+
+			## moveactor command: moves an actor (deprecated - use 'actor move' instead)
+			"moveactor":
+				# _moveactor(cmd["args"], context)
+				pass
+
+			## setactor command: sets an actor's sprite (deprecated - use 'actor set' instead)
+			"setactor":
+				# _setactor(cmd["args"], context)
+				pass
+
 			## end command: marks the end of a sequence of actions
 			"end":
 				return
