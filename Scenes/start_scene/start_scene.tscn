@@ -1,102 +1,99 @@
-[gd_scene load_steps=5 format=3 uid="uid://dw1r26w55mwbu"]
+[gd_scene load_steps=4 format=3 uid="uid://dw1r26w55mwbu"]
 
 [ext_resource type="Script" uid="uid://e1dma4llcu5r" path="res://Scenes/start_scene/start_scene.gd" id="1_8turk"]
-[ext_resource type="Texture2D" uid="uid://c0iidmf7tbexd" path="res://img/Temp Images/Petial_World_Map.png" id="1_82sop"]
+[ext_resource type="Texture2D" uid="uid://cxfu0j2vu3kwg" path="res://img/Temp Images/Petial_World_Map.png" id="1_82sop"]
 [ext_resource type="Theme" uid="uid://c6ym5lmrssndh" path="res://util/Themes/button_theme.tres" id="2_aeweq"]
 
-[sub_resource type="StyleBoxLine" id="StyleBoxLine_u4q12"]
-thickness = 10
-
-[node name="StartScene" type="Node2D"]
-script = ExtResource("1_8turk")
-
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D"]
 scale = Vector2(0.563, 0.563)
 texture = ExtResource("1_82sop")
+script = ExtResource("1_8turk")
 
-[node name="PanelContainer" type="PanelContainer" parent="."]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -346.5
-offset_top = -180.5
-offset_right = 346.5
-offset_bottom = 180.5
+[node name="AspectRatioContainer" type="AspectRatioContainer" parent="."]
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -1023.0
+offset_top = -875.0
+offset_right = -1023.0
+offset_bottom = -575.0
 grow_horizontal = 2
-grow_vertical = 2
+grow_vertical = 0
+ratio = 6.8247
+stretch_mode = 0
+alignment_vertical = 2
 
-[node name="AspectRatioContainer" type="AspectRatioContainer" parent="PanelContainer"]
+[node name="PanelContainer" type="PanelContainer" parent="AspectRatioContainer"]
 layout_mode = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/AspectRatioContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="AspectRatioContainer/PanelContainer"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="PanelContainer/AspectRatioContainer/VBoxContainer"]
+[node name="Label" type="Label" parent="AspectRatioContainer/PanelContainer/VBoxContainer"]
 layout_mode = 2
 theme = ExtResource("2_aeweq")
 text = "Roses of Petial"
+horizontal_alignment = 1
+vertical_alignment = 3
 
-[node name="Button" type="Button" parent="PanelContainer/AspectRatioContainer/VBoxContainer"]
+[node name="NewGame" type="Button" parent="AspectRatioContainer/PanelContainer/VBoxContainer"]
 layout_mode = 2
-size_flags_horizontal = 4
+focus_neighbor_bottom = NodePath("../LoadGame")
 theme = ExtResource("2_aeweq")
 text = "New Game"
 
-[node name="Button2" type="Button" parent="PanelContainer/AspectRatioContainer/VBoxContainer"]
+[node name="LoadGame" type="Button" parent="AspectRatioContainer/PanelContainer/VBoxContainer"]
 layout_mode = 2
-size_flags_horizontal = 4
+focus_neighbor_top = NodePath("../NewGame")
+focus_neighbor_bottom = NodePath("../Quit")
 theme = ExtResource("2_aeweq")
 text = "Load Game
 "
 
-[node name="Quit" type="Button" parent="PanelContainer/AspectRatioContainer/VBoxContainer"]
+[node name="Quit" type="Button" parent="AspectRatioContainer/PanelContainer/VBoxContainer"]
 layout_mode = 2
-size_flags_horizontal = 4
+focus_neighbor_top = NodePath("../LoadGame")
+focus_neighbor_bottom = NodePath("../SelectScene")
 theme = ExtResource("2_aeweq")
 text = "Quit Game"
 
-[node name="SelectScene" type="Button" parent="PanelContainer/AspectRatioContainer/VBoxContainer"]
+[node name="SelectScene" type="Button" parent="AspectRatioContainer/PanelContainer/VBoxContainer"]
 layout_mode = 2
-size_flags_horizontal = 4
+focus_neighbor_top = NodePath("../Quit")
 theme = ExtResource("2_aeweq")
 text = "Select Scene"
 
-[node name="Camera2D" type="Camera2D" parent="."]
-limit_enabled = false
-editor_draw_screen = false
-
 [node name="PanelContainer2" type="PanelContainer" parent="."]
 visible = false
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -346.5
-offset_top = -180.5
-offset_right = 346.5
-offset_bottom = 180.5
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -400.0
+offset_top = -200.0
+offset_right = -1646.0
+offset_bottom = -950.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxLine_u4q12")
+size_flags_horizontal = 4
+size_flags_vertical = 4
 
-[node name="ItemList" type="ItemList" parent="PanelContainer2"]
+[node name="SceneList" type="VBoxContainer" parent="PanelContainer2"]
 layout_mode = 2
-auto_width = true
-auto_height = true
+size_flags_horizontal = 0
+size_flags_vertical = 0
 
-[node name="Button" type="Button" parent="PanelContainer2/ItemList"]
-layout_mode = 0
-offset_left = 591.0
-offset_top = 293.0
-offset_right = 693.0
-offset_bottom = 351.0
+[node name="Back" type="Button" parent="PanelContainer2"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
 theme = ExtResource("2_aeweq")
 text = "Back"
 
-[connection signal="pressed" from="PanelContainer/AspectRatioContainer/VBoxContainer/Quit" to="." method="_quit_game"]
-[connection signal="pressed" from="PanelContainer/AspectRatioContainer/VBoxContainer/SelectScene" to="." method="_on_select_scene_button_pressed"]
-[connection signal="item_clicked" from="PanelContainer2/ItemList" to="." method="_on_item_clicked"]
-[connection signal="pressed" from="PanelContainer2/ItemList/Button" to="." method="_on_back_button_pressed"]
+[node name="Camera2D" type="Camera2D" parent="."]
+scale = Vector2(0.99999994, 0.99999994)
+limit_enabled = false
+
+[connection signal="pressed" from="AspectRatioContainer/PanelContainer/VBoxContainer/Quit" to="." method="_quit_game"]
+[connection signal="pressed" from="AspectRatioContainer/PanelContainer/VBoxContainer/SelectScene" to="." method="_on_select_scene_button_pressed"]
+[connection signal="pressed" from="PanelContainer2/Back" to="." method="_on_back_button_pressed"]

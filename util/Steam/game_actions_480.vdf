@@ -12,21 +12,14 @@
 					"title"			"#Action_Move"
 					"input_mode"	"joystick_move"
 				}
-				"Camera"
-				{
-					"title"			"#Action_Camera"
-					"input_mode"	"absolute_mouse"
-				}
 			}
 			"AnalogTrigger"
 			{
-				"Throttle"			"#Action_Throttle"
 			}
 			"Button"
 			{
-				"fire"				"#Action_Fire"
-				"Jump"				"#Action_Jump"
-				"pause_menu"		"#Action_Menu"
+				"Confirm"		"#Confirm"
+				"Cancel"		"#Cancel"
 			}
 		}
 		"InBattleControls"

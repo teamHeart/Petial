@@ -1,5 +1,5 @@
-extends Node2D
 class_name BattleManager
+extends Node2D
 
 ## Gonna refactor this with a proper state machine later
 
@@ -25,8 +25,6 @@ class_name BattleManager
 signal exited_state(old_state: TurnState) #():
 signal entered_state(new_state: TurnState) #():
 signal battle_started(turn_order: Array) #():
-# Optional: emit battle_ended(victory: bool) when battle finishes
-signal turn_ended(combatant: Combatant) #():
 signal turn_started(combatant: Combatant) #():
 signal turn_order_updated(turn_order: Array) #():
 signal turn_order_altered() #():

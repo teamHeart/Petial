@@ -27,7 +27,7 @@ func _ready():
 		offset = Vector2(0, -sprite_frames.get_frame_texture(animation, frame).get_size().y / 2.0)
 	else:
 		offset = Vector2.ZERO
-	y_sort_enabled = true
+	z_index = occupied_cell_pos.y + 1000  # Ensure drawn above grid
 	play(animation)
 	turn_timer = 1.0 / sqrt(speed)
 
@@ -63,3 +63,4 @@ func move_to_cell(cell: BattleCell):
 		occupied_cell.occupant = null
 	occupied_cell = cell
 	cell.occupant = self
+	z_index = occupied_cell.pos.y + 1000  # Ensure drawn above grid

@@ -73,6 +73,7 @@ move_range = 3
 metadata/_custom_type_script = "uid://bx7cd0vs3ih5j"
 
 [node name="Ally1" type="AnimatedSprite2D" parent="Combatants Layer"]
+z_as_relative = false
 sprite_frames = SubResource("SpriteFrames_wb0gu")
 script = ExtResource("8_f4ggb")
 battler = ExtResource("7_wb0gu")
@@ -227,7 +228,7 @@ metadata/_custom_type_script = "uid://crx0ee5d5l06u"
 
 [node name="FiniteStateMachine" type="Node" parent="." node_paths=PackedStringArray("states")]
 script = ExtResource("17_vuvll")
-states = [NodePath("")]
+states = [null]
 metadata/_custom_type_script = "uid://cd58dt4mmnmau"
 
 [connection signal="pressed" from="HUD/ActionPalette/HBoxContainer/Attack" to="." method="_on_attack_pressed"]
@@ -239,6 +240,5 @@ metadata/_custom_type_script = "uid://cd58dt4mmnmau"
 [connection signal="battle_started" from="BattleManager" to="HUD/TurnOrderDisplay" method="_on_battle_manager_battle_started"]
 [connection signal="entered_state" from="BattleManager" to="." method="_on_state_entered"]
 [connection signal="exited_state" from="BattleManager" to="." method="_on_state_exited"]
-[connection signal="turn_ended" from="BattleManager" to="BattleManager" method="_on_turn_ended"]
 [connection signal="turn_order_updated" from="BattleManager" to="HUD/TurnOrderDisplay" method="_on_battle_manager_turn_order_updated"]
 [connection signal="turn_started" from="BattleManager" to="BattleManager" method="_on_turn_started"]
