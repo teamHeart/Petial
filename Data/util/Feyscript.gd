@@ -224,7 +224,8 @@ static func execute_commands(commands: Array, context: Dictionary):
 				# _label(cmd["args"], context)
 				pass
 
-			## actor command: unified command for managing actors (create, delete, show, hide, enable, disable, move, set)
+			## actor command: unified command for managing actors
+			## (create, delete, show, hide, enable, disable, move, set)
 			"actor":
 				if cmd["args"].size() > 0:
 					var subcommand = cmd["args"][0]
@@ -265,7 +266,10 @@ static func execute_commands(commands: Array, context: Dictionary):
 						_:
 							print("Unknown actor subcommand: %s" % subcommand)
 				else:
-					print("actor command requires a subcommand (create, delete, show, hide, enable, disable, move, set)")
+					print(
+						"actor command requires a subcommand " +
+						"(create, delete, show, hide, enable, disable, move, set)"
+					)
 
 			## createactor command: creates a new actor (deprecated - use 'actor create' instead)
 			"createactor":
