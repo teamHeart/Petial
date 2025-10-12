@@ -1,0 +1,38 @@
+# Test file for new unified actor command
+
+# Test actor create
+actor create enemy Goblin Gobdo 10 20
+
+# Test actor show
+actor show Gobdo
+
+# Test actor move
+actor move Gobdo 100 200 duration 2
+
+# Test actor set
+actor set Gobdo IdleLeft
+
+# Test actor hide
+actor hide Gobdo
+
+# Test actor enable
+actor enable Gobdo
+
+# Test actor disable
+actor disable Gobdo
+
+# Test actor delete
+actor delete Gobdo
+
+# Test backward compatibility - old commands should still work
+createactor npc Villager TestNPC 50 50
+showactor TestNPC
+moveactor TestNPC 150 150 speed 100
+setactor TestNPC IdleRight
+hideactor TestNPC
+enableactor TestNPC
+disableactor TestNPC
+deleteactor TestNPC
+
+print "Actor command tests completed"
+end

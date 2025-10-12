@@ -1,6 +1,10 @@
 # Delete Actor
 
+> **⚠️ DEPRECATED**: This command is deprecated. Please use `actor delete` instead. See [**actor**](actor.md) for the unified actor command documentation.
+
 The `deleteactor` command is used to remove an actor from the game world. This command is useful for cleaning up unused or unwanted actors.
+
+This command has been superseded by the unified `actor` command. Use `actor delete` instead for new scripts.
 
 ## Syntax
 
@@ -27,6 +31,7 @@ This command will delete the actor with the local name "Gobdo" from the game wor
 
 ## See Also
 
+- [**actor**](actor.md) - Unified command for all actor operations (recommended).
 - [**createactor**](createactor.md) - Command to create a new actor in the game world.
 - [**moveactor**](moveactor.md) - Command to move an existing actor to a new location.
 - [**setactor**](setactor.md) - Command to modify properties of an existing actor.
