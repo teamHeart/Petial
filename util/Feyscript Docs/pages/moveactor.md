@@ -1,6 +1,10 @@
 # Move Actor
 
+> **⚠️ DEPRECATED**: This command is deprecated. Please use `actor move` instead. See [**actor**](actor.md) for the unified actor command documentation.
+
 The `moveactor` command is used to move an actor to a specified location in the game world. This command can be used to create dynamic and interactive scenes by repositioning characters during gameplay and cutscenes.
+
+This command has been superseded by the unified `actor` command. Use `actor move` instead for new scripts.
 
 ## Syntax
 
@@ -39,3 +43,11 @@ moveactor Astra 700 Astra.position.y
 - The coordinates should be within the bounds of the game world to avoid unexpected behavior.
 - Use the `moveactor` command in conjunction with other commands like `wait` to create smooth transitions and interactions in your scenes.
 - The movement will be linear; if you need more complex paths, consider using multiple `moveactor` commands or additional scripting logic.
+
+## See Also
+
+- [**actor**](actor.md): Unified command for all actor operations (recommended).
+- [**showactor**](showactor.md): Command to show an actor in the scene.
+- [**hideactor**](hideactor.md): Command to hide an actor from the scene.
+- [**createactor**](createactor.md): Command to create a new actor in the scene.
+- [**setactor**](setactor.md): Command to change an actor's sprite.

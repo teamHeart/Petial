@@ -1,6 +1,10 @@
 # Show Actor
 
+> **⚠️ DEPRECATED**: This command is deprecated. Please use `actor show` instead. See [**actor**](actor.md) for the unified actor command documentation.
+
 The `showactor` command is used to make an invisible actor visible in the scene. If the actor is already visible, this command has no effect.
+
+This command has been superseded by the unified `actor` command. Use `actor show` instead for new scripts.
 
 ## Syntax
 
@@ -30,6 +34,7 @@ In this example, the actor with the local name "Gobdo" will be made visible in t
 
 ## See Also
 
+- [**actor**](actor.md): Unified command for all actor operations (recommended).
 - [**hideactor**](hideactor.md): Command to hide an actor.
 - [**moveactor**](moveactor.md): Command to move an actor to a different position.
 - [**createactor**](createactor.md): Command to create a new actor in the scene.
