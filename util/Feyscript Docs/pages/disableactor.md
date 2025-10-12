@@ -2,7 +2,7 @@
 
 > **⚠️ DEPRECATED**: This command is deprecated. Please use `actor disable` instead. See [**actor**](actor.md) for the unified actor command documentation.
 
-The `disableactor` command is used to disable an actor in the game. It suspends the actor's scripts and makes in non-interactive.
+The `disableactor` command is used to disable an actor in the game. It suspends the actor's scripts and makes it non-interactive.
 
 This command has been superseded by the unified `actor` command. Use `actor disable` instead for new scripts.
 
