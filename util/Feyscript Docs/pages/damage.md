@@ -17,7 +17,7 @@ Damage in Feyscript is a fundamental aspect of gameplay, affecting characters' h
 
 Damage in Feyscript is calculated using a combination of the attacker's damage output and the defender's resistances. The basic formula is as follows:
 
-$` \boxed{\large{\textcolor{#ff4040}{\text{Damage}} = \textcolor{#00ff00}{\text{Attack}}^2 * \left( \frac{C}{C + {\textcolor{#8080ff}{\text{Defense}}}^{1.5}}\right) * \underbrace{ \color{orange}{\text{Resistances}}\color{white}\left[ \color{pink}{\text{Element}}\color{white}\right] \left(^{1.5}_{0.\overline{6}}\right) * \color{#ffff00}{\text{Critical Chance}} \color{white}\left(^{2}_{1}\right) * \color{purple}{\text{Random Multiplier} \color{white}{\left(^{1.1}_{0.9}\right)}}}_\text{Modifiers}}}`$
+$` \boxed{\large{\textcolor{#ff4040}{\text{Damage}} = \textcolor{#00ff00}{\text{Attack}}^2 \times \left( \frac{C}{C + {\textcolor{#8080ff}{\text{Defense}}}^{1.5}}\right) \times \underbrace{ \color{orange}{\text{Resistances}}\color{white}\left[ \color{pink}{\text{Element}}\color{white}\right] \left(^{1.5}_{0.\overline{6}}\right) \times \color{#ffff00}{\text{Critical Chance}} \color{white}\left(^{2}_{1}\right) \times \color{purple}{\text{Random Multiplier} \color{white}{\left(^{1.1}_{0.9}\right)}}}_\text{Modifiers}}}`$
 
 Inflict damage on a target. `damage` is commonly used during battles to reduce HP; it supports modifiers such as element, chance, and duration for status effects.
 
@@ -67,4 +67,5 @@ damage self flat 20
 - [**apply**](apply.md) — apply status effects
 - [**heal**](heal.md) — restore HP to targets
 - [**setturn**](setturn.md) — control battle turn order
+
 
