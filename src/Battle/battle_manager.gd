@@ -80,7 +80,6 @@ static var instance: BattleManager
 @export var turn_order_queue_size: int = 11
 @export var turn_order_display_size: int = 9
 
-
 ## Runtime fields
 # The working queue of upcoming combatants (front is next to act).
 var turn_order_queue: Array = []
