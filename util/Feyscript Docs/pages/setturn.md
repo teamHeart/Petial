@@ -1,4 +1,3 @@
-
 # Set Turn
 
 ([Back to Index](../README.md#commands))  
