@@ -1,4 +1,3 @@
-
 # End Battle
 
 ([Back to Index](../README.md#commands))  
