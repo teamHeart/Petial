@@ -1,7 +1,6 @@
 class_name BattleGrid
 extends Node2D
 
-
 enum Neighbors { UP, RIGHT, DOWN, LEFT }
 
 @export var cell_height := 48

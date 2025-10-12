@@ -9,6 +9,7 @@ signal state_exited  #():
 
 @export var valid_states: Array[State] = []
 
+
 func enter():
 	emit_signal("state_entered")
 

@@ -10,7 +10,6 @@ extends AnimatedSprite2D
 @export var speed: int
 @export var skill_list: Array[Skill] = []
 
-
 var current_hp: int
 var turn_timer: float = 0.0
 var turn_counter: int = 0
