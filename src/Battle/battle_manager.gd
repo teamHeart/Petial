@@ -58,6 +58,8 @@ enum TurnState {
 	FLEEING
 }
 
+static var instance: BattleManager
+
 # Current high-level battle state (START, PLAYER_TURN, ENEMY_TURN, ...).
 @export var battle_state: int = BattleState.START
 
@@ -78,7 +80,6 @@ enum TurnState {
 @export var turn_order_queue_size: int = 11
 @export var turn_order_display_size: int = 9
 
-static var instance: BattleManager
 
 ## Runtime fields
 # The working queue of upcoming combatants (front is next to act).
