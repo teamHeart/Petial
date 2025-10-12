@@ -9,7 +9,7 @@ Keep guidance concise and actionable. Prefer edits that follow existing project 
 - Major areas:
   - `src/` — main gameplay scripts (player, party, camera, grid helpers, movement controllers).
   - `Data/` — game data and `Data/util/Database.gd` autoload (global data access).
-  - `addons/` — editor and tooling plugins included (cba, gdLinter, signal_lens, simple_gdscript_formatter, steam_devkit_notifier, wingman, etc.).
+  - `addons/` — editor and tooling plugins included (cba, gdLinter, signal_lens, simple_gdscript_formatter, steam_devkit_notifier, wingman, etc.). DO NOT modify these.
   - `Scenes/`, `Prefab/`, `Resources/` — scene and resource assets used at runtime.
   - `util/Feyscript Docs/` — domain-specific language docs (Feyscript) used by project tooling.
 
