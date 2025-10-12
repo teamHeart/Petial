@@ -2,6 +2,8 @@
 ![Static Checks](https://github.com/teamHeart/Petial/actions/workflows/Static%20Checks.yml/badge.svg) 
 ![Build](https://github.com/teamHeart/Petial/actions/workflows/Build.yml/badge.svg)
 ![Static Badge](https://img.shields.io/badge/Gay-Everyone-pink?logo=wine)
+![Static Badge](https://img.shields.io/badge/Version-v0.0.3-blue)
+
 <br />
 
 <br /><img width="157" height="265" alt="GitHub for Lesbians" src="https://github.com/user-attachments/assets/2218d8f3-9dad-4b3d-9cb7-119893cbe17b" /> <img height="265" src="https://imgs.xkcd.com/comics/ballmer_peak.png" />   <br/> 
