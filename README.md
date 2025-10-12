@@ -1,4 +1,6 @@
-![Auto Assign](https://github.com/teamHeart/Petial/actions/workflows/AutoAssign.yml/badge.svg)<br />
+![Auto Assign](https://github.com/teamHeart/Petial/actions/workflows/AutoAssign.yml/badge.svg) 
+![Static Checks](https://github.com/teamHeart/Petial/actions/workflows/Static%20Checks.yml/badge.svg) 
+![Build](https://github.com/teamHeart/Petial/actions/workflows/Build.yml/badge.svg)
 <img width="157" height="265" alt="GitHub for Lesbians" src="https://github.com/user-attachments/assets/2218d8f3-9dad-4b3d-9cb7-119893cbe17b" /> <img height="265" src="https://imgs.xkcd.com/comics/ballmer_peak.png" />   <br/> 
 # teamHeart 
 We makin' a game, my dudez!
