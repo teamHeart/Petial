@@ -1,11 +1,7 @@
 name: Static checks
+on: [push, pull_request]
 
-on:
-  push:
-    branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
-
+  
 jobs:
   static-checks:
     name: 'Static checks'
