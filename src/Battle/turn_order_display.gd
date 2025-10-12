@@ -8,6 +8,7 @@ var turn_order_slot: TurnOrderSlot
 
 @onready var turn_order_container = $TurnOrderContainer
 
+
 func _ready():
 	turn_order_container = $TurnOrderContainer
 	turn_order_container.slots.clear()

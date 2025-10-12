@@ -12,10 +12,10 @@ var highlight_color: Color = Color(1, 1, 0, 0.5)  # Yellow highlight by default
 var default_color: Color = Color(1, 1, 1, 0)  # Transparent by default
 var move_range := 0
 var attack_range := 0
+var neighbors: Array = [null, null, null, null]  # UP, RIGHT, DOWN, LEFT
 
 var _move_range_processing_queue := []
 var _processed := false
-var neighbors: Array = [null, null, null, null]  # UP, RIGHT, DOWN, LEFT
 
 
 func _init(tpos: Vector2i):
