@@ -1,6 +1,8 @@
 class_name BattleCell
 extends Node2D
 
+enum Neighbors { UP, RIGHT, DOWN, LEFT }
+
 ## The position of the cell in the grid
 
 var pos: Vector2i
@@ -13,8 +15,6 @@ var attack_range := 0
 
 var _move_range_processing_queue := []
 var _processed := false
-
-enum Neighbors { UP, RIGHT, DOWN, LEFT }
 var neighbors: Array = [null, null, null, null]  # UP, RIGHT, DOWN, LEFT
 
 

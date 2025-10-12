@@ -4,9 +4,9 @@ extends Panel
 # var _acc: float = 0
 
 @export var combatant: Combatant
-@onready var icon: Sprite2D = $Icon
 @export var index: int = 0
 
+@onready var icon: Sprite2D = $Icon
 
 func _ready() -> void:
 	icon = $Icon
