@@ -230,7 +230,7 @@ static func execute_commands(commands: Array, context: Dictionary):
 			"actor":
 				if cmd["args"].size() > 0:
 					var subcommand = cmd["args"][0]
-					var subcommand_args = cmd["args"].slice(1)
+				#	var subcommand_args = cmd["args"].slice(1)
 					match subcommand:
 						"create":
 							# createactor <actor_type> <database name> <local name> <x position> <y position>
