@@ -1,5 +1,5 @@
-extends Combatant
 class_name Ally
+extends Combatant
 
 
 func _init():

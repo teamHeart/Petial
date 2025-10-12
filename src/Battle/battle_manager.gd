@@ -114,7 +114,6 @@ func change_battle_state(new_state: int):
 			_start_battle()
 		BattleState.PLAYER_TURN:
 			emit_signal("turn_started", current_combatant)
-			pass
 		BattleState.ENEMY_TURN:
 			# _start_enemy_turn()
 			pass
@@ -132,24 +131,25 @@ func change_battle_state(new_state: int):
 # turn (MOVE, MOVING, SELECT_COMMAND, ATTACK, etc.). This enforces valid
 # transitions and emits `turn_ended` when a turn completes.
 func change_turn_state(new_state: int):
+	var allow_change: bool = true
 	if turn_state == new_state:
-		return
+		allow_change = false
 	match turn_state:
 		TurnState.START_TURN:
 			if new_state == TurnState.MOVE:
 				pass  # _start_turn()
 			else:
-				return
+				allow_change = false
 		TurnState.MOVE:
 			if new_state in [TurnState.MOVING, TurnState.SELECT_COMMAND]:
 				pass  # _start_moving()
 			else:
-				return
+				allow_change = false
 		TurnState.MOVING:
 			if new_state == TurnState.MOVE:
 				pass  # _end_moving()
 			else:
-				return
+				allow_change = false
 		TurnState.SELECT_COMMAND:
 			if (
 				new_state
@@ -166,74 +166,76 @@ func change_turn_state(new_state: int):
 			):
 				pass  # _select_command()
 			else:
-				return
+				allow_change = false
 		TurnState.ATTACK:
 			if new_state in [TurnState.ATTACKING, TurnState.SELECT_COMMAND]:
 				pass  # _start_attacking()
 			else:
-				return
+				allow_change = false
 		TurnState.ATTACKING:
 			if new_state == TurnState.END_TURN:
 				pass  # _end_attacking()
 			else:
-				return
+				allow_change = false
 		TurnState.ITEM_SELECT:
 			if new_state in [TurnState.ITEM_TARGET, TurnState.SELECT_COMMAND]:
 				pass  # _start_item_targeting()
 			else:
-				return
+				allow_change = false
 		TurnState.ITEM_TARGET:
 			if new_state in [TurnState.ITEM_USE, TurnState.ITEM_SELECT]:
 				pass  # _start_item_use()
 			else:
-				return
+				allow_change = false
 		TurnState.ITEM_USE:
 			if new_state == TurnState.END_TURN:
 				pass  # _end_item_use()
 			else:
-				return
+				allow_change = false
 		TurnState.SKILL_SELECT:
 			if new_state in [TurnState.SKILL_TARGET, TurnState.SELECT_COMMAND]:
 				pass  # _start_skill_targeting()
 			else:
-				return
+				allow_change = false
 		TurnState.SKILL_TARGET:
 			if new_state in [TurnState.SKILL_USE, TurnState.SKILL_SELECT]:
 				pass  # _start_skill_use()
 			else:
-				return
+				allow_change = false
 		TurnState.SKILL_USE:
 			if new_state == TurnState.END_TURN:
 				pass  # _end_skill_use()
 			else:
-				return
+				allow_change = false
 		TurnState.GUARDING:
 			if new_state == TurnState.END_TURN:
 				pass  # _end_guarding()
 			else:
-				return
+				allow_change = false
 		TurnState.END_TURN:
 			if new_state == TurnState.WAITING:
 				pass
 			else:
-				return
+				allow_change = false
 		TurnState.WAITING:
 			if new_state == TurnState.START_TURN:
 				pass  # _waiting()
 			else:
-				return
+				allow_change = false
 		TurnState.FLEEING:
 			if new_state == TurnState.END_TURN:
 				pass  # _end_running()
 			else:
-				return
+				allow_change = false
 
 		TurnState.INSTANT_WIN:
 			if new_state == TurnState.END_TURN:
 				pass  # _end_instant_win()
 			else:
-				return
-
+				allow_change = false
+	if not allow_change:
+		push_warning("Invalid turn state transition from %s to %s" % [turn_state, new_state])
+		return
 	emit_signal("exited_state", turn_state)
 	turn_state = new_state
 	emit_signal("entered_state", new_state)

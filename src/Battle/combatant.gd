@@ -3,21 +3,20 @@ extends AnimatedSprite2D
 
 @export var battler: Battler
 @export var occupied_cell_pos: Vector2i
-@export_range(1, 5, 1) var move_range: int
+@export_range(1, 6, 1) var move_range: int
 @export var attack: int
 @export var defense: int
 @export var max_hp: int
-var current_hp: int
 @export var speed: int
+@export var skill_list: Array[Skill] = []
+
+
+var current_hp: int
 var turn_timer: float = 0.0
 var turn_counter: int = 0
 var predicted_turn_timer: float = 0.0
 var is_dead: bool = false
-
-@export var skill_list: Array[Skill] = []
-
 var occupied_cell: BattleCell
-
 var _tween: Tween
 
 

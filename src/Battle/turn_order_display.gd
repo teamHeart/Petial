@@ -1,11 +1,12 @@
 class_name TurnOrderDisplay
 extends NinePatchRect
 
-@onready var turn_order_container = $TurnOrderContainer
 var display_slots: Array[TurnOrderSlot] = []
 var combatants_in_order: Array = []
 var prev_order: Array = []
+var turn_order_slot: TurnOrderSlot
 
+@onready var turn_order_container = $TurnOrderContainer
 
 func _ready():
 	turn_order_container = $TurnOrderContainer
@@ -13,12 +14,13 @@ func _ready():
 	display_slots.clear()
 	combatants_in_order.clear()
 	prev_order.clear()
+	turn_order_slot = load("res://Prefab/turn_order_slot.tscn")
 
 
 func _on_battle_manager_battle_started(turn_order: Array) -> void:
 	combatants_in_order = turn_order.duplicate()
 	for i in range(combatants_in_order.size()):
-		var slot = load("res://Prefab/turn_order_slot.tscn").instantiate() as TurnOrderSlot
+		var slot = turn_order_slot.instantiate() as TurnOrderSlot
 		slot.combatant = combatants_in_order[i]
 		turn_order_container.add_child(slot)
 		display_slots.append(slot)
@@ -32,7 +34,7 @@ func _on_battle_manager_turn_order_updated(turn_order: Array) -> void:
 	if display_slots.size() < combatants_in_order.size():
 		# Add new slots if there are more combatants
 		for i in range(display_slots.size(), combatants_in_order.size()):
-			var slot = load("res://Prefab/turn_order_slot.tscn").instantiate() as TurnOrderSlot
+			var slot = turn_order_slot.instantiate() as TurnOrderSlot
 			slot.combatant = combatants_in_order[i - 1]
 			turn_order_container.add_child(slot)
 			display_slots.append(slot)

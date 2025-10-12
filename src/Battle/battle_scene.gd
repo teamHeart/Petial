@@ -120,7 +120,6 @@ func _on_state_entered(new_state):
 
 
 func _on_state_exited(old_state):
-	var TurnState = battle_manager.TurnState
 	match old_state:
 		TurnState.START_TURN:
 			pass
@@ -135,7 +134,6 @@ func _on_state_exited(old_state):
 			end_turn_button.release_focus()
 			flee_button.release_focus()
 			instant_victory_button.release_focus()
-			pass
 		TurnState.END_TURN:
 			pass
 
@@ -176,7 +174,6 @@ func _handle_actor_movement(event: InputEvent) -> void:
 			if selected_combatant in allies:
 				battle_manager.change_turn_state(battle_manager.TurnState.SELECT_COMMAND)
 				# battle_manager.emit_signal("turn_ended", selected_combatant)
-				pass
 			# if allies.size() > 0:
 			# 	_selected_combatant_index = (_selected_combatant_index + 1) % allies.size()
 			# 	selected_combatant = allies[_selected_combatant_index]
