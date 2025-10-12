@@ -41,5 +41,5 @@ set Global.globalSum (Global.globalVar + myVar)    # sets global variable global
 
 ## See also
 
-- [**print**](print.md)  inspect variable values
-- [**if**](if.md)  branch logic using variables
+- [**print**](print.md) — inspect variable values
+- [**if**](if.md) — branch logic using variables
