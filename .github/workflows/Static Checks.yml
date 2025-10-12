@@ -1,8 +1,6 @@
 name: Static checks
+on: [push, pull_request]
 
-on:
-  push
-  pull_request
   
 jobs:
   static-checks:
