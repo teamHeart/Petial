@@ -1,4 +1,4 @@
-# Set
+﻿# Set
 
 ([Back to Index](../README.md#commands))
 
@@ -17,10 +17,10 @@ set Global.<variable_name> <expression>
 
 ## Parameters
 
-- `<variable_name>` — the name to assign. Must start with a letter or underscore.
-- `Global.` — optional prefix to write to the global namespace.
-- `<value>` — a literal value (string/number/boolean) or an expression.
-- `<expression>` — any valid Feyscript expression (math, logic, function calls, etc.).
+- `<variable_name>`  the name to assign. Must start with a letter or underscore.
+- `Global.`  optional prefix to write to the global namespace.
+- `<value>`  a literal value (string/number/boolean) or an expression.
+- `<expression>`  any valid Feyscript expression (math, logic, function calls, etc.).
 
 ## Examples
 
@@ -41,4 +41,5 @@ set Global.globalSum (Global.globalVar + myVar)    # sets global variable global
 
 ## See also
 
-- [**print**](print.md) — inspect variable values
+- [**print**](print.md)  inspect variable values
+- [**if**](if.md)  branch logic using variables

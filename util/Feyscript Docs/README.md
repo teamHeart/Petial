@@ -78,32 +78,32 @@ Feyscript includes a variety of commands that can be used to create interactive 
 - [**goto**](pages/goto.md): Jumps to a specified label in the script.
   - [**label**](pages/goto.md): Defines a label that can be jumped to using the `goto` or `ask` commands.
 - [**music**](pages/music.md): Controls background music playback.
-  - [**play**](pages/music.md) — start a track
-  - [**stop**](pages/music.md) — stop playback
-  - [**pause**](pages/music.md) — pause playback
-  - [**fadein**](pages/music.md) — fade audio in
-  - [**fadeout**](pages/music.md) — fade audio out
-  - [**fadeto**](pages/music.md) — crossfade to another track
-  - [**setvolume**](pages/music.md) — set music volume
-  - [**loop**](pages/music.md) — enable/disable looping
+  - [**play**](pages/music.md#play) — start a track
+  - [**stop**](pages/music.md#stop) — stop playback
+  - [**pause**](pages/music.md#pause) — pause playback
+  - [**fadein**](pages/music.md#fadein) — fade audio in
+  - [**fadeout**](pages/music.md#fadeout) — fade audio out
+  - [**fadeto**](pages/music.md#fadeto) — crossfade to another track
+  - [**setvolume**](pages/music.md#setvolume) — set music volume
+  - [**loop**](pages/music.md#loop) — enable/disable looping
 - [**sound**](pages/sound.md): Controls sound effect playback.
 - [**animation**](pages/animation.md): Controls animations for characters or objects.
 - [**setbackground**](pages/setbackground.md): Changes the background image to a specified image.
 - [**camera**](pages/camera.md): Moves or zooms the camera to a specified position or area, as well as other camera effects.
-  - [**move**](pages/camera.md) — move camera to coordinates or actor
-  - [**shake**](pages/camera.md) — shake the camera
-  - [**zoom**](pages/camera.md) — zoom camera in/out
-  - [**follow**](pages/camera.md) — follow an actor
-  - [**set**](pages/camera.md) — instantly set position and zoom
+  - [**move**](pages/camera.md#move) — move camera to coordinates or actor
+  - [**shake**](pages/camera.md#shake) — shake the camera
+  - [**zoom**](pages/camera.md#zoom) — zoom camera in/out
+  - [**follow**](pages/camera.md#follow) — follow an actor
+  - [**set**](pages/camera.md#set) — instantly set position and zoom
 - [**actor**](pages/actor.md): Unified command for all actor management operations (create, delete, show, hide, enable, disable, move, set).
-  - [**create**](pages/actor.md) — create a new actor
-  - [**delete**](pages/actor.md) — remove an actor
-  - [**show**](pages/actor.md) — make an actor visible
-  - [**hide**](pages/actor.md) — hide an actor
-  - [**enable**](pages/actor.md) — enable an actor
-  - [**disable**](pages/actor.md) — disable an actor
-  - [**move**](pages/actor.md) — move an actor
-  - [**set**](pages/actor.md) — set an actor's sprite or active actor
+  - [**create**](pages/actor.md#create) — create a new actor
+  - [**delete**](pages/actor.md#delete) — remove an actor
+  - [**show**](pages/actor.md#show) — make an actor visible
+  - [**hide**](pages/actor.md#hide) — hide an actor
+  - [**enable**](pages/actor.md#enable) — enable an actor
+  - [**disable**](pages/actor.md#disable) — disable an actor
+  - [**move**](pages/actor.md#move) — move an actor
+  - [**set**](pages/actor.md#set) — set an actor's sprite or active actor
 - [**effect**](pages/effect.md): Applies a visual effect to the screen or a specified object.
 - [**fadein**](pages/fadein.md): Fades in the screen from black to the current scene.
 - [**fadeout**](pages/fadeout.md): Fades out the screen to black from the current scene.

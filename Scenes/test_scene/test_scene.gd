@@ -1,9 +1,7 @@
 class_name TestScene
 extends Node2D
 
-'''
-Currently a test scene for camera shake effects.
-'''
+## Currently a test scene for camera shake effects.
 
 @onready var sprite: Sprite2D = $Sprite2D
 @onready var camera: Camera2D = $Camera2D

@@ -20,14 +20,37 @@ music loop <true|false>
 
 ## Subcommands (short reference)
 
-- `music play <track>` — start playing the specified track immediately.
-- `music stop` — stop playback of the current track.
-- `music pause` — pause the current track; playback may be resumable.
-- `music fadein <seconds>` — fade audio in over the given duration.
-- `music fadeout <seconds>` — fade audio out over the given duration.
-- `music fadeto <seconds> <track>` — crossfade to a new track over duration.
-- `music setvolume <volume>` — set master music volume (0–100).
-- `music loop <true|false>` — enable or disable looping for the current track.
+### play
+
+`music play <track>` — start playing the specified track immediately.
+
+### stop
+
+`music stop` — stop playback of the current track.
+
+### pause
+
+`music pause` — pause the current track; playback may be resumable.
+
+### fadein
+
+`music fadein <seconds>` — fade audio in over the given duration.
+
+### fadeout
+
+`music fadeout <seconds>` — fade audio out over the given duration.
+
+### fadeto
+
+`music fadeto <seconds> <track>` — crossfade to a new track over duration.
+
+### setvolume
+
+`music setvolume <volume>` — set master music volume (0–100).
+
+### loop
+
+`music loop <true|false>` — enable or disable looping for the current track.
 
 ## Parameters
 

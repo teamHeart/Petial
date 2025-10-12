@@ -12,7 +12,7 @@ actor <subcommand> [arguments...]
 
 The `actor` command supports the following subcommands:
 
-### actor create
+### create
 
 Creates a new actor in the game world.
 
@@ -21,17 +21,19 @@ actor create <actor_type> <database name> <local name> <x position> <y position>
 ```
 
 **Parameters:**
+
 - `<actor_type>`: The type of actor to create (e.g., "player", "npc", "enemy", "object").
 - `<database name>`: The name of the actor as it appears in the database.
 - `<local name>`: The local name assigned to the actor for identification within the script.
 - `<x|y position>`: The initial position of the actor in the game world, specified as coordinates.
 
 **Example:**
+
 ```feyscript
 actor create enemy Goblin Gobdo 10 20
 ```
 
-### actor delete
+### delete
 
 Removes an actor from the game world.
 
@@ -40,14 +42,16 @@ actor delete <local name>
 ```
 
 **Parameters:**
+
 - `<local name>`: The local name of the actor you want to delete.
 
 **Example:**
+
 ```feyscript
 actor delete Gobdo
 ```
 
-### actor show
+### show
 
 Makes an invisible actor visible in the scene.
 
@@ -56,14 +60,16 @@ actor show <local name>
 ```
 
 **Parameters:**
+
 - `<local name>`: The local name of the actor you want to show.
 
 **Example:**
+
 ```feyscript
 actor show Gobdo
 ```
 
-### actor hide
+### hide
 
 Hides an actor from the scene without deleting them.
 
@@ -72,14 +78,16 @@ actor hide <local name>
 ```
 
 **Parameters:**
+
 - `<local name>`: The local name of the actor you want to hide.
 
 **Example:**
+
 ```feyscript
 actor hide Gobdo
 ```
 
-### actor enable
+### enable
 
 Enables an actor, making it interactive and allowing its scripts to run.
 
@@ -88,14 +96,16 @@ actor enable <local name>
 ```
 
 **Parameters:**
+
 - `<local name>`: The local name of the actor to be enabled.
 
 **Example:**
+
 ```feyscript
 actor enable Gobdo
 ```
 
-### actor disable
+### disable
 
 Disables an actor, making it non-interactive and preventing its scripts from running.
 
@@ -104,14 +114,16 @@ actor disable <local name>
 ```
 
 **Parameters:**
+
 - `<local name>`: The local name of the actor to be disabled.
 
 **Example:**
+
 ```feyscript
 actor disable Gobdo
 ```
 
-### actor move
+### move
 
 Moves an actor to a specified location in the game world.
 
@@ -120,6 +132,7 @@ actor move <local name> <x position> <y position> [<"speed"|"duration">] [<value
 ```
 
 **Parameters:**
+
 - `<local name>`: The local name of the actor you want to move.
 - `<x|y position>`: The target x and y coordinates where you want the actor to move.
 - `[<"speed"|"duration">]`: An optional parameter that specifies how the movement should be executed.
@@ -131,11 +144,12 @@ actor move <local name> <x position> <y position> [<"speed"|"duration">] [<value
   - If "duration" is chosen, this value represents the time in seconds it will take for the actor to reach the target position.
 
 **Example:**
+
 ```feyscript
 actor move Gobdo 100 200 duration 2
 ```
 
-### actor set
+### set
 
 Changes the current sprite of an actor in the scene.
 
@@ -144,10 +158,12 @@ actor set <actor_id> <sprite_id>
 ```
 
 **Parameters:**
+
 - `<actor_id>`: The identifier of the actor whose sprite you want to change.
 - `<sprite_id>`: The identifier of the new sprite to assign to the actor.
 
 **Example:**
+
 ```feyscript
 actor set Nim IdleLeft
 ```
@@ -183,6 +199,7 @@ If you're using the older individual actor commands, you can easily migrate to t
 ## Legacy Commands
 
 For documentation on the individual legacy commands, see:
+
 - [**createactor**](createactor.md) - (Deprecated) Command to create a new actor.
 - [**deleteactor**](deleteactor.md) - (Deprecated) Command to delete an actor.
 - [**showactor**](showactor.md) - (Deprecated) Command to show an actor.

@@ -39,7 +39,7 @@ effect tint target Gobdo duration 3 intensity 0.6 color "#5aa9ff"
 
 - Effect names and available parameters depend on your game's runtime and the engine's effect system. Check your engine docs for supported effects.
 - When targeting an actor, the actor must exist and be visible for most visual effects to be noticeable.
--- Use modest intensity and short durations for disruptive effects (flash) to avoid disorienting players.
+- Use modest intensity and short durations for disruptive effects (flash) to avoid disorienting players.
 - Combine `effect` with `wait` and `camera` commands to build cinematic moments.
 
 ## See also

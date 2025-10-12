@@ -18,7 +18,12 @@ Damage in Feyscript is a fundamental aspect of gameplay, affecting characters' h
 Damage in Feyscript is calculated using a combination of the attacker's damage output and the defender's resistances. The basic formula is as follows:
 
 ```feyscript
-((IN PROGRESS))
+# Example Damage Calculation Formula
+# (This section is a draft and may be updated)
+
+# Basic formula:
+# final_damage = (power * attack_modifier) - (defense * resistance_modifier)
+# Apply element/resistance modifiers as needed.
 ```
 
 Inflict damage on a target. `damage` is commonly used during battles to reduce HP; it supports modifiers such as element, chance, and duration for status effects.
