@@ -1,0 +1,23 @@
+[gd_scene load_steps=3 format=3 uid="uid://c3g378l17u1r0"]
+
+[ext_resource type="Script" uid="uid://djmt3yoihkbb5" path="res://Scenes/test_scene/test_scene.gd" id="1_tf2av"]
+[ext_resource type="Texture2D" uid="uid://cxfu0j2vu3kwg" path="res://img/Temp Images/Petial_World_Map.png" id="2_lvvqt"]
+
+[node name="TestScene" type="Node2D"]
+script = ExtResource("1_tf2av")
+camera_shake_intensity = 1.0
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_lvvqt")
+centered = false
+
+[node name="Camera2D" type="Camera2D" parent="."]
+anchor_mode = 0
+
+[node name="Label" type="Label" parent="Camera2D"]
+offset_left = 184.0
+offset_top = 162.0
+offset_right = 447.0
+offset_bottom = 309.0
+theme_override_font_sizes/font_size = 64
+text = "fadsfasd"

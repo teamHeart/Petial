@@ -1,7 +1,9 @@
-<<<<<<< HEAD
 # Sound
 
-The `sound` command is used to play sound effects in the game. It can be used to enhance the player's experience by adding audio cues for various actions or events.
+([Back to Index](../README.md#commands))
+
+Play short sound effects (SFX). Use `sound` for UI clicks, impact sounds,
+and other non-music audio cues that enhance feedback during gameplay.
 
 ## Syntax
 
@@ -11,9 +13,9 @@ sound <sound_name>
 
 ## Parameters
 
-- `<sound_name>`: The name of the sound effect to be played. This should correspond to a sound file that has been added to the game's resources.
+- `<sound_name>` — file name or resource identifier for the effect.
 
-## Example
+## Examples
 
 ```feyscript
 sound "door_open.wav"
@@ -29,52 +31,14 @@ sound "explosion.wav"
 
 ## Notes
 
-- Ensure that the sound files are properly added to the game's resources and that the names used in the `sound` command match the file names.
-- The `sound` command can be used in various parts of the script, such as in response to player actions or during specific events in the game.
-- Multiple sound effects can be played in succession by using multiple `sound` commands in conjunction with the `wait` command to control timing.
-- Be mindful of the overall audio experience; avoid playing too many sounds at once, which can lead to a cluttered and overwhelming auditory environment for the player.
+- Ensure sound files are included in your game's resources and that the
+  identifier matches exactly.
+- Use `wait` between `sound` calls to control timing when playing effects in
+  sequence.
+- Avoid playing too many simultaneous sounds to keep audio clear.
 
-## See Also
-- [**music**](./music.md) - For background music control.
-- [**wait**](./wait.md) - To control timing between sound effects.
-=======
-# Sound
+## See also
 
-The `sound` command is used to play sound effects in the game. It can be used to enhance the player's experience by adding audio cues for various actions or events.
-
-## Syntax
-
-```feyscript
-sound <sound_name>
-```
-
-## Parameters
-
-- `<sound_name>`: The name of the sound effect to be played. This should correspond to a sound file that has been added to the game's resources.
-
-## Example
-
-```feyscript
-sound "door_open.wav"
-```
-
-```feyscript
-loop 3
-  sound "tick.wav"
-  wait 1
-endloop
-sound "explosion.wav"
-```
-
-## Notes
-
-- Ensure that the sound files are properly added to the game's resources and that the names used in the `sound` command match the file names.
-- The `sound` command can be used in various parts of the script, such as in response to player actions or during specific events in the game.
-- Multiple sound effects can be played in succession by using multiple `sound` commands in conjunction with the `wait` command to control timing.
-- Be mindful of the overall audio experience; avoid playing too many sounds at once, which can lead to a cluttered and overwhelming auditory environment for the player.
-
-## See Also
-- [**music**](./music.md) - For background music control.
-- [**wait**](./wait.md) - To control timing between sound effects.
->>>>>>> 3104484cc8018e463cf43bb35e2b9007e52e7788
-- [**animation**](./animation.md) - To synchronize sound effects with animations.
+- [**music**](music.md) — background music control
+- [**wait**](wait.md) — timing and delays
+- [**animation**](animation.md) — syncing SFX with visuals
