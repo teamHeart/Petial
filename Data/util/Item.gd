@@ -15,4 +15,3 @@ extends Action
 @export var effects: Array = []
 @export var icon: Texture2D
 @export var maxStack: int = 99
-

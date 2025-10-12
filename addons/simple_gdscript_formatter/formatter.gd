@@ -35,7 +35,9 @@ func format(code_edit: CodeEdit) -> String:
 				var end_position := code_edit.get_delimiter_end_position(line_index, column_index)
 				end_line = end_position.y
 				end_column = end_position.x
-				map[placeholder] = _extrat_text(code_edit, start_line, start_column - 1, end_line, end_column)
+				map[placeholder] = _extrat_text(
+					code_edit, start_line, start_column - 1, end_line, end_column
+				)
 				code = _replace(code, map[placeholder], placeholder)
 				line_index = end_line
 				column_index = end_column
@@ -106,7 +108,9 @@ func _replace(text: String, what: String, forwhat: String) -> String:
 	return text
 
 
-func _extrat_text(code_edit: CodeEdit, start_line: int, start_column: int, end_line: int, end_column: int) -> String:
+func _extrat_text(
+	code_edit: CodeEdit, start_line: int, start_column: int, end_line: int, end_column: int
+) -> String:
 	if code_edit.get_line(start_line)[start_column - 1] == "&":
 		start_column -= 1
 	if start_line == end_line:
@@ -119,9 +123,9 @@ func _extrat_text(code_edit: CodeEdit, start_line: int, start_column: int, end_l
 		if i == start_line:
 			text += code_edit.get_line(start_line).substr(start_column)
 		elif i == end_line:
-			text += '\n' + code_edit.get_line(end_line).substr(0, end_column)
+			text += "\n" + code_edit.get_line(end_line).substr(0, end_column)
 		else:
-			text += '\n' + code_edit.get_line(i)
+			text += "\n" + code_edit.get_line(i)
 	return text
 
 

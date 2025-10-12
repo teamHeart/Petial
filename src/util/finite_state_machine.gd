@@ -4,12 +4,15 @@ extends Node
 ## A simple finite state machine implementation.
 ## States can be added to the `states` array, and transitions between states are managed.
 
+signal state_changed(new_state)
+
+@export var states: Array[State] = []
+
 var current_state: State = null
 var previous_state: State = null
-@export var states: Array[State] = []
-signal state_changed(new_state)#():
 
-func change_state(new_state: State) -> bool: #():
+
+func change_state(new_state: State) -> bool:  #():
 	if not new_state or new_state == current_state:
 		return false
 	if new_state not in states:

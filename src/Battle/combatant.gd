@@ -31,6 +31,7 @@ func _ready():
 	play(animation)
 	turn_timer = 1.0 / sqrt(speed)
 
+
 func load_from_data(data: Battler) -> bool:
 	if not data:
 		# print("Invalid battler data")
@@ -50,14 +51,18 @@ func load_from_data(data: Battler) -> bool:
 		sprite_frames = data.animation
 	return true
 
+
 func move_to_cell(cell: BattleCell):
 	if not cell or _tween or cell.is_occupied() or cell.move_range > move_range:
 		return
 	_tween = create_tween().bind_node(self)
-	_tween.tween_property(self, "position", cell.position, 0.125).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
-	_tween.tween_callback(func():
-		_tween = null
+	(
+		_tween
+		. tween_property(self, "position", cell.position, 0.125)
+		. set_trans(Tween.TRANS_SINE)
+		. set_ease(Tween.EASE_OUT)
 	)
+	_tween.tween_callback(func(): _tween = null)
 	_tween.play()
 	if occupied_cell:
 		occupied_cell.occupant = null

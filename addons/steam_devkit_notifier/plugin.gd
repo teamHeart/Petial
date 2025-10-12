@@ -8,6 +8,7 @@ var export_notifier_plugin = ExportNotifierPlugin.new()
 
 var has_loaded = false
 
+
 func _enter_tree() -> void:
 	if has_loaded:
 		return
@@ -16,6 +17,7 @@ func _enter_tree() -> void:
 	add_control_to_dock(DOCK_SLOT_LEFT_BR, dock)
 	add_export_plugin(export_notifier_plugin)
 	has_loaded = true
+
 
 func _exit_tree() -> void:
 	remove_control_from_docks(dock)
