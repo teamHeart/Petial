@@ -1,12 +1,7 @@
 class_name BattleScene
 extends Node2D
 
-enum HighlightTypes {
-	NONE = 0,
-	MOVE = 5,
-	START = 6,
-	ATTACK = 1
-}
+enum HighlightTypes { NONE = 0, MOVE = 5, START = 6, ATTACK = 1 }
 
 @export var grid_size: Vector2i = Vector2i(13, 6)
 @export var cell_size: Vector2 = Vector2(64, 48)
@@ -30,6 +25,7 @@ var instant_victory_button: Button
 
 @onready var battle_manager = $BattleManager
 @onready var action_palette = $HUD/ActionPalette
+
 
 func _ready() -> void:
 	attack_button = action_palette.find_child("Attack") as Button
@@ -64,17 +60,28 @@ func _ready() -> void:
 
 	battle_manager._start_battle()
 
+
 func _show_action_palette():
 	action_palette.visible = true
 	var tween = create_tween().bind_node(action_palette)
-	tween.tween_property(action_palette, "size", Vector2(1086, 68), 0.5).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+	(
+		tween
+		. tween_property(action_palette, "size", Vector2(1086, 68), 0.5)
+		. set_trans(Tween.TRANS_SINE)
+		. set_ease(Tween.EASE_IN_OUT)
+	)
+
 
 func _hide_action_palette():
 	var tween = create_tween().bind_node(action_palette)
-	tween.tween_property(action_palette, "size", Vector2(0, 68), 0.5).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
-	tween.tween_callback(func():
-		action_palette.visible = false
+	(
+		tween
+		. tween_property(action_palette, "size", Vector2(0, 68), 0.5)
+		. set_trans(Tween.TRANS_SINE)
+		. set_ease(Tween.EASE_IN_OUT)
 	)
+	tween.tween_callback(func(): action_palette.visible = false)
+
 
 func _on_state_entered(new_state):
 	match new_state:
@@ -98,12 +105,20 @@ func _on_state_entered(new_state):
 			var counter_pos = 0
 			for ally in allies:
 				var tween = create_tween().bind_node(ally)
-				tween.tween_property(ally, "position", ally.position + Vector2(get_viewport().get_visible_rect().size.x, 0), 1.0).set_delay(0.1 * counter_pos)
-				tween.chain().tween_callback(func():
-					get_tree().free()
+				(
+					tween
+					. tween_property(
+						ally,
+						"position",
+						ally.position + Vector2(get_viewport().get_visible_rect().size.x, 0),
+						1.0
+					)
+					. set_delay(0.1 * counter_pos)
 				)
+				tween.chain().tween_callback(func(): get_tree().free())
 				counter_pos += 1
-				
+
+
 func _on_state_exited(old_state):
 	var TurnState = battle_manager.TurnState
 	match old_state:
@@ -124,7 +139,8 @@ func _on_state_exited(old_state):
 		TurnState.END_TURN:
 			pass
 
-func _unhandled_input(event: InputEvent) -> void: #():
+
+func _unhandled_input(event: InputEvent) -> void:  #():
 	match battle_manager.turn_state:
 		battle_manager.TurnState.SELECT_COMMAND:
 			if event.is_action_pressed("Cancel"):
@@ -133,18 +149,29 @@ func _unhandled_input(event: InputEvent) -> void: #():
 			_handle_actor_movement(event)
 
 
-
 func _handle_actor_movement(event: InputEvent) -> void:
 	#():
-	if battle_manager.turn_state == battle_manager.TurnState.MOVE and selected_combatant and not selected_combatant.is_dead:
+	if (
+		battle_manager.turn_state == battle_manager.TurnState.MOVE
+		and selected_combatant
+		and not selected_combatant.is_dead
+	):
 		if event.is_action_pressed("ui_left"):
-			selected_combatant.move_to_cell(selected_combatant.occupied_cell.neighbors[BattleGrid.Neighbors.LEFT])
+			selected_combatant.move_to_cell(
+				selected_combatant.occupied_cell.neighbors[BattleGrid.Neighbors.LEFT]
+			)
 		elif event.is_action_pressed("ui_right"):
-			selected_combatant.move_to_cell(selected_combatant.occupied_cell.neighbors[BattleGrid.Neighbors.RIGHT])
+			selected_combatant.move_to_cell(
+				selected_combatant.occupied_cell.neighbors[BattleGrid.Neighbors.RIGHT]
+			)
 		elif event.is_action_pressed("ui_up"):
-			selected_combatant.move_to_cell(selected_combatant.occupied_cell.neighbors[BattleGrid.Neighbors.UP])
+			selected_combatant.move_to_cell(
+				selected_combatant.occupied_cell.neighbors[BattleGrid.Neighbors.UP]
+			)
 		elif event.is_action_pressed("ui_down"):
-			selected_combatant.move_to_cell(selected_combatant.occupied_cell.neighbors[BattleGrid.Neighbors.DOWN])
+			selected_combatant.move_to_cell(
+				selected_combatant.occupied_cell.neighbors[BattleGrid.Neighbors.DOWN]
+			)
 		elif event.is_action_pressed("Confirm"):
 			if selected_combatant in allies:
 				battle_manager.change_turn_state(battle_manager.TurnState.SELECT_COMMAND)
@@ -156,6 +183,7 @@ func _handle_actor_movement(event: InputEvent) -> void:
 			# 	turn_start(selected_combatant)
 	selected_combatant.z_index = selected_combatant.occupied_cell.pos.y
 
+
 func set_position_in_grid(combatant: Combatant, cell_pos: Vector2i):
 	if not combatant or not battle_grid:
 		return
@@ -164,7 +192,7 @@ func set_position_in_grid(combatant: Combatant, cell_pos: Vector2i):
 		return
 	combatant.position = cell.position
 	battle_grid.occupy_cell(cell_pos, combatant)
-	
+
 
 func turn_start(combatant: Combatant):
 	selected_combatant = combatant
@@ -181,11 +209,13 @@ func turn_start(combatant: Combatant):
 			battle_manager.change_turn_state(battle_manager.TurnState.SELECT_COMMAND)
 			battle_manager.change_turn_state(battle_manager.TurnState.END_TURN)
 
+
 func highlight_cell(cell_pos: Vector2i, highlight_type: HighlightTypes):
 	if not highlight_grid:
 		return
 	highlight_grid.set_cell(cell_pos, 2, Vector2i(highlight_type, 0))
 	# print("Highlighting cell at ", cell_pos, " with type ", highlight_type)
+
 
 func show_move_range():
 	for y in range(battle_grid.grid_height):
@@ -198,25 +228,32 @@ func show_move_range():
 			else:
 				highlight_cell(Vector2i(x, y), HighlightTypes.NONE)
 
+
 func hide_move_range():
 	for y in range(battle_grid.grid_height):
 		for x in range(battle_grid.grid_width):
 			highlight_cell(Vector2i(x, y), HighlightTypes.NONE)
 
+
 func _on_attack_pressed():
 	battle_manager.change_turn_state(battle_manager.TurnState.END_TURN)
+
 
 func _on_skill_pressed():
 	battle_manager.change_turn_state(battle_manager.TurnState.END_TURN)
 
+
 func _on_item_pressed():
 	battle_manager.change_turn_state(battle_manager.TurnState.END_TURN)
+
 
 func _on_end_turn_pressed():
 	battle_manager.change_turn_state(battle_manager.TurnState.END_TURN)
 
+
 func _on_flee_pressed():
 	battle_manager.change_turn_state(battle_manager.TurnState.FLEEING)
-	
+
+
 func _on_instant_victory_pressed():
 	battle_manager.change_turn_state(battle_manager.TurnState.END_TURN)

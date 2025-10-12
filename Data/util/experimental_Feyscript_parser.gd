@@ -315,4 +315,4 @@ static func example_inputs() -> Array:
 		"if target is frozen then remove frozen from target else apply burning to target chance 25 duration 3 done",
 		"if user.hp < 50 { heal 40 to user }"
 	]
-	'''# ----- IGNORE -----
+	'''  # ----- IGNORE -----

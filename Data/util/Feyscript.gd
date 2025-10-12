@@ -1,5 +1,6 @@
 class_name Feyscript
 
+
 static func parse_feyscript(input: String) -> Array:
 	var lines = input.split("\n", false)
 	var commands = []
@@ -15,6 +16,7 @@ static func parse_feyscript(input: String) -> Array:
 		commands.append({"command": command, "args": args})
 	return commands
 
+
 static func execute_commands(commands: Array, context: Dictionary):
 	for cmd in commands:
 		match cmd["command"]:
@@ -22,7 +24,7 @@ static func execute_commands(commands: Array, context: Dictionary):
 			"print":
 				if cmd["args"].size() > 0:
 					print(cmd["args"].join(" "))
-			
+
 			## set command: sets a variable in the context
 			"set":
 				if cmd["args"].size() == 2:
@@ -38,7 +40,7 @@ static func execute_commands(commands: Array, context: Dictionary):
 						print(context[var_name])
 					else:
 						print("Variable " + var_name + " not found in context.")
-			
+
 			## add command: adds two numbers and stores the result in the context
 			"add":
 				if cmd["args"].size() == 3:
@@ -74,13 +76,12 @@ static func execute_commands(commands: Array, context: Dictionary):
 					else:
 						print("Error: Division by zero.")
 
-
 			## if command: conditional execution based on variable value
 			"if":
 				# This is a placeholder for future implementation
 				# _if(cmd["args"], context)
 				pass
-			
+
 			## then command: marks the start of the then block
 			"then":
 				# This is a placeholder for future implementation
@@ -267,8 +268,10 @@ static func execute_commands(commands: Array, context: Dictionary):
 							print("Unknown actor subcommand: %s" % subcommand)
 				else:
 					print(
-						"actor command requires a subcommand " +
-						"(create, delete, show, hide, enable, disable, move, set)"
+						(
+							"actor command requires a subcommand "
+							+ "(create, delete, show, hide, enable, disable, move, set)"
+						)
 					)
 
 			## createactor command: creates a new actor (deprecated - use 'actor create' instead)
@@ -318,5 +321,3 @@ static func execute_commands(commands: Array, context: Dictionary):
 			## Unknown command
 			_:
 				print("Unknown command: %s" % cmd["command"])
-
-

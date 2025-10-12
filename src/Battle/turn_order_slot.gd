@@ -7,11 +7,13 @@ extends Panel
 @onready var icon: Sprite2D = $Icon
 @export var index: int = 0
 
+
 func _ready() -> void:
 	icon = $Icon
 	if combatant:
 		icon.texture = combatant.battler.turn_order_sprite
 		icon.centered = false
+
 
 func set_combatant(c: Combatant) -> void:
 	if c:
@@ -19,11 +21,14 @@ func set_combatant(c: Combatant) -> void:
 	else:
 		icon.texture = null
 
+
 func clear_slot() -> void:
 	icon.texture = null
 
+
 func _draw() -> void:
 	icon.scale = Vector2.ONE * remap(size.y, 32, 64, 0.75, 1.0)
+
 
 func _process(_delta: float) -> void:
 	size.y = max(64 - (0.5 * position.y), 32)

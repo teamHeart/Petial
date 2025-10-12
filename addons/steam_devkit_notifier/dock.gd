@@ -85,4 +85,9 @@ func _on_title_name_input_text_changed(new_text: String):
 
 
 func _on_open_devkit_client_pressed():
-	OS.shell_open("C:\\Program Files (x86)\\Steam\\steamapps\\common\\SteamOSDevkitClient\\windows-client\\devkit-gui.exe")
+	(
+		OS
+		. shell_open(
+			"C:\\Program Files (x86)\\Steam\\steamapps\\common\\SteamOSDevkitClient\\windows-client\\devkit-gui.exe"
+		)
+	)

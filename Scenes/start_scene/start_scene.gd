@@ -9,6 +9,7 @@ extends Node2D
 var back_button: Button
 var select_scene: Button
 
+
 func _ready() -> void:
 	_Steam.initialize_steam()
 	var new_game = find_child("NewGame") as Button
@@ -36,6 +37,7 @@ func _ready() -> void:
 	# new_game.
 	_populate_scene_list()
 
+
 func _on_select_scene_button_pressed() -> void:
 	select_panel.visible = false
 	select_panel.position = Vector2(1920, 1080)
@@ -53,12 +55,14 @@ func _on_back_button_pressed() -> void:
 	select_scene_panel.visible = false
 	select_scene.grab_focus()
 
+
 func _quit_game() -> void:
 	get_tree().quit()
 
 
 func _on_button_pressed() -> void:
-	pass # Replace with function body.
+	pass  # Replace with function body.
+
 
 func _populate_scene_list() -> void:
 	var scenes := []

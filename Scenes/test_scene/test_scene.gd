@@ -10,13 +10,20 @@ extends Node2D
 @export var shake_timer = 0.0
 var original_camera_position = Vector2.ZERO
 
+
 func _ready():
 	camera.enabled = true
 	original_camera_position = camera.position
 	shake_timer = 10.0
 
+
 func _process(delta):
-	label.text = "Shake Timer: " + str(snappedf(shake_timer,0.1)) + "\nShake Intensity: " + str(camera_shake_intensity)
+	label.text = (
+		"Shake Timer: "
+		+ str(snappedf(shake_timer, 0.1))
+		+ "\nShake Intensity: "
+		+ str(camera_shake_intensity)
+	)
 	if shake_timer > 0.0:
 		shake_timer -= delta
 		var shake_offset = Vector2.ONE.rotated(randf() * TAU) * log(camera_shake_intensity + 1) * 1
