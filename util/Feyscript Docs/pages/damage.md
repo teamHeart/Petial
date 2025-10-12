@@ -1,5 +1,8 @@
 # Damage
 
+([Back to Index](../README.md#commands))  
+([Back to Battle Commands](../README.md#battle-specific-commands))
+
 Damage in Feyscript is a fundamental aspect of gameplay, affecting characters' health and status. This document outlines the various types of damage, how they are calculated, and their effects on characters.
 
 ## Types of Damage
@@ -14,4 +17,55 @@ Damage in Feyscript is a fundamental aspect of gameplay, affecting characters' h
 
 Damage in Feyscript is calculated using a combination of the attacker's damage output and the defender's resistances. The basic formula is as follows:
 
+```feyscript
+((IN PROGRESS))
 ```
+
+Inflict damage on a target. `damage` is commonly used during battles to reduce HP; it supports modifiers such as element, chance, and duration for status effects.
+
+## AI / Usage
+
+Enemy AI commonly uses `damage` indirectly (via higher-level attack/skill primitives). When used directly by AI scripts, consider it a low-level effect that the engine applies to the chosen target after decision-making and target selection.
+
+## Syntax
+
+```feyscript
+damage <target> <type (physical|magical|flat)> <power> [as <element>] [chance <percent>] [flat <true|false>]
+```
+
+## Parameters
+
+- `<target>` — the target identifier (actor id, enemy id, `target`, or `self`).
+- `<type (physical|magical|flat)>` — type of damage: `physical`, `magical`, or `flat` (true damage).
+- `<power>` — numeric power amount (can be an expression).
+- `as <element>` — optional: element type (for example `fire`, `ice`) which may interact with resistances.
+- `chance <percent>` — optional: percentage chance the damage applies (0–100).
+- `flat <true|false>` — optional: if `true`, applies flat damage, bypassing calculations; if `false` or omitted, damage is calculated normally.
+
+## Examples
+
+```feyscript
+# Deal 30 fire magical damage to the target
+damage target magical 30 as fire
+```
+
+```feyscript
+# 50% chance to deal 100 flat (true) damage
+damage boss flat 100 chance 50
+```
+
+```feyscript
+# Deal 20 flat damage to self
+damage self flat 20
+```
+
+## Notes
+
+- Damage handling (HP reduction, death triggers) depends on the runtime's battle system.
+- Use `apply` for status effects that modify behavior (poisoned, stunned) rather than direct damage when appropriate.
+
+## See also
+
+- [**apply**](apply.md) — apply status effects
+- [**heal**](heal.md) — restore HP to targets
+- [**setturn**](setturn.md) — control battle turn order

@@ -1,37 +1,37 @@
-<<<<<<< HEAD
+
 # If
 
-([Back to Index](../README.md#commands)) \
-([Back to Control Flow](../README.md#Control-Structures)) \
-The `if` statement is used to execute a block of code conditionally, based on whether a specified condition evaluates to true or false. It can be used in conjunction with `else` and `elif` statements to provide alternative code paths. The `if` statement must be terminated with an `done` statement.
+([Back to Index](../README.md#commands))  
+([Back to Control Flow](../README.md#Control-Structures))
+
+Runs a block of statements when a condition is true. Use [`elif`](#elif) and [`else`](#else) for alternatives, and terminate the block with [`done`](#done).
 
 ## Syntax
 
 ```feyscript
 if <condition>
-  <code to execute if condition is true>
+  <statements>
 done
 ```
 
 ```feyscript
 if <condition>
-  <code to execute if condition is true>
+  <statements>
+elif <condition2>
+  <statements>
 else
-  <code to execute if condition is false>
+  <statements>
 done
 ```
 
-```feyscript
-if <condition>
-  <code to execute if condition is true>
-elif <another condition>
-  <code to execute if the first condition is false and the second condition is true>
-else
-  <code to execute if all conditions are false>
-done
-```
+## Parameters
 
-## Example
+- `<condition>` — any Feyscript expression that evaluates to true/false. Common operators: `==`, `!=`, `<`, `>`, `<=`, `>=`, `and`, `or`, `not`, `is`.
+- `elif` — an optional additional branch evaluated only if prior conditions were false.
+- `else` — an optional fallback branch executed when no prior condition is true (only one `else` allowed).
+- `done` — required terminator for the `if` block.
+
+## Examples
 
 ```feyscript
 set age 20
@@ -40,248 +40,126 @@ if age >= 18
 else
   print "You are a minor."
 done
-# Output: You are an adult.
 ```
 
 ```feyscript
-set score to 85
+set score 85
 if score >= 90
   print "You got an A."
 elif score >= 80
   print "You got a B."
-elif score >= 70
-  print "You got a C."
 else
   print "You need to improve."
 done
-# Output: You got a B.
 ```
 
 ```feyscript
-set temperature to 30
-if temperature > 30
-  print "It's a hot day."
-elif temperature > 20
-  print "It's a warm day."
-elif temperature > 10
-  print "It's a cool day."
-else
-  print "It's a cold day."
-done
-# Output: It's a warm day.
-```
-
-```feyscript
-set number to 5
-if number % 2 == 0
-  print "The number is even."
-else
-  print "The number is odd."
-done
-# Output: The number is odd.
-```
-
-```feyscript
-set day to "Saturday"
-if day == "Saturday" or day == "Sunday"
-  print "It's the weekend!"
-else
-  print "It's a weekday."
-done
-# Output: It's the weekend!
-```
-
-```feyscript
-set x to 10
-set y to 20
-if x < y and y < 30
-  print "x is less than y and y is less than 30."
-else
-  print "The condition is not met."
-done
-# Output: x is less than y and y is less than 30.
-```
-
-```feyscript
-set password to "secret"
-if password == "secret"
-  print "Access granted."
-else
-  print "Access denied."
-done
-# Output: Access granted.
-```
-
-```feyscript
-set number to -5
-if number > 0
-  print "The number is positive."
-elif number < 0
-  print "The number is negative."
-else
-  print "The number is zero."
-done
-# Output: The number is negative.
-```
-
-## Notes
-
-- Supported operators: `==`, `!=`, `<`, `>`, `<=`, `>=`, `and`, `or`, `not`, `is`.
-- Expressions resolve game variables (e.g., `player.hp`, `Global.flags.foo`).
-- Use `elif` for multiple branches instead of nested `if` statements.
-
-- Indentation is important for readability, but the language does not enforce it.
-- The `done` statement is mandatory to indicate the end of the `if` block.
-- You can nest `if` statements within other `if`, `elif`, or `else` blocks for more complex logic.
-- The `elif` and `else` blocks are optional and can be omitted if not needed.
-- Only one `else` block is allowed per `if` statement, but multiple `elif` blocks can be used.
-- Ensure that the conditions in `if` and `elif` statements evaluate to boolean values (true or false).
-
-## See also
-
-- [**ask**](ask.md) — present choices to the player
-- [**loop**](loop.md) — repeat code blocks
-=======
-# If
-
-([Back to Index](../README.md#commands)) \
-([Back to Control Flow](../README.md#Control-Structures)) \
-The `if` statement is used to execute a block of code conditionally, based on whether a specified condition evaluates to true or false. It can be used in conjunction with `else` and `elif` statements to provide alternative code paths. The `if` statement must be terminated with an `done` statement.
-
-## Syntax
-
-```feyscript
-if <condition>
-  <code to execute if condition is true>
+# Nested example
+if Global.debug == true
+  print "Debug mode on"
+  if player.hp <= 0
+    print "Player is down (debug)"
+  done
 done
 ```
 
+## Elif
+
+([Back to top](#if)) ([See in Commands index](../README.md#commands))
+
+`elif` provides an additional conditional branch evaluated only if all
+preceding `if`/`elif` conditions were false. Use `elif` to keep multiple
+branches readable without deep nesting.
+
+### Elif — Syntax
+
 ```feyscript
-if <condition>
-  <code to execute if condition is true>
-else
-  <code to execute if condition is false>
-done
+elif <condition>
+  <statements>
 ```
 
-```feyscript
-if <condition>
-  <code to execute if condition is true>
-elif <another condition>
-  <code to execute if the first condition is false and the second condition is true>
-else
-  <code to execute if all conditions are false>
-done
-```
+### Elif — Parameters
 
-## Example
+- `<condition>` — any Feyscript expression that evaluates to true/false.
+
+### Elif — Examples
 
 ```feyscript
-set age 20
-if age >= 18
-  print "You are an adult."
-else
-  print "You are a minor."
-done
-# Output: You are an adult.
-```
-
-```feyscript
-set score to 85
+set score 85
 if score >= 90
-  print "You got an A."
+  print "A"
 elif score >= 80
-  print "You got a B."
+  print "B"
 elif score >= 70
-  print "You got a C."
+  print "C"
 else
-  print "You need to improve."
+  print "Below C"
 done
-# Output: You got a B.
 ```
 
-```feyscript
-set temperature to 30
-if temperature > 30
-  print "It's a hot day."
-elif temperature > 20
-  print "It's a warm day."
-elif temperature > 10
-  print "It's a cool day."
-else
-  print "It's a cold day."
-done
-# Output: It's a warm day.
-```
+## Else
+
+([Back to top](#if)) ([See in Commands index](../README.md#commands))
+
+`else` is the optional fallback branch that runs when no prior `if` or
+`elif` condition evaluated to true.
+
+### Else — Syntax
 
 ```feyscript
-set number to 5
-if number % 2 == 0
-  print "The number is even."
 else
-  print "The number is odd."
-done
-# Output: The number is odd.
+  <statements>
 ```
 
-```feyscript
-set day to "Saturday"
-if day == "Saturday" or day == "Sunday"
-  print "It's the weekend!"
-else
-  print "It's a weekday."
-done
-# Output: It's the weekend!
-```
+### Else — Parameters
+
+- none — `else` does not take a condition; it always executes when reached.
+
+### Else — Examples
 
 ```feyscript
-set x to 10
-set y to 20
-if x < y and y < 30
-  print "x is less than y and y is less than 30."
+set has_key false
+if has_key == true
+  print "You open the door."
 else
-  print "The condition is not met."
+  print "The door is locked."
 done
-# Output: x is less than y and y is less than 30.
 ```
 
-```feyscript
-set password to "secret"
-if password == "secret"
-  print "Access granted."
-else
-  print "Access denied."
-done
-# Output: Access granted.
-```
+### Else — Notes
+
+## Done
+
+([Back to top](#if)) ([See Control Flow](../README.md#Control-Structures))
+
+`done` terminates an `if` block. Forgetting `done` will leave the block
+unclosed and may cause the script to be parsed incorrectly.
+
+### Done — Syntax
 
 ```feyscript
-set number to -5
-if number > 0
-  print "The number is positive."
-elif number < 0
-  print "The number is negative."
-else
-  print "The number is zero."
 done
-# Output: The number is negative.
+```
+
+### Done — Parameters
+
+- none — `done` is a standalone terminator.
+
+### Done — Examples
+
+```feyscript
+if player.hp <= 0
+  print "Player is down"
+  endbattle
+done
 ```
 
 ## Notes
 
-- Supported operators: `==`, `!=`, `<`, `>`, `<=`, `>=`, `and`, `or`, `not`, `is`.
-- Expressions resolve game variables (e.g., `player.hp`, `Global.flags.foo`).
-- Use `elif` for multiple branches instead of nested `if` statements.
-
-- Indentation is important for readability, but the language does not enforce it.
-- The `done` statement is mandatory to indicate the end of the `if` block.
-- You can nest `if` statements within other `if`, `elif`, or `else` blocks for more complex logic.
-- The `elif` and `else` blocks are optional and can be omitted if not needed.
-- Only one `else` block is allowed per `if` statement, but multiple `elif` blocks can be used.
-- Ensure that the conditions in `if` and `elif` statements evaluate to boolean values (true or false).
-
-## See also
-
-- [**ask**](ask.md) — present choices to the player
-- [**loop**](loop.md) — repeat code blocks
->>>>>>> 3104484cc8018e463cf43bb35e2b9007e52e7788
+- Conditions that evaluate to non-boolean values are interpreted by Feyscript's truthiness rules; prefer explicit boolean expressions.
+- Indentation improves readability but is not syntactically required.
+- `elif` is evaluated in order; once a true condition is found, later `elif` branches are skipped.
+- Use `elif` for clarity instead of nested `if` blocks when checking multiple mutually-exclusive ranges.
+- Only one `else` block is allowed per `if` chain.
+- `else` must appear after any `if`/`elif` branches and before `done`.
+- `done` is required to close `if` blocks. It is also used for other block-terminating constructs (see Control Structures in the README).

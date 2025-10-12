@@ -1,7 +1,8 @@
-<<<<<<< HEAD
 # Animation
 
-The `animation` command is used to play animations on entities. It can be used to play a specific animation or to stop an animation that is currently playing.
+([Back to Index](../README.md#commands))
+
+Play animations on entities (players, NPCs, objects) or stop a currently-playing animation. Use `animation` to trigger named animations and optionally make them loop.
 
 ## Syntax
 
@@ -11,15 +12,15 @@ animation <entity> <animation_name|stop> [loop <true|false>]
 
 ## Parameters
 
-- `<entity>`: The target entity on which the animation will be played. This can be a player, NPC, or any other entity that supports animations.
-- `<animation_name|stop>`: The name of the animation to play or the keyword `stop` to stop the current animation.
-- `[loop]` (optional): If specified, the animation will loop continuously until stopped.
+- `<entity>` — the target entity (for example: `player`, `npc1`, `party_leader`).
+- `<animation_name|stop>` — the name of the animation to play, or the keyword `stop` to halt playback.
+- `[loop <true|false>]` — optional. When `true` the animation repeats until stopped. Defaults to `false` if omitted.
 
 ## Examples
 
 ```feyscript
-# Play a walk animation on the player
-animation player walk true
+# Play a walking animation on the player and loop it
+animation player walk loop true
 ```
 
 ```feyscript
@@ -28,75 +29,21 @@ animation npc1 stop
 ```
 
 ```feyscript
-# Play a dance animation on an entity without looping
-animation entity1 dance false
+# Play a one-shot dance animation
+animation entity1 dance
 ```
 
 ## Notes
 
-- Ensure that the animation name provided is valid and supported by the entity.
-- The `loop` parameter is optional and defaults to `false` if not specified.
-- Stopping an animation will revert the entity to its default state.
-- Some entities may not support certain animations, so check the entity's capabilities before using the command.
-- The `animation` command can be combined with other commands to create complex behaviors and interactions in your scripts.
-- Use the `animation` command in conjunction with event triggers to create dynamic and responsive animations based on game events.
-- Be mindful of performance when using multiple animations simultaneously, as this may impact game performance.
-- Test animations in different scenarios to ensure they behave as expected across various entity states and environments.
-- Consider using the `animation` command in cutscenes or scripted events to enhance storytelling and immersion.
+- Animation names are engine- and entity-specific. Check your entity's available animations before calling the command.
+- If an entity doesn't support the requested animation, the command may be ignored or fall back to a default pose.
+- Use `loop true` for long-running motions (idle/walk) and omit it for single-shot actions (attack/dance).
+- Combine `animation` with timing commands like `wait` to sequence actions, or with `goto`/`label` to create cutscenes.
+- Excessive simultaneous animations on many entities can affect performance; profile on target platforms when needed.
 
-## See Also
-- [**music**](./music.md) - Play music tracks.
-- [**sound**](./sound.md) - Play sound effects.
-- [**moveactor**](./moveactor.md) - Move entities to specified locations.
-=======
-# Animation
+## See also
 
-The `animation` command is used to play animations on entities. It can be used to play a specific animation or to stop an animation that is currently playing.
-
-## Syntax
-
-```feyscript
-animation <entity> <animation_name|stop> [loop <true|false>]
-```
-
-## Parameters
-
-- `<entity>`: The target entity on which the animation will be played. This can be a player, NPC, or any other entity that supports animations.
-- `<animation_name|stop>`: The name of the animation to play or the keyword `stop` to stop the current animation.
-- `[loop]` (optional): If specified, the animation will loop continuously until stopped.
-
-## Examples
-
-```feyscript
-# Play a walk animation on the player
-animation player walk true
-```
-
-```feyscript
-# Stop the current animation on an NPC
-animation npc1 stop
-```
-
-```feyscript
-# Play a dance animation on an entity without looping
-animation entity1 dance false
-```
-
-## Notes
-
-- Ensure that the animation name provided is valid and supported by the entity.
-- The `loop` parameter is optional and defaults to `false` if not specified.
-- Stopping an animation will revert the entity to its default state.
-- Some entities may not support certain animations, so check the entity's capabilities before using the command.
-- The `animation` command can be combined with other commands to create complex behaviors and interactions in your scripts.
-- Use the `animation` command in conjunction with event triggers to create dynamic and responsive animations based on game events.
-- Be mindful of performance when using multiple animations simultaneously, as this may impact game performance.
-- Test animations in different scenarios to ensure they behave as expected across various entity states and environments.
-- Consider using the `animation` command in cutscenes or scripted events to enhance storytelling and immersion.
-
-## See Also
-- [**music**](./music.md) - Play music tracks.
-- [**sound**](./sound.md) - Play sound effects.
-- [**moveactor**](./moveactor.md) - Move entities to specified locations.
->>>>>>> 3104484cc8018e463cf43bb35e2b9007e52e7788
-- [**wait**](./wait.md) - Pause script execution for a specified duration.
+- [**music**](music.md) — control background music playback
+- [**sound**](sound.md) — play short sound effects
+- [**moveactor**](moveactor.md) — move actors around the scene
+- [**wait**](wait.md) — pause script execution for timing
