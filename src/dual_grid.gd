@@ -24,8 +24,8 @@ const CORNERS: Dictionary = {
 }
 
 @export var path_tile_set: TileSet
-@export var path_layer: TileMapLayer
 
+var path_layer: TileMapLayer
 
 func calc():
 	for coord: Vector2i in get_used_cells():
