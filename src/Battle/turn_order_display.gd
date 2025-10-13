@@ -15,16 +15,19 @@ func _ready():
 	display_slots.clear()
 	combatants_in_order.clear()
 	prev_order.clear()
-	turn_order_slot = load("res://Prefab/turn_order_slot.tscn")
 
 
 func _on_battle_manager_battle_started(turn_order: Array) -> void:
 	combatants_in_order = turn_order.duplicate()
 	for i in range(combatants_in_order.size()):
-		var slot = turn_order_slot.instantiate() as TurnOrderSlot
-		slot.combatant = combatants_in_order[i]
-		turn_order_container.add_child(slot)
-		display_slots.append(slot)
+		var slot = ClassDB.instantiate("TurnOrderSlot") as TurnOrderSlot
+		if slot:
+			slot.combatant = combatants_in_order[i]
+			slot.index = i
+			turn_order_container.add_child(slot)
+			display_slots.append(slot)
+		else:
+			push_error("Failed to instantiate TurnOrderSlot.")
 
 
 func _on_battle_manager_turn_order_updated(turn_order: Array) -> void:
@@ -35,7 +38,7 @@ func _on_battle_manager_turn_order_updated(turn_order: Array) -> void:
 	if display_slots.size() < combatants_in_order.size():
 		# Add new slots if there are more combatants
 		for i in range(display_slots.size(), combatants_in_order.size()):
-			var slot = turn_order_slot.instantiate() as TurnOrderSlot
+			var slot = ClassDB.instantiate("TurnOrderSlot") as TurnOrderSlot
 			slot.combatant = combatants_in_order[i - 1]
 			turn_order_container.add_child(slot)
 			display_slots.append(slot)

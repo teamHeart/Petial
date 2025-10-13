@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://bo2dfyxx7tfjo"]
 
 [ext_resource type="Script" path="res://addons/steam_devkit_notifier/dock.gd" id="1_0xwbs"]
-[ext_resource type="Texture2D" uid="uid://bgvfvjnsxwmxo" path="res://addons/steam_devkit_notifier/assets/logo_steam.svg" id="2_4252p"]
+[ext_resource type="Texture2D" path="res://addons/steam_devkit_notifier/assets/logo_steam.svg" id="2_4252p"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kovi6"]
 border_width_left = 1
