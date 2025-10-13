@@ -66,15 +66,7 @@ func _on_button_pressed() -> void:
 
 func _populate_scene_list() -> void:
 	var scenes := []
-	var dir = DirAccess.open("res://Scenes/")
-	if dir:
-		dir.list_dir_begin()
-		var file_name = dir.get_next()
-		while file_name != "":
-			if file_name.ends_with(".tscn"):
-				scenes.append("res://Scenes/" + file_name)
-			file_name = dir.get_next()
-		dir.list_dir_end()
+	Data.get_all_files("res://Scenes/", "tscn", scenes)
 	print(scenes)
 	if scenes.size() == 0:
 		scenes = ["uid://coteu2wi3o76p", "uid://drr2ei2e86qms"]
@@ -92,8 +84,8 @@ func _populate_scene_list() -> void:
 	for i in range(scene_list.get_child_count() - 2):
 		var current_button = scene_list.get_child(i) as Button
 		var next_button = scene_list.get_child(i + 1) as Button
-		current_button.focus_neighbor_down = next_button.get_path()
-		next_button.focus_neighbor_up = current_button.get_path()
+		current_button.focus_neighbor_bottom = next_button.get_path()
+		next_button.focus_neighbor_top = current_button.get_path()
 
 
 func _on_item_clicked(scene_path: String) -> void:
