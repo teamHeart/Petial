@@ -42,8 +42,8 @@ func _initialize_grid():
 				parent_grid.map_to_local(Vector2i(x, y)).x + parent_grid.position.x,
 				parent_grid.position.y
 			)
-			var skew = parent_grid.transform.get_skew()
-			cell.position = pivot + Vector2.DOWN.rotated(skew) * (y + 0.5) * cell_height
+			var not_straight = parent_grid.transform.get_skew()
+			cell.position = pivot + Vector2.DOWN.rotated(not_straight) * (y + 0.5) * cell_height
 			cell.move_range = -1
 			if y > 0:
 				cell.neighbors[Neighbors.UP] = grid[y - 1][x]

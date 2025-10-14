@@ -121,20 +121,20 @@ func _on_state_entered(new_state):
 
 func _on_state_exited(old_state):
 	match old_state:
-		TurnState.START_TURN:
+		BattleManager.TurnState.START_TURN:
 			pass
-		TurnState.MOVE:
+		BattleManager.TurnState.MOVE:
 			hide_move_range()
-		TurnState.MOVING:
+		BattleManager.TurnState.MOVING:
 			pass
-		TurnState.SELECT_COMMAND:
+		BattleManager.TurnState.SELECT_COMMAND:
 			attack_button.release_focus()
 			skill_button.release_focus()
 			item_button.release_focus()
 			end_turn_button.release_focus()
 			flee_button.release_focus()
 			instant_victory_button.release_focus()
-		TurnState.END_TURN:
+		BattleManager.TurnState.END_TURN:
 			pass
 
 

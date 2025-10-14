@@ -1,19 +1,23 @@
 class_name TurnOrderSlot
 extends Panel
 
+# const SELF = ClassDB.instantiate(
+
 # var _acc: float = 0
-
-@export var combatant: Combatant
-@export var index: int = 0
-
+var combatant: Combatant
+var index: int = 0
 @onready var icon: Sprite2D = $Icon
+
+
+func _init(c: Combatant = null):
+	self.combatant = c
 
 
 func _ready() -> void:
 	icon = $Icon
-	if combatant:
-		icon.texture = combatant.battler.turn_order_sprite
-		icon.centered = false
+	# if combatant:
+	# icon.texture = combatant.battler.turn_order_sprite
+	# icon.centered = false
 
 
 func set_combatant(c: Combatant) -> void:
