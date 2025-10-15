@@ -316,3 +316,4 @@ static func example_inputs() -> Array:
 		"if user.hp < 50 { heal 40 to user }"
 	]
 	'''  # ----- IGNORE -----
+pass
