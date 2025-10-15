@@ -95,7 +95,8 @@ func _tokenize(script: String) -> void:  #():
 				# Commands that define labels
 				"set":
 					_set_var()
-			commands.append({"_command": _command, "line": _current_line + 1})
+				"print":
+					_print()
 		else:
 			push_error(
 				"Unknown _command_token '%s' at line %d" % [_command_token, _current_line + 1]
