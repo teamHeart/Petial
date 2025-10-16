@@ -1,6 +1,23 @@
 class_name FeyscriptParser
 extends Node
 
+"""
+FeyscriptParser
+
+Responsible for turning a raw Feyscript string into a list of command
+dictionaries that the `FeyscriptInterpreter` can execute.
+
+Current limitations / design notes:
+- This is a line-oriented, space-tokenized parser. It intentionally keeps
+  parsing simple for now. The `_parse_args()` function is the placeholder
+  where more robust handling (quoted strings, escaped characters) should be
+  implemented.
+- `COMMANDS` is the authoritative list of supported command tokens. When you
+  add a new command, add its name to `COMMANDS` and implement a corresponding
+  handler in the `_tokenize()` match block (or replace the match with a
+  dispatch table).
+"""
+
 #region Properties and Constants
 const COMMANDS := [
 	"actor",  # Reference an actor in the scene
@@ -42,11 +59,17 @@ const COMMANDS := [
 ]
 
 static var instance: FeyscriptParser
+# Array of parsed command dictionaries produced during tokenization
 var commands := []
+# Map of label name -> command index or line number (used for `goto`)
 var labels := {}
+# Current line index while tokenizing (0-based)
 var _current_line := 0
+# Parser-local variables set by `set` during parse-time (used to resolve
+# literals at parse-time in this simple implementation)
 var _variables := {}
 
+# Internal buffers used during tokenization
 var _lines: PackedStringArray = []
 var _tokens: PackedStringArray = []
 var _command_token: String = ""
@@ -56,13 +79,15 @@ var _args: PackedStringArray = []
 
 
 #region Housekeeping Functions
-static func get_instance() -> FeyscriptParser:  #():
+static func get_instance() -> FeyscriptParser:  # ():
 	if instance == null:
 		instance = FeyscriptParser.new()
 	return instance
 
 
-func _reset() -> void:  #():
+func _reset() -> void:  # ():
+	# Clear all parser state so the parser can be reused across multiple
+	# scripts without leaking previous data.
 	commands.clear()
 	labels.clear()
 	_current_line = 0
@@ -78,22 +103,36 @@ func _reset() -> void:  #():
 
 
 #region Processing Functions
-func _tokenize(script: String) -> void:  #():
+func _tokenize(script: String) -> void:  # ():
+	"""
+	Very small tokenizer that splits the input into lines, then space-tokenizes
+	each non-empty, non-comment line. This function constructs a command
+	dictionary for each recognized command token and appends it to `commands`.
+
+	Limitations:
+	- Quoted strings and escaped spaces are NOT handled. Implement `_parse_args`
+		to add proper quoting and escaping support.
+	- Command handlers are implemented inline (see the `match` below). When
+		adding commands, extend the match block to populate `_command` with the
+		expected fields.
+	"""
 	_lines = script.split("\n", false)
 	for line in _lines:
 		line = line.strip_edges()
 		if line == "" or line.begins_with("#"):
 			_current_line += 1
-			continue  # Skip empty _lines and comments
+			continue  # Skip empty lines and comments
+		# Simple whitespace split — see _parse_args() for improvements
 		_tokens = line.split(" ", false)
 		_command_token = _tokens[0].to_lower()
 		_args = _tokens if _tokens.size() > 1 else PackedStringArray()
 		_args.remove_at(0)  # Remove the command token from args
 		_parse_args()
 		if _command_token in COMMANDS:
-			# Break out into methods for each command
+			# Break out into methods for each command. Add implementations
+			# here as commands are required by your scripting needs.
 			match _command_token:
-				# Commands that define labels
+				# Commands that define labels or simple immediate data
 				"set":
 					_set_var()
 				"print":
@@ -102,10 +141,13 @@ func _tokenize(script: String) -> void:  #():
 					_end()
 				_:
 					push_error(
-						"Command '%s' not yet implemented at line %d"
-						% [_command_token, _current_line + 1]
+						(
+							"Command '%s' not yet implemented at line %d"
+							% [_command_token, _current_line + 1]
+						)
 					)
-			_command["line"] = _current_line + 1  # Store line number for error reporting
+			# Store line number for better error reporting at runtime
+			_command["line"] = _current_line + 1
 			commands.append(_command)
 		else:
 			push_error(
@@ -114,20 +156,25 @@ func _tokenize(script: String) -> void:  #():
 		_current_line += 1
 
 
-func _parse_args() -> void:  #():
-	# Placeholder for argument parsing logic
-	# go letter by letter to handle quoted strings, escape sequences, etc.
-	# for now, just use the raw _args array
+func _parse_args() -> void:  # ():
+	# Placeholder for argument parsing logic. Right now `_args` is used
+	# directly as an array of space-separated tokens. To support quoted
+	# strings (e.g. `say Alice "Hello world"`) and escape sequences, update
+	# this function to iterate through the raw line character-by-character
+	# and produce a cleaned `_args` list.
 	pass
 
 
-static func parse_script(script: String) -> Dictionary:  #():
+func parse_script(script: String) -> Dictionary:  # ():
+	# Public entrypoint used by the interpreter. Resets the parser, tokenizes
+	# the script, and returns a simple dictionary containing the parsed
+	# commands and labels.
 	var parser = get_instance()
 	parser._reset()
 	parser._tokenize(script)
 	print(
 		(
-			"Parsed %d commands and %d labels\n	Commands:\n"
+			"Parsed %d commands and %d labels\n\tCommands:\n"
 			% [parser.commands.size(), parser.labels.size()]
 		)
 	)
@@ -141,11 +188,15 @@ static func parse_script(script: String) -> Dictionary:  #():
 
 #region Command Handlers
 ## Set a variable to a specified value
-func _set_var() -> void:  #():
+func _set_var() -> void:  # ():
+	# Minimal `set` implementation used during parsing to resolve simple
+	# literals into typed values (bool/null/number/string). This stores the
+	# value into `_variables` and produces a `_command` entry describing the
+	# `set` operation for the interpreter.
 	if _args.size() < 2:
 		push_error(
 			(
-				"Insufficient arguments for 'set' command at line %d\n		Syntax: set <variable> <value>"
+				"Insufficient arguments for 'set' command at line %d\n\t\tSyntax: set <variable> <value>"
 				% [_args[0], _current_line + 1]
 			)
 		)
@@ -170,11 +221,13 @@ func _set_var() -> void:  #():
 	_command = {"type": "set", "variable": variable, "value": value}
 
 
-func _print() -> void:  #():
+func _print() -> void:  # ():
+	# Produce a `print` command dictionary. If the argument is a previously
+	# set variable, resolve it at parse-time to simplify runtime behavior.
 	if _args.size() < 1:
 		push_error(
 			(
-				"Insufficient arguments for 'print' command at line %d\n		Syntax: print <message|variable>"
+				"Insufficient arguments for 'print' command at line %d\n\tSyntax: print <message|variable>"
 				% [_current_line + 1]
 			)
 		)
@@ -184,6 +237,8 @@ func _print() -> void:  #():
 
 
 func _end():
+	# Marker command used to denote the end of a block or script in some
+	# control-flow constructs. Kept simple for now.
 	_command = {"type": "end"}
 
 #endregion
