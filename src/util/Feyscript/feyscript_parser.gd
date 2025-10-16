@@ -47,11 +47,11 @@ var labels := {}
 var _current_line := 0
 var _variables := {}
 
-var _lines: Array[String] = []
-var _tokens: Array[String] = []
+var _lines: PackedStringArray = []
+var _tokens: PackedStringArray = []
 var _command_token: String = ""
 var _command: Dictionary = {}
-var _args: Array[String] = []
+var _args: PackedStringArray = []
 #endregion
 
 
@@ -87,7 +87,8 @@ func _tokenize(script: String) -> void:  #():
 			continue  # Skip empty _lines and comments
 		_tokens = line.split(" ", false)
 		_command_token = _tokens[0].to_lower()
-		_args = _tokens.pop_front() if _tokens.size() > 1 else []
+		_args = _tokens if _tokens.size() > 1 else PackedStringArray()
+		_args.remove_at(0)  # Remove the command token from args
 		_parse_args()
 		if _command_token in COMMANDS:
 			# Break out into methods for each command
@@ -97,6 +98,15 @@ func _tokenize(script: String) -> void:  #():
 					_set_var()
 				"print":
 					_print()
+				"end":
+					_end()
+				_:
+					push_error(
+						"Command '%s' not yet implemented at line %d"
+						% [_command_token, _current_line + 1]
+					)
+			_command["line"] = _current_line + 1  # Store line number for error reporting
+			commands.append(_command)
 		else:
 			push_error(
 				"Unknown _command_token '%s' at line %d" % [_command_token, _current_line + 1]
@@ -122,7 +132,7 @@ static func parse_script(script: String) -> Dictionary:  #():
 		)
 	)
 	for command in parser.commands:
-		print("  - %s (line %d)" % [command["_command"], command["line"]])
+		print("  - %s (line %d)" % [command["type"], command["line"]])
 	return {"commands": parser.commands, "labels": parser.labels}
 
 
@@ -141,7 +151,21 @@ func _set_var() -> void:  #():
 		)
 		return
 	var variable := _args[0]
-	var value := _args[1]
+	var value
+	match _args[1].to_lower():
+		"true":
+			value = true
+		"false":
+			value = false
+		"null":
+			value = null
+		_:
+			if _args[1].is_valid_int():
+				value = _args[1] as int
+			elif _args[1].is_valid_float():
+				value = _args[1] as float
+			else:
+				value = _args[1]
 	_variables[variable] = value
 	_command = {"type": "set", "variable": variable, "value": value}
 
@@ -157,4 +181,9 @@ func _print() -> void:  #():
 		return
 	var message = _variables[_args[0]] if _args[0] in _variables else _args[0]
 	_command = {"type": "print", "message": message}
+
+
+func _end():
+	_command = {"type": "end"}
+
 #endregion
