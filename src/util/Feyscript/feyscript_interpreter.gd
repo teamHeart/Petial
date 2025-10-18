@@ -1,10 +1,10 @@
 class_name FeyscriptInterpreter
 extends Node
+## Lightweight interpreter that executes a parsed Feyscript command list. [br]
+
 
 """
 FeyscriptInterpreter
-
-Lightweight interpreter that executes a parsed Feyscript command list.
 
 Design notes / responsibilities:
 - This class receives the raw script (string or path ending in `.fey`), asks
@@ -29,12 +29,14 @@ Extension points / TODOs:
 static var instance: FeyscriptInterpreter
 var parser: FeyscriptParser
 
-# Parsed script structure produced by the parser; cleared between runs
+## Parsed script structure produced by the parser; cleared between runs
 var _script: Dictionary = {}
-# The command currently being executed (for debugging / errors)
+## The command currently being executed (for debugging / errors)
 var _current_command: Dictionary = {}
-# Script-local variables: set/used by `set` and other commands
+## Script-local variables: set/used by `set` and other commands
 var _variables: Dictionary = {}
+## Handle `end` command
+var _ended: bool = false
 #endregion
 
 
@@ -54,6 +56,7 @@ func _reset() -> void:  # ():
 	_script.clear()
 	_current_command.clear()
 	_variables.clear()
+	_ended = false
 
 
 static func get_instance() -> FeyscriptInterpreter:  # ():
@@ -109,6 +112,8 @@ func run_script(script: String) -> void:  # ():
 func _process_command(command: Dictionary) -> void:  # ():
 	# Central dispatch for executing a single parsed command dictionary.
 	# Add additional `match` arms here as you implement more commands.
+	if _ended:
+		return
 	match command["type"]:
 		"set":
 			# Persist a script-local variable
@@ -123,8 +128,8 @@ func _process_command(command: Dictionary) -> void:  # ():
 				)
 			)
 		"end":
-			# No-op for `end` command in this simple interpreter
-			pass
+			_ended = true
+			_script.clear()
 		_:
 			# Unknown command: report with the command type so it's easier to
 			# locate the offending line in the source script during debugging.

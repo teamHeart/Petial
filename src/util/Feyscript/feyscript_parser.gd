@@ -1,24 +1,43 @@
 class_name FeyscriptParser
 extends Node
 
-"""
-FeyscriptParser
+## Responsible for turning a raw Feyscript string into a list of command
+## dictionaries that the `FeyscriptInterpreter` can execute.
 
-Responsible for turning a raw Feyscript string into a list of command
-dictionaries that the `FeyscriptInterpreter` can execute.
-
-Current limitations / design notes:
-- This is a line-oriented, space-tokenized parser. It intentionally keeps
-  parsing simple for now. The `_parse_args()` function is the placeholder
-  where more robust handling (quoted strings, escaped characters) should be
-  implemented.
-- `COMMANDS` is the authoritative list of supported command tokens. When you
-  add a new command, add its name to `COMMANDS` and implement a corresponding
-  handler in the `_tokenize()` match block (or replace the match with a
-  dispatch table).
-"""
+# Current limitations / design notes:
+# - This is a line-oriented, space-tokenized parser. It intentionally keeps
+#   parsing simple for now. The `_parse_args()` function is the placeholder
+#   where more robust handling (quoted strings, escaped characters) should be
+#   implemented.
+# - `COMMANDS` is the authoritative list of supported command tokens. When you
+#   add a new command, add its name to `COMMANDS` and implement a corresponding
+#   handler in the `_tokenize()` match block (or replace the match with a
+#   dispatch table).
 
 #region Properties and Constants
+## List of recognized operators for expression parsing
+const OPERATORS := [
+	"(",
+	")",
+	"+",
+	"-",
+	"*",
+	"/",
+	"%",
+	"==",
+	"!=",
+	"<",
+	">",
+	"<=",
+	">=",
+	"and",
+	"or",
+	"not",
+	"is",
+]
+
+## List of supported Feyscript command tokens[br]
+## See https://github.com/teamHeart/Petial/wiki/Feyscript#commands for details.
 const COMMANDS := [
 	"actor",  # Reference an actor in the scene
 	"animation",  # Play an animation on a specified object
@@ -70,11 +89,22 @@ var _current_line := 0
 var _variables := {}
 
 # Internal buffers used during tokenization
+## Individual lines of the input script[br][PackedStringArray]
 var _lines: PackedStringArray = []
+## Individual tokens of the current line being processed[br][PackedStringArray]
 var _tokens: PackedStringArray = []
+## Current command token being processed[br][String]
 var _command_token: String = ""
+## Current command dictionary being built[br][Dictionary][br]Data Shape:[br]
+## - type: Command type string[br]
+## - ...command-specific fields...
 var _command: Dictionary = {}
-var _args: PackedStringArray = []
+## Arguments of the current command being processed[br][code]Array<Dictionary>[/code][br]
+## Data Shape of each argument dictionary:[br]
+## - [code]type[/code]: "literal" | "variable" | "expression"[br]
+## - ...other fields...
+var _args: Array[Dictionary] = []
+
 #endregion
 
 
@@ -101,14 +131,35 @@ func _reset() -> void:  # ():
 
 #endregion
 
-
 #region Processing Functions
+## Public entrypoint used by the interpreter. Resets the parser, tokenizes
+## the script, and returns a simple dictionary containing the parsed
+## commands and labels.
+
+
+func parse_script(script: String) -> Dictionary:  # ():
+	var parser = get_instance()
+	parser._reset()
+	parser._tokenize(script)
+	print(
+		(
+			"Parsed %d commands and %d labels\n\tCommands:\n"
+			% [parser.commands.size(), parser.labels.size()]
+		)
+	)
+	for command in parser.commands:
+		print("  - %s (line %d)" % [command["type"], command["line"]])
+	return {"commands": parser.commands, "labels": parser.labels}
+
+
+##	Very small tokenizer that splits the input into lines, then space-tokenizes
+##	each non-empty, non-comment line. This function constructs a command
+##	dictionary for each recognized command token and appends it to `commands`.
+## [br]
+## Parameters:
+## - script: The input script string to tokenize.
 func _tokenize(script: String) -> void:  # ():
 	"""
-	Very small tokenizer that splits the input into lines, then space-tokenizes
-	each non-empty, non-comment line. This function constructs a command
-	dictionary for each recognized command token and appends it to `commands`.
-
 	Limitations:
 	- Quoted strings and escaped spaces are NOT handled. Implement `_parse_args`
 		to add proper quoting and escaping support.
@@ -125,8 +176,8 @@ func _tokenize(script: String) -> void:  # ():
 		# Simple whitespace split — see _parse_args() for improvements
 		_tokens = line.split(" ", false)
 		_command_token = _tokens[0].to_lower()
-		_args = _tokens if _tokens.size() > 1 else PackedStringArray()
-		_args.remove_at(0)  # Remove the command token from args
+		_tokens.remove_at(0)  # Remove the command token from args
+		# _args = _tokens if _tokens.size() > 1 else PackedStringArray()
 		_parse_args()
 		if _command_token in COMMANDS:
 			# Break out into methods for each command. Add implementations
@@ -156,25 +207,116 @@ func _tokenize(script: String) -> void:  # ():
 		_current_line += 1
 
 
+## Parse the passed arguments into structured data,
+## resolving strings, expressions, variables, and literals
+## [br]
+## Data Shape:[br]
+## - [code]type[/code]: "literal" | "variable" | "expression" | "operator"[br]
+## - [code]raw[/code]: Raw argument string[br]
+## - ...other fields...[br]
+## See [method FeyscriptParser._resolve_string] for string resolution details.
 func _parse_args() -> void:  # ():
-	pass
+	_args.clear()
+	# var expr_queue: Array = []
+	var argument: Dictionary = {"type": "", "raw": "", "value": null}
+	var string_mode: bool = false
+	for arg in _tokens:
+		match arg:
+			# comments
+			_ when arg.begins_with("#"):
+				# Skip comments
+				return
 
-func parse_script(script: String) -> Dictionary:  # ():
-	# Public entrypoint used by the interpreter. Resets the parser, tokenizes
-	# the script, and returns a simple dictionary containing the parsed
-	# commands and labels.
-	var parser = get_instance()
-	parser._reset()
-	parser._tokenize(script)
-	print(
-		(
-			"Parsed %d commands and %d labels\n\tCommands:\n"
-			% [parser.commands.size(), parser.labels.size()]
-		)
-	)
-	for command in parser.commands:
-		print("  - %s (line %d)" % [command["type"], command["line"]])
-	return {"commands": parser.commands, "labels": parser.labels}
+			# String literals
+
+			# - Single Token Strings
+			_ when arg.begins_with('"') and arg.ends_with('"') and not string_mode:
+				argument["type"] = "literal"
+				string_mode = true
+				argument["raw"] = arg
+				argument["value"] = arg.substr(1, arg.length() - 2)
+
+			# - Multi-Token Strings (start)
+			_ when arg.begins_with('"'):
+				string_mode = true
+				argument["type"] = "literal"
+				argument["raw"] = arg
+				argument["value"] = arg.substr(1)
+
+			# - Multi-Token Strings (end)
+			_ when arg.ends_with('"') and string_mode:
+				string_mode = false
+				_args[_args.size() - 1]["value"] += " " + arg.substr(0, arg.length() - 1)
+
+				# Handle escaped characters
+				var escaped_str = _args[_args.size() - 1]["value"]
+				escaped_str = escaped_str.replace("\\n", "\n")
+				escaped_str = escaped_str.replace("\\t", "\t")
+				escaped_str = escaped_str.replace('\\"', '"')
+				_args[_args.size() - 1]["value"] = escaped_str
+
+			# - Multi-Token Strings (middle)
+			_ when string_mode:
+				_args[_args.size() - 1]["value"] += " " + arg
+
+			# Variable references
+
+			# External/global variables
+			_ when arg.begins_with("@") and not string_mode:
+				argument["type"] = "variable"
+				argument["raw"] = arg
+				argument["value"] = arg.substr(1)
+
+			# Local variables
+			_ when arg.begins_with("$") and not string_mode:
+				# - Check for prior variable declaration
+				if not _variables.has(arg.substr(1)):
+					push_error("Undefined variable '%s' at line %d" % [arg, _current_line + 1])
+				argument["type"] = "variable"
+				argument["raw"] = arg
+				argument["value"] = arg.substr(1)
+
+			# Expressions (not yet implemented)
+			_ when arg in Operators and not string_mode:
+				argument["type"] = "operator"
+				argument["raw"] = arg
+				argument["value"] = arg
+
+			# All Other Literals
+			_:
+				argument["type"] = "Literal"
+				argument["raw"] = arg
+				match arg.to_lower():
+					"true":
+						argument["value"] = true
+					"false":
+						argument["value"] = false
+					"null":
+						argument["value"] = null
+					_ when arg.is_valid_int():
+						argument["value"] = arg as int
+					_ when arg.is_valid_float():
+						argument["value"] = arg as float
+					_:
+						argument["value"] = arg
+		_args.append(argument)
+	_resolve_expressions()
+
+
+## Resolve an operator into an expression dictionary.
+## This function is responsible for taking a raw operator string and
+## breaking it down into its component parts for easier evaluation.[br]
+## Data Shape:[br]
+## - type: "expression"[br]
+## - raw: Raw operator string[br]
+## - operator: Operator string[br]
+## - arg1: First operand[br]
+## - arg2: Second operand[br]
+func _resolve_expressions():
+	# Placeholder implementation for operator resolution. This should be
+	# expanded to properly parse and structure expressions based on the
+	# specific operators and their operands.
+	return
 
 
 #endregion
@@ -194,22 +336,8 @@ func _set_var() -> void:  # ():
 			)
 		)
 		return
-	var variable := _args[0]
-	var value
-	match _args[1].to_lower():
-		"true":
-			value = true
-		"false":
-			value = false
-		"null":
-			value = null
-		_:
-			if _args[1].is_valid_int():
-				value = _args[1] as int
-			elif _args[1].is_valid_float():
-				value = _args[1] as float
-			else:
-				value = _args[1]
+	var variable = _args[0]["value"]
+	var value = _args[1]
 	_variables[variable] = value
 	_command = {"type": "set", "variable": variable, "value": value}
 
@@ -225,7 +353,7 @@ func _print() -> void:  # ():
 			)
 		)
 		return
-	var message = _variables[_args[0]] if _args[0] in _variables else _args[0]
+	var message = _args[0]
 	_command = {"type": "print", "message": message}
 
 
@@ -235,7 +363,6 @@ func _end():
 	_command = {"type": "end"}
 
 #endregion
-
 
 #region Operators
 
