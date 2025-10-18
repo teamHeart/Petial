@@ -2,7 +2,6 @@ class_name FeyscriptInterpreter
 extends Node
 ## Lightweight interpreter that executes a parsed Feyscript command list. [br]
 
-
 """
 FeyscriptInterpreter
 
@@ -26,8 +25,21 @@ Extension points / TODOs:
 """
 
 #region Properties and Constants
-static var instance: FeyscriptInterpreter
+
+@warning_ignore_start("UNUSED_SIGNAL")
+signal command_executed(command: Dictionary)  #):
+signal command_failed(command: Dictionary, error: String)  #):
+@warning_ignore_restore("UNUSED_SIGNAL")
+
+enum ExecutionMode {
+	PARALLEL,
+	CHAIN,
+}
+
+## Shared parser instance used to parse scripts
 var parser: FeyscriptParser
+var execution_state: FiniteStateMachine
+var execution_mode: ExecutionMode = ExecutionMode.CHAIN
 
 ## Parsed script structure produced by the parser; cleared between runs
 var _script: Dictionary = {}
@@ -45,6 +57,7 @@ func _init() -> void:  # ():
 	# Acquire the shared parser instance and ensure both parser and
 	# interpreter are in a clean state. This is intentionally simple — the
 	# parser is global/singleton in this implementation.
+
 	parser = FeyscriptParser.get_instance()
 	parser._reset()
 	_reset()
@@ -59,22 +72,15 @@ func _reset() -> void:  # ():
 	_ended = false
 
 
-static func get_instance() -> FeyscriptInterpreter:  # ():
-	# Basic singleton accessor used by the rest of the toolchain / tests.
-	if instance == null:
-		instance = FeyscriptInterpreter.new()
-	return instance
-
-
 #endregion
 
 
 #region Processing Functions
+## Entry point to execute a Feyscript script. [param script] may be the script
+## contents or a path to a `.fey` file. Parsing and execution are synchronous
+## in this lightweight interpreter.
 func run_script(script: String) -> void:  # ():
 	"""
-	Entry point to execute a Feyscript script. `script` may be the script
-	contents or a path to a `.fey` file. Parsing and execution are synchronous
-	in this lightweight interpreter.
 
 	Current behavior:
 	- If `script` ends with `.fey`, it will be opened and read.
@@ -88,7 +94,7 @@ func run_script(script: String) -> void:  # ():
 	if script == "":
 		push_error("No script provided to run_script()")
 		return
-	if parser == null or instance == null:
+	if parser == null:
 		push_error("Feyscript not initialized properly.")
 		return
 	if script.ends_with(".fey"):
@@ -100,13 +106,13 @@ func run_script(script: String) -> void:  # ():
 		file.close()
 	# Reset parser and interpreter state prior to parsing/execution
 	parser._reset()
-	instance._reset()
+	_reset()
 	_script = parser.parse_script(script)
 
 	# Execute each parsed command in order. Command handlers are simple and
 	# map 1:1 to parser-produced command dictionaries.
 	for command in _script["commands"]:
-		instance._process_command(command)
+		_process_command(command)
 
 
 func _process_command(command: Dictionary) -> void:  # ():
@@ -134,4 +140,10 @@ func _process_command(command: Dictionary) -> void:  # ():
 			# Unknown command: report with the command type so it's easier to
 			# locate the offending line in the source script during debugging.
 			push_error("Unknown command type '%s'" % [command["type"]])
+
+
 #endregion
+
+
+func _process(_delta: float) -> void:  # ():
+	pass

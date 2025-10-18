@@ -1,5 +1,5 @@
 class_name FeyscriptParser
-extends Node
+extends RefCounted
 
 ## Responsible for turning a raw Feyscript string into a list of command
 ## dictionaries that the `FeyscriptInterpreter` can execute.
@@ -277,7 +277,7 @@ func _parse_args() -> void:  # ():
 				argument["value"] = arg.substr(1)
 
 			# Expressions (not yet implemented)
-			_ when arg in Operators and not string_mode:
+			_ when arg in OPERATORS and not string_mode:
 				argument["type"] = "operator"
 				argument["raw"] = arg
 				argument["value"] = arg
