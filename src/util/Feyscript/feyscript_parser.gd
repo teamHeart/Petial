@@ -157,13 +157,7 @@ func _tokenize(script: String) -> void:  # ():
 
 
 func _parse_args() -> void:  # ():
-	# Placeholder for argument parsing logic. Right now `_args` is used
-	# directly as an array of space-separated tokens. To support quoted
-	# strings (e.g. `say Alice "Hello world"`) and escape sequences, update
-	# this function to iterate through the raw line character-by-character
-	# and produce a cleaned `_args` list.
 	pass
-
 
 func parse_script(script: String) -> Dictionary:  # ():
 	# Public entrypoint used by the interpreter. Resets the parser, tokenizes
@@ -187,7 +181,6 @@ func parse_script(script: String) -> Dictionary:  # ():
 
 
 #region Command Handlers
-## Set a variable to a specified value
 func _set_var() -> void:  # ():
 	# Minimal `set` implementation used during parsing to resolve simple
 	# literals into typed values (bool/null/number/string). This stores the
@@ -240,5 +233,10 @@ func _end():
 	# Marker command used to denote the end of a block or script in some
 	# control-flow constructs. Kept simple for now.
 	_command = {"type": "end"}
+
+#endregion
+
+
+#region Operators
 
 #endregion

@@ -122,6 +122,9 @@ func _process_command(command: Dictionary) -> void:  # ():
 					else command["message"]
 				)
 			)
+		"end":
+			# No-op for `end` command in this simple interpreter
+			pass
 		_:
 			# Unknown command: report with the command type so it's easier to
 			# locate the offending line in the source script during debugging.
