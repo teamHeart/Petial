@@ -1,44 +1,48 @@
 # goto
 
-The `goto` command transfers execution to the line marked by a label elsewhere in the script. Labels are plain identifiers placed on their own line and typically terminated with a colon (`:`) or declared with a `label` directive depending on the script dialect used in this project. Use `goto` sparingly — labels make control flow explicit but can reduce readability when overused.
+([Back to Index](../README.md#commands))
+
+Jump execution to a named label elsewhere in the same script. `goto` is a
+low-level control directive — handy for short scripts or special cases, but
+prefer structured control flow (loops, conditionals) for readability.
 
 ## Syntax
 
 ```feyscript
 goto <label>
 
+# label (define a jump target)
 label <label>
-<code>
+  <statements>
 ```
 
-## Arguments
+## Parameters
 
-- `<label>` — The identifier of a previously defined label in the same script. Must match exactly.
+- `<label>` — identifier for a label defined in the current script. Labels
+  are plain identifiers (often followed by `:` in some dialects) and must
+  match exactly.
 
 ## Behavior
 
-- Execution continues from the first line after the label.
-- If the given label does not exist, the runtime raises an error and the script stops (or reports an error according to the runtime's error-handling mode).
+- Execution resumes at the first statement after the target label.
+- If the label cannot be found, the runtime reports an error and stops the script.
 
 ## Examples
 
-Define a label and jump to it:
-
 ```feyscript
-start:
+label start
   print "begin"
   goto end
 
-middle:
-  print "this is skipped"
+label skipped
+  print "this won't run"
 
-end:
+label end
   print "done"
 ```
 
-Using a label directive (alternate style):
-
 ```feyscript
+# Alternate explicit label directive
 label loop
   print "looping"
   goto loop
@@ -46,10 +50,17 @@ label loop
 
 ## Notes
 
-- Prefer structured constructs (loops, functions) when available. `goto` is useful for small scripts, legacy code, or where explicit low-level control is needed.
-- Labels are typically resolved at parse/load time; duplicate labels may be disallowed or shadow previous definitions depending on the implementation.
+- Use `goto` sparingly; overuse can make scripts harder to follow.
+- Labels are commonly resolved when the script is loaded — duplicate
+  labels are disallowed and will result in an error.
+- Labels are case-sensitive and must be unique within a script.
+- Avoid using `goto` to jump into or out of control structures (loops,
+  conditionals) as this can lead to unpredictable behavior.
+- The `label` command does not create a scope; variables remain accessible across jumps.
+- The `label` command does not affect execution flow by itself; it simply
+  marks a position in the script.
 
 ## See also
 
-- [**loop**](loop.md) — Repeats a block of code multiple times.
-- [**if**](if.md) — Conditional execution of code blocks.
+- [**loop**](loop.md) — repeat blocks of statements
+- [**if**](if.md) — branch logic

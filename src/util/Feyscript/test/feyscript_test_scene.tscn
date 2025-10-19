@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://dxmrsqwej54jg"]
+
+[ext_resource type="Script" uid="uid://cmy8ccugrfm8g" path="res://src/util/Feyscript/test/feyscript_test_scene.gd" id="1_nomhr"]
+
+[node name="FeyscriptTestScene" type="Node2D"]
+script = ExtResource("1_nomhr")

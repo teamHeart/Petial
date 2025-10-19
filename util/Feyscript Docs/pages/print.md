@@ -1,7 +1,9 @@
 # Print
 
-([Back to Index](../README.md#commands)) \
-Prints a string to the console.
+([Back to Index](../README.md#commands))
+
+Outputs text or expression results to the console or log. Useful for
+debugging and quick inspections while developing scripts.
 
 ## Syntax
 
@@ -13,9 +15,9 @@ print <expression>
 
 ## Parameters
 
-- `string`: The string to be printed.
-- `number`: A number to be printed.
-- `expression`: An expression whose result will be printed.
+- `<string>`: A string literal to print.
+- `<number>`: A numeric value to print.
+- `<expression>`: Any valid Feyscript expression; the evaluated result will be printed.
 
 ## Examples
 
@@ -29,8 +31,10 @@ print "The result is: " + (5 * 2)    # Outputs: The result is: 10
 
 ## Notes
 
-- Use `print` liberally while developing scripts to inspect values; remove or disable verbose prints in release builds if needed.
+- `print` is primarily a development tool. Remove or silence verbose prints in release builds if you don't want debug output visible to players.
+- Use `print` for quick checks; prefer `say` for player-facing dialogue.
 
 ## See also
 
 - [**set**](set.md) — assign values to variables
+- [**say**](say.md) — display dialogue text to the player

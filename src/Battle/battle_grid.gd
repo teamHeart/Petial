@@ -1,12 +1,13 @@
 class_name BattleGrid
 extends Node2D
 
+enum Neighbors { UP, RIGHT, DOWN, LEFT }
+
 @export var cell_height := 48
 @export var cell_width := 64
 @export var grid_height := 5
 @export var grid_width := 13
 
-enum Neighbors {UP, RIGHT, DOWN, LEFT}
 var grid := []
 
 
@@ -18,12 +19,14 @@ func _init(grid_size: Vector2i):
 		var row := []
 		for x in range(grid_width):
 			var cell = BattleCell.new(Vector2i(x, y))
-			row.append(cell) # Initialize each cell to null (empty)
+			row.append(cell)  # Initialize each cell to null (empty)
 			add_child(cell)
 		grid.append(row)
 
+
 func _ready():
 	_initialize_grid()
+
 
 func _initialize_grid():
 	# set each cell's neighbors
@@ -35,12 +38,13 @@ func _initialize_grid():
 			if parent_grid == null:
 				push_error("GridOverlay not found in parent node.")
 				continue
-			var pivot = Vector2(parent_grid.map_to_local(Vector2i(x, y)).x + parent_grid.position.x, parent_grid.position.y)
-			var _skew = parent_grid.transform.get_skew()
-			cell.position = pivot + Vector2.DOWN.rotated(_skew) * (y + 0.5) * cell_height
+			var pivot = Vector2(
+				parent_grid.map_to_local(Vector2i(x, y)).x + parent_grid.position.x,
+				parent_grid.position.y
+			)
+			var not_straight = parent_grid.transform.get_skew()
+			cell.position = pivot + Vector2.DOWN.rotated(not_straight) * (y + 0.5) * cell_height
 			cell.move_range = -1
-	#		cell.position = __parent_grid.map_to_local(Vector2i(x, y)) +__parent_grid.position - Vector2((y+0.5)*cell_height*sin((__parent_grid.transform.get_skew())), 0)
-			# Set neighbors (up, right, down, left)
 			if y > 0:
 				cell.neighbors[Neighbors.UP] = grid[y - 1][x]
 			if x < grid_width - 1:
@@ -49,6 +53,7 @@ func _initialize_grid():
 				cell.neighbors[Neighbors.DOWN] = grid[y + 1][x]
 			if x > 0:
 				cell.neighbors[Neighbors.LEFT] = grid[y][x - 1]
+
 
 func get_cell(pos: Vector2i) -> BattleCell:
 	if pos.y < 0 or pos.y >= grid_height or pos.x < 0 or pos.x >= grid_width:

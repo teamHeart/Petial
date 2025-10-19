@@ -1,9 +1,9 @@
-# Set
+﻿# Set
 
 ([Back to Index](../README.md#commands))
 
 The `set` command assigns a value to a variable. Use it to create or update
-local or global variables; prefix a variable with `Global.` to target the
+local or global variables. Prefix a variable with `Global.` to target the
 global scope.
 
 ## Syntax
@@ -42,3 +42,4 @@ set Global.globalSum (Global.globalVar + myVar)    # sets global variable global
 ## See also
 
 - [**print**](print.md) — inspect variable values
+- [**if**](if.md) — branch logic using variables
