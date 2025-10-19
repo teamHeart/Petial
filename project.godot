@@ -24,7 +24,6 @@ boot_splash/minimum_display_time=1000
 
 SignalLens="res://addons/signal_lens/autoload/signal_lens_autoload.gd"
 Data="*res://Data/util/Database.gd"
-PartyContainer="*res://src/party_container.gd"
 _Steam="*res://util/Steam/steam.gd"
 DevkitMessenger="*res://addons/steam_devkit_notifier/devkit_messenger.gd"
 SteamControllerInput="*res://util/Steam/steam_controller_input.gd"

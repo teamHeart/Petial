@@ -8,26 +8,33 @@ signal state_entered  #():
 signal state_exited  #():
 
 @export var valid_states: Array[State] = []
+var _on_enter: Callable = func() -> void: pass
+var _on_exit: Callable = func() -> void: pass
+var _on_process: Callable = func(_delta: float) -> void: pass
+var _on_physics_process: Callable = func(_delta: float) -> void: pass
+var _on_input: Callable = func(_event: InputEvent) -> void: pass
 
 
 func enter():
+	_on_enter.call()
 	emit_signal("state_entered")
 
 
 func exit():
+	_on_exit.call()
 	emit_signal("state_exited")
 
 
 func process(_delta):
-	pass
+	_on_process.call(_delta)
 
 
 func physics_process(_delta):
-	pass
+	_on_physics_process.call(_delta)
 
 
 func input(_event):
-	pass
+	_on_input.call(_event)
 
 
 func can_transition_to(state: State) -> bool:

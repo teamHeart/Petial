@@ -108,6 +108,8 @@ Feyscript includes a variety of commands that can be used to create interactive 
 - [**fadein**](pages/fadein.md): Fades in the screen from black to the current scene.
 - [**fadeout**](pages/fadeout.md): Fades out the screen to black from the current scene.
 - [**transition**](pages/transition.md): Transitions between two scenes with a specified effect.
+- [**give**](pages/give.md): Gives an item or currency to the party.
+- [**take**](pages/take.md): Takes an item or currency from the party.
 
 ### Battle-specific Commands
 
