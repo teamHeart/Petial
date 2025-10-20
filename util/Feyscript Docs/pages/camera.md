@@ -1,54 +1,114 @@
 # Camera
 
-The `camera` is a special object that determines what part of the game world is visible on the screen. It can be moved, shaken, and zoomed to create dynamic and engaging scenes.
+([Back to Index](../README.md#commands))
 
-## syntax
+The `camera` controls which part of the game world is visible. It supports several subcommands; each subsection below documents one subcommand and provides examples.
+
+## Move
 
 ```feyscript
-camera <action> [parameters]
+camera move <x> <y> <duration>
+camera move <actor_id> <duration>
 ```
 
-## Parameters
+Move the camera to a target position or to an actor's current position over the specified duration (in seconds).
 
-- `<action>`: The action to perform on the camera. This can be one of the following:
-	- `move`: Move the camera to a specified position.
-	- `shake`: Shake the camera for a specified duration and intensity.
-	- `zoom`: Zoom the camera in or out to a specified level.
-	- `follow`: Make the camera follow a specified object.
-	- `set`: Set the camera to a specific position and zoom level.
+Parameters
 
-- `[parameters]`: The parameters for the specified action. These vary depending on the action being performed.
-  - `camera move` `<x>` `<y>` `<duration>`: Moves the camera to the specified (x, y) coordinates over the given duration in seconds.
-  - `camera move` `<actor_id>` `<duration>`: Moves the camera to the specified actor's position over the given duration in seconds.
-  - `camera shake` `<intensity>` `<duration>`: Shakes the camera with the specified intensity for the given duration in seconds.
-  - `camera zoom` `<level>` `<duration>`: Zooms the camera to the specified level over the given duration in seconds. A level of 1 is normal, greater than 1 is zoomed in, and less than 1 is zoomed out.
-  - `camera follow` `<actor_id>`: Makes the camera follow the specified actor.
-  - `camera set` `<x>` `<y>` `<zoom_level>`: Instantly sets the camera to the specified (x, y) coordinates and zoom level.
+- `<x>` `<y>` — world coordinates to move to.
+- `<actor_id>` — the id/name of an actor whose position will be targeted.
+- `<duration>` — seconds to take for the move (may be fractional).
 
-## Examples
+Example
 
 ```feyscript
-camera move 100 200 2.0  # Move camera to (100, 200) over 2 seconds
-camera shake 5 1.0       # Shake camera with intensity 5 for 1 second
-camera zoom 1.5 1.0      # Zoom in to level 1.5 over 1 second
-camera follow player     # Make camera follow the player actor
-camera set 0 0 1.0       # Instantly set camera to (0, 0) with normal zoom
+camera move 100 200 2.0
+camera move player 1.5
+```
+
+## Shake
+
+```feyscript
+camera shake <intensity> <duration>
+```
+
+Shake the camera to add impact to events. Intensity controls magnitude; duration is in seconds.
+
+Parameters
+
+- `<intensity>` — numerical intensity of the shake.
+- `<duration>` — seconds to shake for.
+
+Example
+
+```feyscript
+camera shake 5 0.8
+```
+
+## Zoom
+
+```feyscript
+camera zoom <level> <duration>
+```
+
+Zoom the camera to a specified level over duration. `1.0` is default/normal. Values greater than 1 zoom in; less than 1 zoom out.
+
+Parameters
+
+- `<level>` — numeric zoom level.
+- `<duration>` — seconds to perform the zoom.
+
+Example
+
+```feyscript
+camera zoom 1.5 1.0
+```
+
+## Follow
+
+```feyscript
+camera follow <actor_id>
+```
+
+Have the camera continuously follow an actor until another camera command overrides it.
+
+Parameters
+
+- `<actor_id>` — id/name of the actor to follow.
+
+Example
+
+```feyscript
+camera follow player
+```
+
+## Set
+
+```feyscript
+camera set <x> <y> <zoom_level>
+```
+
+Instantly set the camera position and zoom.
+
+Parameters
+
+- `<x>` `<y>` — world coordinates to place the camera.
+- `<zoom_level>` — numeric zoom level to set immediately.
+
+Example
+
+```feyscript
+camera set 0 0 1.0
 ```
 
 ## Notes
 
-- The camera's position is typically defined in world coordinates, which may differ from screen coordinates depending on the game's design.
-- When using `camera follow`, the camera will automatically adjust its position to keep the specified actor centered on the screen.
-- The `camera shake` effect can be used to enhance the impact of events such as explosions or collisions.
-- The `camera zoom` action can be used to create dramatic effects, such as zooming in on a character during a critical moment or zooming out to reveal a larger scene.
-- It's important to consider the player's experience when manipulating the camera, as excessive movement or shaking can cause discomfort or disorientation.
-- Always test camera movements and effects to ensure they enhance the gameplay experience without causing confusion or discomfort for players.
+- Coordinate systems and accepted values depend on your runtime/engine; test on target platforms.
+- Use `camera move` for smooth pans and `camera set` for instant jumps.
+- Excessive camera motion can be disorienting; use sparingly.
 
-## See Also
+## See also
 
-- [**setbackground**](./setbackground.md): Change the background image or color of the scene.
-- [**hideactor**](./hideactor.md): Hide an actor from the scene.
-- [**showactor**](./showactor.md): Show an actor in the scene.
-- [**moveactor**](./moveactor.md): Move an actor to a specified position.
-- [**sound**](./sound.md): Play sound effects or music in the scene.
-- [**wait**](./wait.md): Pause the script for a specified duration.
+- [**setbackground**](setbackground.md) — change the scene background
+- [**moveactor**](moveactor.md) — reposition actors
+- [**wait**](wait.md) — pause script execution for timing

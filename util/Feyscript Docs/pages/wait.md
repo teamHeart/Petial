@@ -1,39 +1,35 @@
 # Wait
 
-([Back to Index](../README.md#commands)) \
-The `wait` command pauses the execution of the script for a specified duration or until user input is received.
+([Back to Index](../README.md#commands))
+
+Pauses script execution either for a fixed duration or until the player
+provides input. Use it to give the player time to read text or to wait for
+animations and other timed events.
 
 ## Syntax
 
 ```feyscript
-wait             # Pauses until user input is received (e.g., pressing [Confirm] or [Cancel])
-wait <duration>  # Pauses for the specified duration in seconds (e.g., wait 5)
+wait [<seconds>]
 ```
 
 ## Parameters
 
-- `<duration>`: (Optional) The number of seconds to wait. If omitted, the script will wait for user input.
+- `<seconds>` — optional number of seconds to pause. When omitted, execution waits for player input.
 
 ## Examples
 
 ```feyscript
-wait 3           # Pauses for 3 seconds
-wait             # Pauses until the user presses [Confirm] or [Cancel]
+wait 3           # pause for 3 seconds
+wait             # pause until the player advances
 ```
 
 ## Notes
 
-- The `wait` command is useful for creating delays in the script or waiting for user interaction
-- When using `wait` without a duration, the script will resume execution only after the user provides input
-- Ensure that the duration specified is a positive number to avoid unexpected behavior
-- The `wait` command can be used in various scenarios, such as waiting for animations to complete or giving users time to read messages before proceeding
-- The command can be interrupted by user actions, so consider the context in which it is used
-- The `wait` command is non-blocking in nature, allowing other processes to run while waiting
-- It is recommended to use `wait` judiciously to maintain a smooth user experience
-- The `wait` command can be combined with other commands to create more complex interactions and timing sequences
-- The command is versatile and can be adapted to different use cases within the script
+- `wait` is useful for pacing dialogue and sequencing animations.
+- When using a numeric duration, prefer a small nonzero value (seconds may be fractional) to avoid stalls.
+- `wait` with no duration blocks script progression until the player presses the confirm/cancel key.
 
-## See Also
+## See also
 
-- [**say**](say.md): Displays dialogue text for a specified character and waits for input before continuing.
-- [**ask**](ask.md): Prompts the user with a question and waits for a response.
+- [**say**](say.md) — display dialogue and optionally wait
+- [**ask**](ask.md) — prompt the player and wait for a choice

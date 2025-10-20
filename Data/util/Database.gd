@@ -13,56 +13,81 @@ var _Skills: Dictionary = {}
 var _States: Dictionary = {}
 var _Weapons: Dictionary = {}
 
+
 func _init():
-    instance = self
-    var currentDir: String
-    var dir = DirAccess.open("res://Data/")
-    if dir:
-        dir.list_dir_begin()        
-        var file_name = dir.get_next()
-        while file_name != "":
-            if file_name.ends_with(".tres"):
-                var resource = ResourceLoader.load("res://Data/" + file_name)
-                if resource:
-                    var key = file_name.get_basename()
-                    self.set(key, resource)
-            else:
-                if dir.current_is_dir() and file_name != "." and file_name != "..":
-                    currentDir = "res://Data/" + file_name + "/"
-                    var subDir = DirAccess.open(currentDir)
-                    if subDir:
-                        subDir.list_dir_begin()
-                        var sub_file_name = subDir.get_next()
-                        while sub_file_name != "":
-                            if sub_file_name.ends_with(".tres"):
-                                var sub_resource = ResourceLoader.load(currentDir + sub_file_name)
-                                if sub_resource:
-                                    var sub_key = sub_file_name.get_basename()
-                                    var subDataBase:Dictionary
-                                    match file_name:
-                                        "Accessories":
-                                            subDataBase = _Accessories
-                                        "Armors":
-                                            subDataBase = _Armors
-                                        "Characters":
-                                            subDataBase = _Characters
-                                        "Classes":
-                                            subDataBase = _Classes
-                                        "Enemies":
-                                            subDataBase = _Enemies
-                                        "Items":
-                                            subDataBase = _Items
-                                        "Skills":
-                                            subDataBase = _Skills
-                                        "States":
-                                            subDataBase = _States
-                                        "Weapons":
-                                            subDataBase = _Weapons
-                                        _:
-                                            pass
-                                    if subDataBase != null:
-                                        subDataBase[sub_key] = sub_resource
-                            sub_file_name = subDir.get_next()
-                        subDir.list_dir_end()
-            file_name = dir.get_next()
-        dir.list_dir_end()
+	instance = self
+	var currentDir: String
+	var dir = DirAccess.open("res://Data/")
+	if dir:
+		dir.list_dir_begin()
+		var file_name = dir.get_next()
+		while file_name != "":
+			if file_name.ends_with(".tres"):
+				var resource = ResourceLoader.load("res://Data/" + file_name)
+				if resource:
+					var key = file_name.get_basename()
+					self.set(key, resource)
+			else:
+				if dir.current_is_dir() and file_name != "." and file_name != "..":
+					currentDir = "res://Data/" + file_name + "/"
+					var subDir = DirAccess.open(currentDir)
+					if subDir:
+						subDir.list_dir_begin()
+						var sub_file_name = subDir.get_next()
+						while sub_file_name != "":
+							if sub_file_name.ends_with(".tres"):
+								var sub_resource = ResourceLoader.load(currentDir + sub_file_name)
+								if sub_resource:
+									var sub_key = sub_file_name.get_basename()
+									var subDataBase: Dictionary
+									match file_name:
+										"Accessories":
+											subDataBase = _Accessories
+										"Armors":
+											subDataBase = _Armors
+										"Characters":
+											subDataBase = _Characters
+										"Classes":
+											subDataBase = _Classes
+										"Enemies":
+											subDataBase = _Enemies
+										"Items":
+											subDataBase = _Items
+										"Skills":
+											subDataBase = _Skills
+										"States":
+											subDataBase = _States
+										"Weapons":
+											subDataBase = _Weapons
+										_:
+											pass
+									if subDataBase != null:
+										subDataBase[sub_key] = sub_resource
+							sub_file_name = subDir.get_next()
+						subDir.list_dir_end()
+			file_name = dir.get_next()
+		dir.list_dir_end()
+
+func get_all_files(path: String, file_ext := "", files := [], full_path := true) -> Array:
+	var dir = DirAccess.open(path)
+
+	if dir:
+		dir.list_dir_begin()
+
+		var file_name = dir.get_next()
+
+		while file_name != "":
+			if dir.current_is_dir():
+				files = get_all_files(dir.get_current_dir()+"/"+file_name+"/", file_ext, files)
+			else:
+				if file_ext and file_name.get_extension() != file_ext:
+					file_name = dir.get_next()
+					continue
+
+				files.append(file_name if not full_path else dir.get_current_dir()+"/"+file_name)
+
+			file_name = dir.get_next()
+	else:
+		print("An error occurred when trying to access %s." % path)
+
+	return files

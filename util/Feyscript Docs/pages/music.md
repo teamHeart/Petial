@@ -1,23 +1,63 @@
 # Music
 
-The `music` command is used to control music playback in a Feyscript script. It allows you to play, pause, stop, and manage music tracks, as well as control volume fade-in and fade-out.
+([Back to Index](../README.md#commands))
+
+Controls background music playback. Use `music` to play, stop, fade,
+and adjust volume for music tracks used by your game.
 
 ## Syntax
 
 ```feyscript
-music <action> [parameters]
+music play <track>
+music stop
+music pause
+music fadein <seconds>
+music fadeout <seconds>
+music fadeto <seconds> <track>
+music setvolume <level>
+music loop <true|false>
 ```
+
+## Subcommands (short reference)
+
+### play
+
+`music play <track>` — start playing the specified track immediately.
+
+### stop
+
+`music stop` — stop playback of the current track.
+
+### pause
+
+`music pause` — pause the current track; playback may be resumable.
+
+### fadein
+
+`music fadein <seconds>` — fade audio in over the given duration.
+
+### fadeout
+
+`music fadeout <seconds>` — fade audio out over the given duration.
+
+### fadeto
+
+`music fadeto <seconds> <track>` — crossfade to a new track over duration.
+
+### setvolume
+
+`music setvolume <volume>` — set master music volume (0–100).
+
+### loop
+
+`music loop <true|false>` — enable or disable looping for the current track.
 
 ## Parameters
 
-- `play <track>`: Plays the specified music track. The track can be a file path or a predefined track name.
-- `pause`: Pauses the currently playing music track.
-- `stop`: Stops the currently playing music track.
-- `fadein <duration>`: Fades in the music over the specified duration (in seconds).
-- `fadeout <duration>`: Fades out the music over the specified duration (in seconds).
-- `fadeto <duration> <track>`: Fades out the current music over the specified duration and then plays the specified track.
-- `setvolume <level>`: Sets the music volume to the specified level (0 to 100).
-- `loop <true|false>`: Sets whether the music should loop when it reaches the end.
+- `<track>` — track name or file path to play.
+- `<seconds>` — number of seconds for fade operations (may be fractional).
+- `<volume>` — numeric volume level (typically 0–100).
+- `<true|false>` — boolean flag to enable/disable looping.
 
 ## Examples
 
@@ -41,16 +81,14 @@ music play "battle_theme.mp3"
 ```
 
 ## Notes
-- Ensure that the music files are in a supported format (e.g., MP3, WAV).
-- The `fadein` and `fadeout` actions can be used to create smooth transitions between music tracks.
-- The `loop` parameter is useful for background music that should play continuously.
-- Volume levels are typically set between 0 (mute) and 100 (maximum volume).
-- You can combine multiple music commands to create complex audio experiences in your scripts.
-- The `fadeto` action is particularly useful for transitioning between different scenes or moods in your script.
-- Make sure to test your music commands to ensure they work as expected in your specific environment or application.
 
-## See Also
+- Ensure music files are in a supported format (MP3, WAV, OGG, etc.).
+- Use `fadein`/`fadeout` for smooth transitions between tracks.
+- `fadeto` lets you crossfade to a new track over a duration.
+- Volume ranges and behavior may depend on the runtime; test on your target platform.
 
-- [**sound**](./sound.md): For controlling sound effects in your script.
-- [**animation**](./animation.md): For controlling animations in your script.
-- [**wait**](./wait.md): For adding delays in your script.
+## See also
+
+- [**sound**](sound.md) — control short sound effects
+- [**animation**](animation.md) — visual transitions and animations
+- [**wait**](wait.md) — pause script execution for timing

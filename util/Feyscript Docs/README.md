@@ -67,6 +67,7 @@ Feyscript includes a variety of commands that can be used to create interactive 
 - [**loop**](pages/loop.md): Starts a loop that repeats a block of code, and defines a specified number of times or a condition that repeats the loop if true.
   - [**endloop**](pages/loop.md): Ends a loop block started by `loop`
   - [**stoploop**](pages/loop.md): Exits the current loop immediately.
+- [**end**](pages/end.md): Immediately terminates execution of the current script.
 
 ### General Commands
 
@@ -77,19 +78,38 @@ Feyscript includes a variety of commands that can be used to create interactive 
 - [**goto**](pages/goto.md): Jumps to a specified label in the script.
   - [**label**](pages/goto.md): Defines a label that can be jumped to using the `goto` or `ask` commands.
 - [**music**](pages/music.md): Controls background music playback.
+  - [**play**](pages/music.md#play) — start a track
+  - [**stop**](pages/music.md#stop) — stop playback
+  - [**pause**](pages/music.md#pause) — pause playback
+  - [**fadein**](pages/music.md#fadein) — fade audio in
+  - [**fadeout**](pages/music.md#fadeout) — fade audio out
+  - [**fadeto**](pages/music.md#fadeto) — crossfade to another track
+  - [**setvolume**](pages/music.md#setvolume) — set music volume
+  - [**loop**](pages/music.md#loop) — enable/disable looping
 - [**sound**](pages/sound.md): Controls sound effect playback.
 - [**animation**](pages/animation.md): Controls animations for characters or objects.
 - [**setbackground**](pages/setbackground.md): Changes the background image to a specified image.
 - [**camera**](pages/camera.md): Moves or zooms the camera to a specified position or area, as well as other camera effects.
-- [**setactor**](pages/setactor.md): Changes the actor sprite to a specified image.
-- [**createactor**](pages/createactor.md): Creates a new actor sprite on the screen.
-- [**deleteactor**](pages/deleteactor.md): Deletes an actor sprite from the screen.
-- [**showactor**](pages/showactor.md): Displays an actor sprite on the screen.
-- [**hideactor**](pages/hideactor.md): Hides an actor sprite from the screen.
-- [**moveactor**](pages/moveactor.md): Moves an actor sprite to a specified position on the screen.
+  - [**move**](pages/camera.md#move) — move camera to coordinates or actor
+  - [**shake**](pages/camera.md#shake) — shake the camera
+  - [**zoom**](pages/camera.md#zoom) — zoom camera in/out
+  - [**follow**](pages/camera.md#follow) — follow an actor
+  - [**set**](pages/camera.md#set) — instantly set position and zoom
+- [**actor**](pages/actor.md): Unified command for all actor management operations (create, delete, show, hide, enable, disable, move, set).
+  - [**create**](pages/actor.md#create) — create a new actor
+  - [**delete**](pages/actor.md#delete) — remove an actor
+  - [**show**](pages/actor.md#show) — make an actor visible
+  - [**hide**](pages/actor.md#hide) — hide an actor
+  - [**enable**](pages/actor.md#enable) — enable an actor
+  - [**disable**](pages/actor.md#disable) — disable an actor
+  - [**move**](pages/actor.md#move) — move an actor
+  - [**set**](pages/actor.md#set) — set an actor's sprite or active actor
+- [**effect**](pages/effect.md): Applies a visual effect to the screen or a specified object.
 - [**fadein**](pages/fadein.md): Fades in the screen from black to the current scene.
 - [**fadeout**](pages/fadeout.md): Fades out the screen to black from the current scene.
 - [**transition**](pages/transition.md): Transitions between two scenes with a specified effect.
+- [**give**](pages/give.md): Gives an item or currency to the party.
+- [**take**](pages/take.md): Takes an item or currency from the party.
 
 ### Battle-specific Commands
 
@@ -101,9 +121,10 @@ Feyscript includes a variety of commands that can be used to create interactive 
 - [**spawn**](pages/spawn.md): Spawns a new entity (enemy, ally, or other) in the battle.
 - [**despawn**](pages/despawn.md): Removes an entity from the battle.
 - [**endbattle**](pages/endbattle.md): Ends the current battle sequence.
-- [**setturn**](pages/setturn.md): Sets the turn in the battle to a specified entity. \
- \
-**Enemy-specific Commands**
+- [**setturn**](pages/setturn.md): Sets the turn in the battle to a specified entity.
+
+#### Enemy-specific Commands
+
 - [**attack**](pages/attack.md): Performs a standard attack on a specified target.
 - [**cast**](pages/cast.md): Casts a spell or ability on a specified target.
 - [**use**](pages/use.md): Uses an item on a specified target.
