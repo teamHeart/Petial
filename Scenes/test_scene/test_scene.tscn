@@ -1,9 +1,7 @@
-[gd_scene load_steps=5 format=4 uid="uid://c3g378l17u1r0"]
+[gd_scene load_steps=3 format=3 uid="uid://c3g378l17u1r0"]
 
 [ext_resource type="Script" uid="uid://djmt3yoihkbb5" path="res://Scenes/test_scene/test_scene.gd" id="1_tf2av"]
 [ext_resource type="Texture2D" uid="uid://cxfu0j2vu3kwg" path="res://img/Temp Images/Petial_World_Map.png" id="2_lvvqt"]
-[ext_resource type="PackedScene" uid="uid://iv21rcjy6lvr" path="res://Prefab/dual_grid.tscn" id="3_kl1i3"]
-[ext_resource type="TileSet" uid="uid://c7j8f71o1aput" path="res://Resources/DefaultPathTileset.tres" id="5_dyo71"]
 
 [node name="TestScene" type="Node2D"]
 script = ExtResource("1_tf2av")
@@ -13,20 +11,26 @@ camera_shake_intensity = 1.0
 texture = ExtResource("2_lvvqt")
 centered = false
 
-[node name="TileMapLayer" parent="Sprite2D" instance=ExtResource("3_kl1i3")]
-z_index = 2
-tile_map_data = PackedByteArray("AAAPAAQAAQABAAEAAAAOAAQAAQABAAEAAAANAAQAAQABAAEAAAAMAAQAAQABAAEAAAALAAQAAQABAAEAAAAKAAQAAQABAAEAAAAJAAQAAQABAAEAAAAJAAUAAQABAAEAAAAJAAYAAQABAAEAAAAJAAcAAQABAAEAAAAKAAgAAQABAAEAAAALAAkAAQABAAEAAAALAAoAAQABAAEAAAAMAAoAAQABAAEAAAAMAAsAAQABAAEAAAANAAsAAQABAAEAAAAOAAsAAQABAAEAAAAOAAoAAQABAAEAAAAPAAoAAQABAAEAAAAQAAkAAQABAAEAAAAOAP7/AQABAAEAAAANAP7/AQABAAEAAAAMAP7/AQABAAEAAAALAP7/AQABAAEAAAALAP//AQABAAEAAAAMAAAAAQABAAEAAAANAAEAAQABAAEAAAAOAAEAAQABAAEAAAAOAAIAAQABAAEAAAAPAAIAAQABAAEAAAAPAAMAAQABAAEAAAAQAAMAAQABAAEAAAAPAP7/AQABAAEAAAAbAAcAAQABAAEAAAAaAAcAAQABAAEAAAAZAAcAAQABAAEAAAAYAAcAAQABAAEAAAAXAAYAAQABAAEAAAAWAAYAAQABAAEAAAAVAAYAAQABAAEAAAAVAAUAAQABAAEAAAAUAAUAAQABAAEAAAATAAUAAQABAAEAAAASAAUAAQABAAEAAAARAAUAAQABAAEAAAAQAAUAAQABAAEAAAAPAAUAAQABAAEAAAAOAAUAAQABAAEAAAANAAUAAQABAAEAAAAMAAUAAQABAAEAAAALAAUAAQABAAEAAAAKAAUAAQABAAEAAAAIAAQAAQABAAEAAAAIAAMAAQABAAEAAAAHAAIAAQABAAEAAAAGAAEAAQABAAEAAAAGAAAAAQABAAEAAAAFAAAAAQABAAEAAAAFAP//AQABAAEAAAAEAP//AQABAAEAAAAEAP7/AQABAAEAAAADAP7/AQABAAEAAAADAP//AQABAAEAAAACAAAAAQABAAEAAAACAAEAAQABAAEAAAABAAIAAQABAAEAAAABAAMAAQABAAEAAAABAAQAAQABAAEAAAABAAUAAQABAAEAAAABAAYAAQABAAEAAAACAAcAAQABAAEAAAADAAgAAQABAAEAAAAEAAgAAQABAAEAAAAFAAgAAQABAAEAAAAGAAgAAQABAAEAAAA=")
-path_tile_set = ExtResource("5_dyo71")
-
 [node name="Camera2D" type="Camera2D" parent="."]
 anchor_mode = 0
 
 [node name="Label" type="Label" parent="Camera2D"]
-offset_left = 184.0
-offset_top = 162.0
-offset_right = 447.0
-offset_bottom = 309.0
+offset_left = 131.0
+offset_top = 691.0
+offset_right = 394.0
+offset_bottom = 838.0
 theme_override_font_sizes/font_size = 64
 text = "fadsfasd"
 
-[editable path="Sprite2D/TileMapLayer"]
+[node name="RichTextLabel" type="RichTextLabel" parent="Camera2D"]
+offset_left = 38.0
+offset_top = 19.0
+offset_right = 624.0
+offset_bottom = 205.0
+bbcode_enabled = true
+text = "[b][fill][outline_size=5][pulse freq=2.5 color=#fabcdeff ease=-2.0]Pulse Pulse Pulse Pulse Pulse Pulse Pulse Pulse[/pulse]
+[wave amp=25.0 freq=10 connected=1]Wave Wave Wave Wave Wave Wave Wave[/wave]
+[tornado radius=2.5 freq=10.0 connected=1]Tornado Tornado Tornado Tornado Tornado[/tornado]
+[shake rate=10.0 level=5 connected=1]Shake Shake Shake Shake Shake Shake[/shake]
+[fade start=6 length=25]Fade Fade Fade Fade Fade Fade Fade Fade [/fade][/outline_size]
+[font_size=25][outline_size=2][pulse freq=5 color=#fabcdeff][shake level=10 rate=100][tornado radius=10 freq=1][rainbow freq=0.8 sat=0.8 val=1.0 speed=0.5]This is the gayest text I can possibly type here![/rainbow][/tornado][/shake][/pulse][/outline_size][/font_size][/fill][/b]"
