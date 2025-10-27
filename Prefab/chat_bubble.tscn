@@ -1,0 +1,84 @@
+[gd_scene load_steps=4 format=3 uid="uid://b8kv710t0lj4g"]
+
+[ext_resource type="Script" path="res://src/UI/chat_bubble.gd" id="1_2fxar"]
+[ext_resource type="Texture2D" uid="uid://b20nncmy2jy58" path="res://img/Temp Images/Nature_portraits.png" id="2_fq2r3"]
+[ext_resource type="Theme" uid="uid://dchgh5xh8ysj8" path="res://Prefab/chat_bubble.tres" id="2_gtxda"]
+
+[node name="ChatBubble" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_2fxar")
+
+[node name="ChatPanel" type="PanelContainer" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 1.0
+anchor_right = 0.66
+anchor_bottom = 1.0
+offset_left = 16.0
+offset_top = -148.0
+offset_right = 0.6799927
+offset_bottom = -20.0
+grow_vertical = 0
+theme = ExtResource("2_gtxda")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ChatPanel"]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="ChatPanel/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="CharacterPortrait" type="TextureRect" parent="ChatPanel/HBoxContainer/MarginContainer"]
+custom_minimum_size = Vector2(128, 8)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("2_fq2r3")
+expand_mode = 4
+flip_h = true
+
+[node name="MarginContainer2" type="MarginContainer" parent="ChatPanel/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="ChatText" type="RichTextLabel" parent="ChatPanel/HBoxContainer/MarginContainer2"]
+custom_minimum_size = Vector2(581, 56)
+layout_mode = 2
+bbcode_enabled = true
+text = "fasdf
+"
+justification_flags = 160
+
+[node name="Control" type="Control" parent="ChatPanel"]
+layout_mode = 2
+
+[node name="Nameplate" type="PanelContainer" parent="ChatPanel/Control"]
+layout_mode = 1
+offset_left = 8.0
+offset_top = -49.0
+offset_right = 152.0
+offset_bottom = -1.0
+theme = ExtResource("2_gtxda")
+
+[node name="MarginContainer" type="MarginContainer" parent="ChatPanel/Control/Nameplate"]
+layout_mode = 2
+theme = ExtResource("2_gtxda")
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="NameplateName" type="Label" parent="ChatPanel/Control/Nameplate/MarginContainer"]
+layout_mode = 2
+text = "Name"
