@@ -10,6 +10,7 @@
             "request": "launch",
             "project": "${workspaceFolder}",
             "scene": "main",
+            "editor_path": "c:\\Program Files (x86)\\Steam\\steamapps\\common\\Godot Engine\\godot.windows.opt.tools.64.exe",
             "debug_collisions": false,
             "debug_paths": false,
             "debug_navigation": false,
