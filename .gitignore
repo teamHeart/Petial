@@ -2,7 +2,7 @@
 .godot/
 /android/
 *.code-workspace
-.vscode/
+.vscode/settings.json
 .editorconfig
 *.tmp
 /Movies/

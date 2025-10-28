@@ -56,8 +56,7 @@ theme_override_constants/margin_bottom = 8
 custom_minimum_size = Vector2(581, 56)
 layout_mode = 2
 bbcode_enabled = true
-text = "fasdf
-"
+text = "[wave]Hello[/wave], this is a sample chat bubble text."
 justification_flags = 160
 
 [node name="Control" type="Control" parent="ChatPanel"]

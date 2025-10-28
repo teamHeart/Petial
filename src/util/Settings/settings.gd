@@ -1,6 +1,7 @@
 class_name Settings
 extends Node
 
+# Frame delay between each character when displaying chat text.
 enum ChatSpeed {
 	INSTANT = 0,
 	FAST = 2,

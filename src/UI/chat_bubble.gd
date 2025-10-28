@@ -33,7 +33,7 @@ var _text_advance_position: int = 0
 
 
 #region Standard Functions
-func _ready() -> void:  # ):
+func _ready() -> void: # ):
 	character_nameplate.text = character_name
 	if character_portrait_texture:
 		character_portrait.texture = character_portrait_texture
@@ -57,12 +57,12 @@ func _ready() -> void:  # ):
 	disappeared.connect(func() -> void: queue_free())
 
 
-func _process(delta: float) -> void:  # ):
+func _process(delta: float) -> void: # ):
 	if state_machine.current_state != null:
 		state_machine._process(delta)
 
 
-func _input(event: InputEvent) -> void:  # ):
+func _input(event: InputEvent) -> void: # ):
 	if state_machine.current_state != null:
 		state_machine._input(event)
 
@@ -71,31 +71,31 @@ func _input(event: InputEvent) -> void:  # ):
 
 
 #region Signal Processors
-func appear() -> void:  # ):
+func appear() -> void: # ):
 	var tween = create_tween().bind_node(self)
 	tween.chain().tween_property(self, "position", Vector2.ZERO, 0.5)
 	tween.tween_callback(emit_signal.call("appeared"))
 
 
-func disappear() -> void:  # ):
+func disappear() -> void: # ):
 	# visible = false
 	var tween = create_tween().bind_node(self)
 	tween.chain().tween_property(self, "position", Vector2(chat_bubble_offscreen_x, 0), 0.5)
 	tween.tween_callback(emit_signal.call("disappeared"))
 
 
-func _on_input_received() -> void:  # ):
+func _on_input_received() -> void: # ):
 	if state_machine.current_state == _presenting_state:
 		emit_signal("fully_displayed")
 	else:
 		emit_signal("next_message_requested")
 
 
-func _on_fully_displayed() -> void:  # ):
+func _on_fully_displayed() -> void: # ):
 	state_machine.change_state(_idle_state)
 
 
-func _on_next_message_requested() -> void:  # ):
+func _on_next_message_requested() -> void: # ):
 	if _current_text_index < full_text.size() - 1:
 		state_machine.change_state(_presenting_state)
 	else:
@@ -106,14 +106,15 @@ func _on_next_message_requested() -> void:  # ):
 
 
 #region State Callbacks
-func _on_enter_presenting_state(_prev_state: State) -> void:  # ():
+func _on_enter_presenting_state(_prev_state: State) -> void: # ():
 	_text_advance_counter = 0
 	_text_advance_position = 0
 	chat_text.visible_characters = 0
 	_current_text_index += 1
+	chat_text.text = full_text[_current_text_index]
 
 
-func _on_process_presenting_state(_delta: float) -> void:  #):
+func _on_process_presenting_state(_delta: float) -> void: # ):
 	if _text_advance_position < full_text[_current_text_index].length():
 		if _text_advance_counter == Settings.chat_speed:
 			_text_advance_counter = 0
@@ -124,11 +125,11 @@ func _on_process_presenting_state(_delta: float) -> void:  #):
 		emit_signal("fully_displayed")
 
 
-func _on_exit_presenting_state(_next_state: State) -> void:  # ():
+func _on_exit_presenting_state(_next_state: State) -> void: # ():
 	chat_text.visible_characters = -1
 
 
-func _on_input(_event: InputEvent) -> void:  # ():
+func _on_input(_event: InputEvent) -> void: # ():
 	if _event.is_action_pressed("Confirm") or _event.is_action_pressed("Cancel"):
 		emit_signal("input_received")
 #endregion State Callbacks
