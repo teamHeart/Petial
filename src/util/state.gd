@@ -4,8 +4,8 @@ extends Node
 ## A base class for states in a finite state machine.
 ## Each state can define valid transitions to other states.
 
-signal state_entered # ():
-signal state_exited # ():
+signal state_entered  # ():
+signal state_exited  # ():
 
 @export var valid_states: Array[State] = []
 var _on_enter: Callable = func(_prev_state: State) -> void: pass

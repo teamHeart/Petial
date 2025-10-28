@@ -4,7 +4,7 @@ extends Node
 ## A simple finite state machine implementation.
 ## States can be added to the `states` array, and transitions between states are managed.
 
-signal state_changed(new_state)  #):
+signal state_changed(new_state)  # ):
 
 @export var states: Array[State] = []
 
@@ -12,7 +12,7 @@ var current_state: State = null
 var previous_state: State = null
 
 
-func change_state(new_state: State) -> bool:  #():
+func change_state(new_state: State) -> bool:  # ():
 	var changed: bool = true
 	if not current_state:
 		if not new_state:
@@ -20,7 +20,7 @@ func change_state(new_state: State) -> bool:  #():
 		if new_state not in states:
 			changed = false
 		current_state = new_state
-		current_state.enter()
+		current_state.enter(previous_state)
 		emit_signal("state_changed", current_state)
 		changed = true
 	if not new_state or new_state == current_state:
@@ -30,10 +30,10 @@ func change_state(new_state: State) -> bool:  #():
 	if current_state and not current_state.can_transition_to(new_state):
 		changed = false
 	if current_state:
-		current_state.exit()
+		current_state.exit(new_state)
 	previous_state = current_state
 	current_state = new_state
-	current_state.enter()
+	current_state.enter(previous_state)
 	emit_signal("state_changed", current_state)
 	if changed:
 		if previous_state:
