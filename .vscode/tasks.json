@@ -1,0 +1,77 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "Launch Godot",
+			"type": "process",
+			"command": "c:\\Program Files\\Godot Engine\\Godot_v4.5-stable_win64.exe",
+			"args": [
+				"--path",
+				"${workspaceFolder}",
+				"project.godot"
+			],
+			"presentation": {
+				"panel": "new",
+				"showReuseMessage": false,
+				"clear": true,
+				"reveal": "silent",
+				"echo": false,
+			},
+			"problemMatcher": []
+		},
+		{
+			"label": "Static Code Analysis",
+			"dependsOn": [
+				"Format Code",
+				"Lint Code"
+			],
+			"group": "test"
+		},
+		{
+			"label": "Format Code",
+			"type": "process",
+			"command": "gdformat",
+			"args": [
+				"${workspaceFolder}${pathSeparator}src"
+			],
+			"presentation": {
+				"panel": "new",
+				"showReuseMessage": false,
+				"clear": false,
+				"group": "gd",
+				"reveal": "silent",
+				"close": false
+			},
+			"problemMatcher": []
+		},
+		{
+			"label": "Lint Code",
+			"type": "process",
+			"command": "gdlint",
+			"args": [
+				"${workspaceFolder}${pathSeparator}src"
+			],
+			"presentation": {
+				"panel": "new",
+				"showReuseMessage": false,
+				"clear": false,
+				"group": "gd",
+				"reveal": "silent",
+				"close": false
+			},
+			"problemMatcher": {
+				"fileLocation": [
+					"absolute"
+				],
+				"pattern": {
+					"regexp": "^(.*):(\\d+):(\\d+): (warning|error): (.*)$",
+					"file": 1,
+					"line": 2,
+					"column": 3,
+					"severity": 4,
+					"message": 5
+				}
+			}
+		}
+	]
+}
