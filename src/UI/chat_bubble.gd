@@ -96,12 +96,13 @@ func _on_fully_displayed() -> void:  # ):
 
 
 func _on_next_message_requested() -> void:  # ):
+	if full_text.size() == 0:
+		disappear()
+		return
 	if _current_text_index < full_text.size() - 1:
 		state_machine.change_state(_presenting_state)
 	else:
 		disappear()
-
-
 #endregion Signal Processors
 
 
