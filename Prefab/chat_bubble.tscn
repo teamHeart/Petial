@@ -1,17 +1,19 @@
-[gd_scene load_steps=4 format=3 uid="uid://b8kv710t0lj4g"]
+[gd_scene load_steps=5 format=3 uid="uid://b8kv710t0lj4g"]
 
 [ext_resource type="Script" uid="uid://caf5h78vq0g1i" path="res://src/UI/chat_bubble.gd" id="1_2fxar"]
+[ext_resource type="Texture2D" uid="uid://lib4njkx2mps" path="res://img/Temp Images/Nature_portraits.png" id="2_fq2r3"]
 [ext_resource type="Theme" uid="uid://dchgh5xh8ysj8" path="res://Prefab/chat_bubble.tres" id="2_gtxda"]
 [ext_resource type="Script" uid="uid://cd58dt4mmnmau" path="res://src/util/finite_state_machine.gd" id="5_g84g2"]
 
 [node name="ChatBubble" type="Control"]
 layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
+anchors_preset = 2
+anchor_top = 1.0
 anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+grow_vertical = 0
+theme = ExtResource("2_gtxda")
 script = ExtResource("1_2fxar")
+chat_speed = 4
 
 [node name="ChatPanel" type="PanelContainer" parent="."]
 layout_mode = 1
@@ -41,6 +43,7 @@ custom_minimum_size = Vector2(128, 8)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
+texture = ExtResource("2_fq2r3")
 expand_mode = 5
 stretch_mode = 4
 flip_h = true
@@ -53,20 +56,37 @@ theme_override_constants/margin_right = 8
 theme_override_constants/margin_bottom = 8
 
 [node name="ChatText" type="RichTextLabel" parent="ChatPanel/HBoxContainer/MarginContainer2"]
+clip_contents = false
 custom_minimum_size = Vector2(581, 56)
 layout_mode = 2
 bbcode_enabled = true
+text = "[wave]This is some text. WwooOOooOoooooOOo![/wave]"
 justification_flags = 160
+
+[node name="FinishedIndicator" type="Panel" parent="ChatPanel/HBoxContainer/MarginContainer2/ChatText"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -20.0
+grow_horizontal = 0
+grow_vertical = 0
+theme = ExtResource("2_gtxda")
 
 [node name="Control" type="Control" parent="ChatPanel"]
 layout_mode = 2
 
 [node name="Nameplate" type="PanelContainer" parent="ChatPanel/Control"]
 layout_mode = 1
-offset_left = 8.0
-offset_top = -36.0
-offset_right = 152.0
-offset_bottom = -1.0
+anchors_preset = -1
+offset_left = -2.0
+offset_top = -47.0
+offset_right = 142.0
+offset_bottom = -4.0
+grow_vertical = 0
 theme = ExtResource("2_gtxda")
 
 [node name="MarginContainer" type="MarginContainer" parent="ChatPanel/Control/Nameplate"]
@@ -79,10 +99,11 @@ theme_override_constants/margin_bottom = 4
 
 [node name="NameplateName" type="Label" parent="ChatPanel/Control/Nameplate/MarginContainer"]
 layout_mode = 2
+theme = ExtResource("2_gtxda")
+text = "Name"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("states")]
+[node name="StateMachine" type="Node" parent="."]
 script = ExtResource("5_g84g2")
-states = [null, null]
 metadata/_custom_type_script = "uid://cd58dt4mmnmau"

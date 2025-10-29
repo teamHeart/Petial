@@ -4,6 +4,7 @@
     // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
     "version": "0.2.0",
     "configurations": [
+
         {
             "name": "GDScript: Launch Project",
             "type": "godot",
@@ -11,10 +12,28 @@
             "project": "${workspaceFolder}",
             "scene": "main",
             "editor_path": "c:\\Program Files (x86)\\Steam\\steamapps\\common\\Godot Engine\\godot.windows.opt.tools.64.exe",
-            "debug_collisions": false,
-            "debug_paths": false,
-            "debug_navigation": false,
-            "additional_options": ""
+        },
+        {
+            "name": "GDScript: Launch Pinned Scene",
+            "type": "godot",
+            "request": "launch",
+            "project": "${workspaceFolder}",
+            "scene": "pinned",
+            "editor_path": "c:\\Program Files (x86)\\Steam\\steamapps\\common\\Godot Engine\\godot.windows.opt.tools.64.exe",
+        },
+        {
+            "name": "GDScript: Attach to Running Instance",
+            "type": "godot",
+            "request": "attach",
+            "port": 6008
+        },
+        {
+            "name": "GDScript: Launch Current Scene",
+            "type": "godot",
+            "request": "launch",
+            "project": "${workspaceFolder}",
+            "scene": "current",
+            "editor_path": "c:\\Program Files (x86)\\Steam\\steamapps\\common\\Godot Engine\\godot.windows.opt.tools.64.exe"
         }
     ]
 }

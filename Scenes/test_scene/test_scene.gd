@@ -24,27 +24,24 @@ func _ready():
 	chat_timer.timeout.connect(func() -> void:
 		make_bubble()
 	)
-	chat_timer.start()
+	# chat_timer.start()
 
 func make_bubble():
 	var bubble_instance = chat_bubble.instantiate()
-	Settings.chat_speed = Settings.ChatSpeed.SLOW
-	bubble_instance.character_name = "C'laire Rhel is gay"
+	Settings.chat_speed = Settings.ChatSpeed.FAST
+	bubble_instance.character_name = "C'laire Rhel"
 	bubble_instance.character_portrait_texture = load("res://img/Temp Images/Nature_portraits.png")
 	bubble_instance.full_text.push_back("Hello there! This is a test chat bubble.")
 	bubble_instance.full_text.push_back("Here's another line of dialogue to display.")
 	bubble_instance.full_text.push_back("Camera shake effects are fun, aren't they?")
 	bubble_instance.full_text.push_back("We can have multiple lines in a single bubble.\nIsn't that great?")
 	bubble_instance.full_text.push_back("This is the final message in this bubble.")
+	bubble_instance.chat_bubble_position_y = get_viewport().get_visible_rect().size.y as int
+	bubble_instance.chat_bubble_offscreen_x = - get_viewport().get_visible_rect().size.x as int
 	add_child(bubble_instance)
 
 func _process(delta):
-	label.text = (
-		"Shake Timer: "
-		+ str(snappedf(shake_timer, 0.1))
-		+"\nShake Intensity: "
-		+ str(camera_shake_intensity)
-	)
+
 	if shake_timer > 0.0:
 		shake_timer -= delta
 		var shake_offset = Vector2.ONE.rotated(randf() * TAU) * log(camera_shake_intensity + 1) * 1
