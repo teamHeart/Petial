@@ -297,7 +297,7 @@ default_input_values = [0, 0.0, 1, 1.0]
 operator = 6
 
 [sub_resource type="VisualShaderNodeFloatConstant" id="VisualShaderNodeFloatConstant_salsv"]
-constant = 32768.0
+constant = 16384.0
 
 [sub_resource type="VisualShaderNodeFloatOp" id="VisualShaderNodeFloatOp_7mn0p"]
 default_input_values = [0, 0.0, 1, 1.0]
@@ -307,7 +307,7 @@ operator = 6
 function = 0
 
 [sub_resource type="VisualShaderNodeFloatOp" id="VisualShaderNodeFloatOp_j2mwi"]
-default_input_values = [0, 0.0, 1, 37.0]
+default_input_values = [0, 0.0, 1, 29.0]
 operator = 2
 
 [sub_resource type="VisualShaderNodeFloatOp" id="VisualShaderNodeFloatOp_xxbjo"]
@@ -356,11 +356,11 @@ input_name = "time"
 constant = 0.75
 
 [sub_resource type="VisualShaderNodeFloatOp" id="VisualShaderNodeFloatOp_4br3p"]
-default_input_values = [0, 0.0, 1, 256.0]
+default_input_values = [0, 0.0, 1, 19.0]
 operator = 2
 
 [sub_resource type="VisualShaderNodeFloatOp" id="VisualShaderNodeFloatOp_ys0l7"]
-default_input_values = [0, 0.0, 1, 256.0]
+default_input_values = [0, 0.0, 1, 61.0]
 operator = 2
 
 [sub_resource type="VisualShaderNodeInput" id="VisualShaderNodeInput_i1aw5"]
@@ -435,7 +435,7 @@ void fragment() {
 
 
 // FloatConstant:67
-	float n_out67p0 = 32768.000000;
+	float n_out67p0 = 16384.000000;
 
 
 // FloatOp:68
@@ -453,7 +453,7 @@ void fragment() {
 
 
 // FloatOp:70
-	float n_in70p1 = 37.00000;
+	float n_in70p1 = 29.00000;
 	float n_out70p0 = n_out14p0 * n_in70p1;
 
 
@@ -568,7 +568,7 @@ void fragment() {
 
 
 // FloatOp:83
-	float n_in83p1 = 256.00000;
+	float n_in83p1 = 19.00000;
 	float n_out83p0 = n_out14p0 * n_in83p1;
 
 
@@ -603,7 +603,7 @@ void fragment() {
 
 
 // FloatOp:84
-	float n_in84p1 = 256.00000;
+	float n_in84p1 = 61.00000;
 	float n_out84p0 = n_out14p0 * n_in84p1;
 
 
