@@ -35,10 +35,6 @@ func change_state(new_state: State) -> bool:  # ():
 	current_state = new_state
 	current_state.enter(previous_state)
 	emit_signal("state_changed", current_state)
-	if changed:
-		if previous_state:
-			remove_child(previous_state)
-		add_child(current_state)
 	return changed
 
 
@@ -47,9 +43,9 @@ func _process(_delta):
 		current_state.process(_delta)
 
 
-func _physics_process(_delta):
-	if current_state:
-		current_state.physics_process(_delta)
+# func _physics_process(_delta):
+# 	if current_state:
+# 		current_state.physics_process(_delta)
 
 
 func _input(_event):

@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=6 format=3 uid="uid://c6ym5lmrssndh"]
+[gd_resource type="Theme" load_steps=4 format=3 uid="uid://c6ym5lmrssndh"]
 
 [sub_resource type="SystemFont" id="SystemFont_iy3be"]
 font_names = PackedStringArray("Handwriting Hearts")
@@ -6,30 +6,15 @@ font_names = PackedStringArray("Handwriting Hearts")
 [sub_resource type="SystemFont" id="SystemFont_13imf"]
 font_names = PackedStringArray("Handwriting Hearts")
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5dry2"]
-content_margin_left = 4.0
-content_margin_top = 4.0
-content_margin_right = 4.0
-content_margin_bottom = 4.0
-bg_color = Color(1, 1, 1, 0.75)
-draw_center = false
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_13imf"]
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
 corner_radius_top_left = 3
 corner_radius_top_right = 3
 corner_radius_bottom_right = 3
 corner_radius_bottom_left = 3
-corner_detail = 5
-expand_margin_left = 2.0
-expand_margin_top = 2.0
-expand_margin_right = 2.0
-expand_margin_bottom = 2.0
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ld3i5"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_13imf"]
 
 [resource]
 Button/colors/font_color = Color(0.875, 0.875, 0.875, 1)
@@ -60,8 +45,6 @@ Label/constants/outline_size = 10
 Label/constants/shadow_offset_x = 1
 Label/constants/shadow_offset_y = 1
 Label/constants/shadow_outline_size = 1
-Label/font_sizes/font_size = 144
+Label/font_sizes/font_size = 32
 Label/fonts/font = SubResource("SystemFont_13imf")
-Label/styles/focus = SubResource("StyleBoxFlat_5dry2")
-Label/styles/normal = SubResource("StyleBoxEmpty_ld3i5")
-Panel/styles/panel = SubResource("StyleBoxEmpty_13imf")
+Panel/styles/panel = SubResource("StyleBoxFlat_13imf")

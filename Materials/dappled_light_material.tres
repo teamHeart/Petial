@@ -1,0 +1,6 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://dqidriqvcbv83"]
+
+[ext_resource type="Shader" uid="uid://u2m8uc2j26eu" path="res://Shaders/dappled_light.tres" id="1_wr5ue"]
+
+[resource]
+shader = ExtResource("1_wr5ue")

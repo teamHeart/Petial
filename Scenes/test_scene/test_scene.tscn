@@ -1,36 +1,41 @@
-[gd_scene load_steps=3 format=3 uid="uid://c3g378l17u1r0"]
+[gd_scene load_steps=4 format=3 uid="uid://c3g378l17u1r0"]
 
 [ext_resource type="Script" uid="uid://djmt3yoihkbb5" path="res://Scenes/test_scene/test_scene.gd" id="1_tf2av"]
 [ext_resource type="Texture2D" uid="uid://cxfu0j2vu3kwg" path="res://img/Temp Images/Petial_World_Map.png" id="2_lvvqt"]
+[ext_resource type="Material" uid="uid://dqidriqvcbv83" path="res://Materials/dappled_light_material.tres" id="3_lvvqt"]
 
 [node name="TestScene" type="Node2D"]
 script = ExtResource("1_tf2av")
 camera_shake_intensity = 1.0
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+texture_repeat = 1
+material = ExtResource("3_lvvqt")
+scale = Vector2(0.57, 0.57)
 texture = ExtResource("2_lvvqt")
 centered = false
 
 [node name="Camera2D" type="Camera2D" parent="."]
+material = ExtResource("3_lvvqt")
 anchor_mode = 0
 
-[node name="Label" type="Label" parent="Camera2D"]
-offset_left = 131.0
-offset_top = 691.0
-offset_right = 394.0
-offset_bottom = 838.0
-theme_override_font_sizes/font_size = 64
-text = "fadsfasd"
+[node name="Timer" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
 
-[node name="RichTextLabel" type="RichTextLabel" parent="Camera2D"]
-offset_left = 38.0
-offset_top = 19.0
-offset_right = 624.0
-offset_bottom = 205.0
-bbcode_enabled = true
-text = "[b][fill][outline_size=5][pulse freq=2.5 color=#fabcdeff ease=-2.0]Pulse Pulse Pulse Pulse Pulse Pulse Pulse Pulse[/pulse]
-[wave amp=25.0 freq=10 connected=1]Wave Wave Wave Wave Wave Wave Wave[/wave]
-[tornado radius=2.5 freq=10.0 connected=1]Tornado Tornado Tornado Tornado Tornado[/tornado]
-[shake rate=10.0 level=5 connected=1]Shake Shake Shake Shake Shake Shake[/shake]
-[fade start=6 length=25]Fade Fade Fade Fade Fade Fade Fade Fade [/fade][/outline_size]
-[font_size=25][outline_size=2][pulse freq=5 color=#fabcdeff][shake level=10 rate=100][tornado radius=10 freq=1][rainbow freq=0.8 sat=0.8 val=1.0 speed=0.5]This is the gayest text I can possibly type here![/rainbow][/tornado][/shake][/pulse][/outline_size][/font_size][/fill][/b]"
+[node name="Button" type="Button" parent="."]
+offset_left = 745.0
+offset_top = 55.0
+offset_right = 895.0
+offset_bottom = 112.0
+text = "Make Chat"
+
+[node name="ColorRect" type="ColorRect" parent="."]
+visible = false
+material = ExtResource("3_lvvqt")
+offset_right = 2046.0
+offset_bottom = 1150.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
