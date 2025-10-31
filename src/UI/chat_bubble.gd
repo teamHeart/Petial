@@ -138,8 +138,9 @@ func _on_fully_displayed():
 
 
 func _on_input_received(_event: InputEvent):
-	Debug._print("Input received for chat bubble.")
-	state_machine._input(_event)
+	if Input.is_action_just_pressed("ui_accept"):
+		Debug._print("Input received for chat bubble.")
+		state_machine._input(_event)
 
 
 #endregion Signal Processors
@@ -223,8 +224,7 @@ func _ready_idle_state() -> State:
 			chat_text.visible_characters = 0
 
 	state._on_input = func(_event):
-		if Input.is_action_just_pressed("ui_accept"):
-			emit_signal.call_deferred("next_message_requested")
+		emit_signal.call_deferred("next_message_requested")
 	return state
 
 
@@ -252,9 +252,8 @@ func _ready_presenting_state():
 				emit_signal("fully_displayed")
 
 	state._on_input = func(_event):
-		if Input.is_action_just_pressed("ui_accept"):
-			chat_text.visible_characters = -1
-			emit_signal.call_deferred("fully_displayed")
+		chat_text.visible_characters = -1
+		emit_signal.call_deferred("fully_displayed")
 	return state
 #endregion Presenting State
 #endregion States
