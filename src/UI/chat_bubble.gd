@@ -1,7 +1,7 @@
 extends Control
 
 #region Declarations
-signal input_received
+signal input_received(_event: InputEvent)
 signal fully_displayed
 signal next_message_requested
 signal appeared
@@ -48,7 +48,7 @@ var finished_indicator = $ChatPanel/HBoxContainer/MarginContainer2/ChatText/Fini
 
 
 #region Standard Functions
-func _ready() -> void:  # ):
+func _ready():
 	if bubble_on_screen:
 		queue_free()
 		return
@@ -75,30 +75,54 @@ func _ready() -> void:  # ):
 	input_received.connect(_on_input_received)
 
 
-func _process(delta: float) -> void:  # ):
+func _process(delta: float):
 	if state_machine.current_state != null:
 		state_machine._process(delta)
 
 
-func _unhandled_input(event: InputEvent) -> void:  # ):
-	if state_machine.current_state != null:
-		state_machine._input(event)
+func _unhandled_input(event: InputEvent):
+	emit_signal("input_received", event)
 
 
 #endregion Standard Functions
 
 
+#region Class Methods
+func reset_chat_bubble():
+	_text_advance_counter = 0
+	_text_advance_position = 0
+	_current_text_index = 0
+	chat_text.text = full_text[_current_text_index]
+	chat_text.visible_characters = 0
+
+
+func set_portrait_texture(texture: Texture2D):
+	character_portrait.texture = texture
+
+
+@warning_ignore("SHADOWED_VARIABLE_BASE_CLASS")
+
+
+func set_character_name(name: String):
+	character_nameplate.text = name
+
+
+#endregion Class Methods
+
+
 #region Signal Processors
-func _on_appeared() -> void:
+func _on_appeared():
+	Debug._print("Chat bubble appeared on screen.")
 	state_machine.change_state(_presenting_state)
 
 
-func _on_disappeared() -> void:
-	print("Chat bubble disappeared from screen.")
+func _on_disappeared():
+	Debug._print("Chat bubble disappeared from screen.")
 	queue_free()
 
 
-func _on_next_message_requested() -> void:
+func _on_next_message_requested():
+	Debug._print("Next message requested.")
 	_current_text_index += 1
 	if _current_text_index < full_text.size():
 		chat_text.text = full_text[_current_text_index]
@@ -106,23 +130,24 @@ func _on_next_message_requested() -> void:
 		state_machine.change_state(_presenting_state)
 	else:
 		state_machine.change_state(_disappearing_state)
-	print("Next message requested.")
 
 
-func _on_fully_displayed() -> void:
-	print("Chat bubble text fully displayed.")
+func _on_fully_displayed():
+	Debug._print("Chat bubble text fully displayed.")
 	state_machine.change_state(_idle_state)
 
 
-func _on_input_received() -> void:
-	print("Input received for chat bubble.")
+func _on_input_received(_event: InputEvent):
+	if Input.is_action_just_pressed("ui_accept"):
+		Debug._print("Input received for chat bubble.")
+		state_machine._input(_event)
 
 
 #endregion Signal Processors
 
 
 #region States
-func configure_states() -> void:  # ):
+func configure_states():
 	_ready_appearing_state()
 	_ready_disappearing_state()
 	_ready_idle_state()
@@ -137,62 +162,79 @@ func configure_states() -> void:  # ):
 	state_machine.change_state(_appearing_state)
 
 
+#region Appearing State
 func _ready_appearing_state():
 	var state = _appearing_state
-	state._on_enter = func(_prev_state):  # ():
-		_tween = create_tween()
+	state._on_enter = func(_prev_state):
+		_tween = get_tree().create_tween().bind_node(self)
 		chat_text.visible_characters = 0
 		_tween.tween_property(self, "position", Vector2(0, chat_bubble_position_y), 0.5)
-		_tween.bind_node(self)
 		_tween.finished.connect(
-			func() -> void:
+			func():
 				emit_signal.call_deferred("appeared")
 				_tween = null
 		)
 	return
 
 
+#endregion Appearing State
+
+
+#region Disappearing State
 func _ready_disappearing_state() -> State:
 	var state = _disappearing_state
-	state._on_enter = func(_prev_state):  # ():
+	state._on_enter = func(_prev_state):
 		print("Entering Disappearing State")
 		bubble_on_screen = false
-		_tween = create_tween()
-		_tween.chain().tween_property(
-			self, "position", Vector2(chat_bubble_offscreen_x, position.y), 0.5
-		)
-		_tween.bind_node(self)
+		if _tween:
+			_tween.kill()
+		_tween = get_tree().create_tween().bind_node(self)
+		_tween.tween_property(self, "position", Vector2(chat_bubble_offscreen_x, position.y), 0.5)
 		# tween.tween_callback(go_signal.call("disappeared")).set_delay(0.5)
+	# tween.tween_callback(go_signal.call("disappeared")).set_delay(0.5)
+	# tween.tween_callback(go_signal.call("disappeared")).set_delay(0.5)
+	# tween.tween_callback(go_signal.call("disappeared")).set_delay(0.5)
+	# tween.tween_callback(go_signal.call("disappeared")).set_delay(0.5)
+	# tween.tween_callback(go_signal.call("disappeared")).set_delay(0.5)
 	# tween.tween_callback(go_signal.call("disappeared")).set_delay(0.5)
 	return state
 
 
+#endregion Disappearing State
+
+
+#region Idle State
 func _ready_idle_state() -> State:
 	var state = _idle_state
-	blink_tween = create_tween().bind_node(finished_indicator)
+	blink_tween = finished_indicator.create_tween()
 
-	state._on_enter = func(_prev_state): finished_indicator.visible = true
-	# blink_tween.tween_property(finished_indicator, "size", Vector2(0, 0), 0.5)
-	# blink_tween.tween_property(finished_indicator, "size", Vector2(20, 20), 0.5)
-	# blink_tween.set_loops()
+	state._on_enter = func(_prev_state):
+		finished_indicator.visible = true
+		blink_tween.tween_property(finished_indicator, "size", Vector2(0, 0), 0.5)
+		blink_tween.tween_property(finished_indicator, "size", Vector2(20, 20), 0.5)
+		blink_tween.set_loops()
 
 	state._on_exit = func(_next_state):
 		finished_indicator.visible = false
-		blink_tween = null
+		if blink_tween:
+			blink_tween.kill()
 		_current_text_index += 1
 		if _current_text_index < full_text.size():
 			chat_text.text = full_text[_current_text_index]
 			chat_text.visible_characters = 0
 
-	state._on_input = func(event):
-		if event.is_action_pressed("ui_accept"):
-			emit_signal.call_deferred("next_message_requested")
+	state._on_input = func(_event):
+		emit_signal.call_deferred("next_message_requested")
 	return state
 
 
+#endregion Idle State
+
+
+#region Presenting State
 func _ready_presenting_state():
 	var state = _presenting_state
-	state._on_enter = func(_prev_state):  # ():
+	state._on_enter = func(_prev_state):
 		_text_advance_counter = 0
 		_text_advance_position = 0
 
@@ -209,8 +251,9 @@ func _ready_presenting_state():
 			if chat_text.visible_characters >= chat_text.get_total_character_count():
 				emit_signal("fully_displayed")
 
-	state._on_input = func(event):
-		if event.is_action_pressed("ui_accept"):
-			chat_text.visible_characters = -1
-			emit_signal.call_deferred("fully_displayed")
+	state._on_input = func(_event):
+		chat_text.visible_characters = -1
+		emit_signal.call_deferred("fully_displayed")
+	return state
+#endregion Presenting State
 #endregion States
