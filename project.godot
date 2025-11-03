@@ -34,14 +34,15 @@ file_logging/enable_file_logging=true
 
 [display]
 
-window/stretch/mode="canvas_items"
+window/size/viewport_width=1920
+window/size/viewport_height=1080
+window/size/resizable=false
+window/size/always_on_top=true
 
 [editor]
 
 movie_writer/movie_file="D:/Petial/Movies/video_proof.mp4"
 naming/script_name_casing=2
-version_control/plugin_name="GitPlugin"
-version_control/autoload_on_startup=true
 
 [editor_plugins]
 
@@ -158,7 +159,8 @@ Menu={
 
 [rendering]
 
-textures/canvas_textures/default_texture_filter=0
+viewport/hdr_2d=true
+viewport/transparent_background=true
 
 [steam]
 
