@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://caf5h78vq0g1i" path="res://src/UI/chat_bubble.gd" id="1_2fxar"]
 [ext_resource type="Texture2D" uid="uid://lib4njkx2mps" path="res://img/Temp Images/Nature_portraits.png" id="2_fq2r3"]
 [ext_resource type="Theme" uid="uid://dchgh5xh8ysj8" path="res://Prefab/chat_bubble.tres" id="2_gtxda"]
-[ext_resource type="Script" uid="uid://cd58dt4mmnmau" path="res://src/util/finite_state_machine.gd" id="5_g84g2"]
+[ext_resource type="Script" uid="uid://cogwxe4u0carl" path="res://src/util/Finite State Machine/finite_state_machine.gd" id="5_g84g2"]
 
 [node name="ChatBubble" type="Control"]
 layout_mode = 3
