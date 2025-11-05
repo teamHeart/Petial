@@ -1,5 +1,12 @@
 {
 	"githubPullRequests.ignoredPullRequestBranches": [
 		"main"
-	]
+	],
+	"editor.rulers": [
+		{
+			"column": 120,
+			"color": "#000000"
+		} // Black ruler at 120 characters
+	],
+	"godotTools.editorPath.godot4": "/workspaces/Petial/godot4"
 }

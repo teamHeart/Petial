@@ -3,6 +3,8 @@ extends Node
 
 ## A base class for states in a finite state machine.
 ## Each state can define valid transitions to other states.
+## States may either be defined via subclassing or by assigning
+## callables to the various lifecycle hooks.
 
 signal state_entered  # ():
 signal state_exited  # ():
@@ -13,6 +15,7 @@ var _on_exit: Callable = func(_next_state: State) -> void: pass
 var _on_process: Callable = func(_delta: float) -> void: pass
 var _on_physics_process: Callable = func(_delta: float) -> void: pass
 var _on_input: Callable = func(_event: InputEvent) -> void: pass
+var _on_unhandled_input: Callable = func(_event: InputEvent) -> void: pass
 
 
 func enter(_prev_state: State):
@@ -35,6 +38,10 @@ func physics_process(_delta):
 
 func input(_event):
 	_on_input.call(_event)
+
+
+func unhandled_input(_event):
+	_on_unhandled_input.call(_event)
 
 
 func can_transition_to(state: State) -> bool:

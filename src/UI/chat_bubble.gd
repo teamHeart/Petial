@@ -42,8 +42,7 @@ var _tween: Tween = null
 @onready var chat_text = $ChatPanel/HBoxContainer/MarginContainer2/ChatText
 @onready var character_portrait = $ChatPanel/HBoxContainer/MarginContainer/CharacterPortrait
 @onready var character_nameplate = $ChatPanel/Control/Nameplate/MarginContainer/NameplateName
-@onready
-var finished_indicator = $ChatPanel/HBoxContainer/MarginContainer2/ChatText/FinishedIndicator
+@onready var finished_indicator = $ChatPanel/HBoxContainer/MarginContainer2/ChatText/FinishedIndicator
 #endregion Declarations
 
 
@@ -138,9 +137,9 @@ func _on_fully_displayed():
 
 
 func _on_input_received(_event: InputEvent):
-	if Input.is_action_just_pressed("ui_accept"):
+	if Input.is_action_just_pressed_by_event("ui_accept", _event):
 		Debug._print("Input received for chat bubble.")
-		state_machine._input(_event)
+		state_machine.input(_event)
 
 
 #endregion Signal Processors
@@ -197,6 +196,7 @@ func _ready_disappearing_state() -> State:
 	# tween.tween_callback(go_signal.call("disappeared")).set_delay(0.5)
 	# tween.tween_callback(go_signal.call("disappeared")).set_delay(0.5)
 	# tween.tween_callback(go_signal.call("disappeared")).set_delay(0.5)
+	# tween.tween_callback(go_signal.call("disappeared")).set_delay(0.5)
 	return state
 
 
@@ -223,8 +223,7 @@ func _ready_idle_state() -> State:
 			chat_text.text = full_text[_current_text_index]
 			chat_text.visible_characters = 0
 
-	state._on_input = func(_event):
-		emit_signal.call_deferred("next_message_requested")
+	state._on_input = func(_event): emit_signal.call_deferred("next_message_requested")
 	return state
 
 
@@ -252,6 +251,7 @@ func _ready_presenting_state():
 				emit_signal("fully_displayed")
 
 	state._on_input = func(_event):
+		get_tree().root.set_input_as_handled()
 		chat_text.visible_characters = -1
 		emit_signal.call_deferred("fully_displayed")
 	return state
