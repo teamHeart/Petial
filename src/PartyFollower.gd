@@ -19,10 +19,7 @@ func _ready():
 
 func _physics_process(_delta: float) -> void:
 	### Follow The Leader
-	var vel: float = pow(
-		max(self.position.distance_to(_leader.position) - (social_distancing * .875), 0),
-		springyness
-	)
+	var vel: float = pow(max(self.position.distance_to(_leader.position) - (social_distancing * .875), 0), springyness)
 	var dir := Vector2.from_angle(self.position.angle_to_point(_leader.position))
 	vel = 0. if (self.position.distance_to(_leader.position) <= social_distancing) else vel
 	velocity = clamp(vel, 0., speed * 1.5) * dir

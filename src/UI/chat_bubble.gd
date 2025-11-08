@@ -2,6 +2,7 @@ extends Control
 
 #region Declarations
 signal input_received(_event: InputEvent)
+#):
 signal fully_displayed
 signal next_message_requested
 signal appeared
@@ -16,8 +17,7 @@ enum BubbleType {
 static var bubble_on_screen: bool = false
 
 @export var bubble_type: BubbleType = BubbleType.LEFT
-@export_placeholder("This is some text. [wave]WwwoooOOoOooOOoooOoo![/wave]")
-var full_text: Array[String]
+@export_placeholder("This is some text. [wave]WwwoooOOoOooOOoooOoo![/wave]") var full_text: Array[String]
 @export_placeholder("Character Name") var character_name: String
 @export var character_portrait_texture: Texture2D
 @export var _current_text_index: int = 0
@@ -30,6 +30,7 @@ var full_text: Array[String]
 var chat_bubble_offscreen_x: int
 var chat_bubble_position_y: int
 var blink_tween: Tween = null
+var _current_chat_speed: Settings.ChatSpeed = Settings.ChatSpeed.NORMAL
 var _text_advance_counter: int = 0
 var _text_advance_position: int = 0
 var _appearing_state: State = State.new()
@@ -59,6 +60,8 @@ func _ready():
 	if character_portrait_texture:
 		character_portrait.texture = character_portrait_texture
 	chat_text.text = full_text[_current_text_index]
+
+	_current_chat_speed = chat_speed
 
 	configure_states()
 
@@ -137,9 +140,8 @@ func _on_fully_displayed():
 
 
 func _on_input_received(_event: InputEvent):
-	if Input.is_action_just_pressed_by_event("ui_accept", _event):
-		Debug._print("Input received for chat bubble.")
-		state_machine.input(_event)
+	Debug._print("Input received for chat bubble.")
+	state_machine.input(_event)
 
 
 #endregion Signal Processors
@@ -189,14 +191,6 @@ func _ready_disappearing_state() -> State:
 			_tween.kill()
 		_tween = get_tree().create_tween().bind_node(self)
 		_tween.tween_property(self, "position", Vector2(chat_bubble_offscreen_x, position.y), 0.5)
-		# tween.tween_callback(go_signal.call("disappeared")).set_delay(0.5)
-	# tween.tween_callback(go_signal.call("disappeared")).set_delay(0.5)
-	# tween.tween_callback(go_signal.call("disappeared")).set_delay(0.5)
-	# tween.tween_callback(go_signal.call("disappeared")).set_delay(0.5)
-	# tween.tween_callback(go_signal.call("disappeared")).set_delay(0.5)
-	# tween.tween_callback(go_signal.call("disappeared")).set_delay(0.5)
-	# tween.tween_callback(go_signal.call("disappeared")).set_delay(0.5)
-	# tween.tween_callback(go_signal.call("disappeared")).set_delay(0.5)
 	return state
 
 
@@ -223,7 +217,13 @@ func _ready_idle_state() -> State:
 			chat_text.text = full_text[_current_text_index]
 			chat_text.visible_characters = 0
 
-	state._on_input = func(_event): emit_signal.call_deferred("next_message_requested")
+	state._on_input = func(_event):
+		if (
+			Input.is_action_just_pressed_by_event("ui_accept", _event)
+			or Input.is_action_just_pressed_by_event("ui_cancel", _event)
+		):
+			get_tree().root.set_input_as_handled()
+			emit_signal.call_deferred("next_message_requested")
 	return state
 
 
@@ -234,16 +234,17 @@ func _ready_idle_state() -> State:
 func _ready_presenting_state():
 	var state = _presenting_state
 	state._on_enter = func(_prev_state):
+		_current_chat_speed = chat_speed
 		_text_advance_counter = 0
 		_text_advance_position = 0
 
 	state._on_process = func(_delta):
-		if Settings.chat_speed == Settings.ChatSpeed.INSTANT:
+		if _current_chat_speed == Settings.ChatSpeed.INSTANT:
 			chat_text.visible_characters = -1
 			emit_signal.call_deferred("fully_displayed")
 			return
 		_text_advance_counter += 1
-		if _text_advance_counter >= Settings.chat_speed:
+		if _text_advance_counter >= _current_chat_speed:
 			_text_advance_counter = 0
 			_text_advance_position += 1
 			chat_text.visible_characters = _text_advance_position
@@ -251,9 +252,12 @@ func _ready_presenting_state():
 				emit_signal("fully_displayed")
 
 	state._on_input = func(_event):
-		get_tree().root.set_input_as_handled()
-		chat_text.visible_characters = -1
-		emit_signal.call_deferred("fully_displayed")
+		if Input.is_action_just_pressed_by_event("ui_accept", _event):
+			get_tree().root.set_input_as_handled()
+			_current_chat_speed = Settings.ChatSpeed.SUPER
+		if _event.is_action_just_pressed_by_event("ui_cancel"):
+			get_tree().root.set_input_as_handled()
+			_current_chat_speed = Settings.ChatSpeed.INSTANT
 	return state
 #endregion Presenting State
 #endregion States

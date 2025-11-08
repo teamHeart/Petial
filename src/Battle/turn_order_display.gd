@@ -56,12 +56,8 @@ func _on_battle_manager_turn_order_updated(turn_order: Array) -> void:
 		. set_trans(Tween.TRANS_SINE)
 		. set_ease(Tween.EASE_OUT)
 	)
-	(
-		tween
-		. parallel()
-		. tween_property(display_slots[0], "size", Vector2.RIGHT, 0.5)
-		. set_trans(Tween.TRANS_SINE)
-		. set_ease(Tween.EASE_OUT)
+	tween.parallel().tween_property(display_slots[0], "size", Vector2.RIGHT, 0.5).set_trans(Tween.TRANS_SINE).set_ease(
+		Tween.EASE_OUT
 	)
 	tween.chain().tween_callback(Callable(self, "pop_front_slot"))
 	display_slots[0].index = -1

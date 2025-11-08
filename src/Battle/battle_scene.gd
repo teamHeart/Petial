@@ -64,21 +64,15 @@ func _ready() -> void:
 func _show_action_palette():
 	action_palette.visible = true
 	var tween = create_tween().bind_node(action_palette)
-	(
-		tween
-		. tween_property(action_palette, "size", Vector2(1086, 68), 0.5)
-		. set_trans(Tween.TRANS_SINE)
-		. set_ease(Tween.EASE_IN_OUT)
+	tween.tween_property(action_palette, "size", Vector2(1086, 68), 0.5).set_trans(Tween.TRANS_SINE).set_ease(
+		Tween.EASE_IN_OUT
 	)
 
 
 func _hide_action_palette():
 	var tween = create_tween().bind_node(action_palette)
-	(
-		tween
-		. tween_property(action_palette, "size", Vector2(0, 68), 0.5)
-		. set_trans(Tween.TRANS_SINE)
-		. set_ease(Tween.EASE_IN_OUT)
+	tween.tween_property(action_palette, "size", Vector2(0, 68), 0.5).set_trans(Tween.TRANS_SINE).set_ease(
+		Tween.EASE_IN_OUT
 	)
 	tween.tween_callback(func(): action_palette.visible = false)
 
@@ -108,10 +102,7 @@ func _on_state_entered(new_state):
 				(
 					tween
 					. tween_property(
-						ally,
-						"position",
-						ally.position + Vector2(get_viewport().get_visible_rect().size.x, 0),
-						1.0
+						ally, "position", ally.position + Vector2(get_viewport().get_visible_rect().size.x, 0), 1.0
 					)
 					. set_delay(0.1 * counter_pos)
 				)
@@ -155,21 +146,13 @@ func _handle_actor_movement(event: InputEvent) -> void:
 		and not selected_combatant.is_dead
 	):
 		if event.is_action_pressed("ui_left"):
-			selected_combatant.move_to_cell(
-				selected_combatant.occupied_cell.neighbors[BattleGrid.Neighbors.LEFT]
-			)
+			selected_combatant.move_to_cell(selected_combatant.occupied_cell.neighbors[BattleGrid.Neighbors.LEFT])
 		elif event.is_action_pressed("ui_right"):
-			selected_combatant.move_to_cell(
-				selected_combatant.occupied_cell.neighbors[BattleGrid.Neighbors.RIGHT]
-			)
+			selected_combatant.move_to_cell(selected_combatant.occupied_cell.neighbors[BattleGrid.Neighbors.RIGHT])
 		elif event.is_action_pressed("ui_up"):
-			selected_combatant.move_to_cell(
-				selected_combatant.occupied_cell.neighbors[BattleGrid.Neighbors.UP]
-			)
+			selected_combatant.move_to_cell(selected_combatant.occupied_cell.neighbors[BattleGrid.Neighbors.UP])
 		elif event.is_action_pressed("ui_down"):
-			selected_combatant.move_to_cell(
-				selected_combatant.occupied_cell.neighbors[BattleGrid.Neighbors.DOWN]
-			)
+			selected_combatant.move_to_cell(selected_combatant.occupied_cell.neighbors[BattleGrid.Neighbors.DOWN])
 		elif event.is_action_pressed("Confirm"):
 			if selected_combatant in allies:
 				battle_manager.change_turn_state(battle_manager.TurnState.SELECT_COMMAND)

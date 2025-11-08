@@ -141,12 +141,7 @@ func parse_script(script: String) -> Dictionary:  # ():
 	var parser = get_instance()
 	parser._reset()
 	parser._tokenize(script)
-	print(
-		(
-			"Parsed %d commands and %d labels\n\tCommands:\n"
-			% [parser.commands.size(), parser.labels.size()]
-		)
-	)
+	print("Parsed %d commands and %d labels\n\tCommands:\n" % [parser.commands.size(), parser.labels.size()])
 	for command in parser.commands:
 		print("  - %s (line %d)" % [command["type"], command["line"]])
 	return {"commands": parser.commands, "labels": parser.labels}
@@ -191,19 +186,12 @@ func _tokenize(script: String) -> void:  # ():
 				"end":
 					_end()
 				_:
-					push_error(
-						(
-							"Command '%s' not yet implemented at line %d"
-							% [_command_token, _current_line + 1]
-						)
-					)
+					push_error("Command '%s' not yet implemented at line %d" % [_command_token, _current_line + 1])
 			# Store line number for better error reporting at runtime
 			_command["line"] = _current_line + 1
 			commands.append(_command)
 		else:
-			push_error(
-				"Unknown _command_token '%s' at line %d" % [_command_token, _current_line + 1]
-			)
+			push_error("Unknown _command_token '%s' at line %d" % [_command_token, _current_line + 1])
 		_current_line += 1
 
 

@@ -39,8 +39,7 @@ func _initialize_grid():
 				push_error("GridOverlay not found in parent node.")
 				continue
 			var pivot = Vector2(
-				parent_grid.map_to_local(Vector2i(x, y)).x + parent_grid.position.x,
-				parent_grid.position.y
+				parent_grid.map_to_local(Vector2i(x, y)).x + parent_grid.position.x, parent_grid.position.y
 			)
 			var not_straight = parent_grid.transform.get_skew()
 			cell.position = pivot + Vector2.DOWN.rotated(not_straight) * (y + 0.5) * cell_height
