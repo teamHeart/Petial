@@ -2,7 +2,8 @@ extends Control
 
 #region Declarations
 signal input_received(_event: InputEvent)
-#):
+#): 
+# stupid fucking syntax highlighter breaking on close parenthesis without an immediately following colon
 signal fully_displayed
 signal next_message_requested
 signal appeared
@@ -27,6 +28,11 @@ static var bubble_on_screen: bool = false
 	get:
 		return Settings.chat_speed
 
+var character_portrait: TextureRect = null
+var character_nameplate: Label = null
+var chat_text: RichTextLabel = null
+var finished_indicator: TextureRect = null
+
 var chat_bubble_offscreen_x: int
 var chat_bubble_position_y: int
 var blink_tween: Tween = null
@@ -40,15 +46,56 @@ var _idle_state: State = State.new()
 var _tween: Tween = null
 
 @onready var state_machine: FiniteStateMachine = $StateMachine
-@onready var chat_text = $ChatPanel/HBoxContainer/MarginContainer2/ChatText
-@onready var character_portrait = $ChatPanel/HBoxContainer/MarginContainer/CharacterPortrait
-@onready var character_nameplate = $ChatPanel/Control/Nameplate/MarginContainer/NameplateName
-@onready var finished_indicator = $ChatPanel/HBoxContainer/MarginContainer2/ChatText/FinishedIndicator
+
+@onready var left_chat_box = null
+@onready var left_chat_text = $ChatPanel/HBoxContainer/MarginContainer2/ChatText
+@onready var left_character_portrait = $ChatPanel/HBoxContainer/MarginContainer/CharacterPortrait
+@onready var left_character_nameplate = $ChatPanel/Control/Nameplate/MarginContainer/NameplateName
+@onready var left_finished_indicator = $ChatPanel/HBoxContainer/MarginContainer2/ChatText/FinishedIndicator
+
+@onready var right_chat_box = null
+@onready var right_chat_text = $ChatPanel/HBoxContainer/MarginContainer2/ChatText
+@onready var right_character_portrait = $ChatPanel/HBoxContainer/MarginContainer/CharacterPortrait
+@onready var right_character_nameplate = $ChatPanel/Control/Nameplate/MarginContainer/NameplateName
+@onready var right_finished_indicator = $ChatPanel/HBoxContainer/MarginContainer2/ChatText/FinishedIndicator
+
+@onready var system_chat_box = null
+@onready var system_chat_text = $ChatPanel/HBoxContainer/MarginContainer2/ChatText
+@onready var system_finished_indicator = $ChatPanel/HBoxContainer/MarginContainer2/ChatText/FinishedIndicator
 #endregion Declarations
 
 
 #region Standard Functions
 func _ready():
+	left_chat_box.visible = false
+	right_chat_box.visible = false
+	system_chat_box.visible = false
+	match bubble_type:
+		BubbleType.LEFT:
+			left_chat_box.visible = true
+			chat_bubble_offscreen_x = -get_viewport().get_visible_rect().size.x as int
+			chat_bubble_position_y = get_viewport().get_visible_rect().size.y as int - 150
+			character_portrait = left_character_portrait
+			character_nameplate = left_character_nameplate
+			chat_text = left_chat_text
+			finished_indicator = left_finished_indicator
+		BubbleType.RIGHT:
+			right_chat_box.visible = true
+			chat_bubble_offscreen_x = get_viewport().get_visible_rect().size.x as int
+			chat_bubble_position_y = get_viewport().get_visible_rect().size.y as int - 150
+			character_portrait = right_character_portrait
+			character_nameplate = right_character_nameplate
+			chat_text = right_chat_text
+			finished_indicator = right_finished_indicator
+		BubbleType.SYSTEM:
+			system_chat_box.visible = true
+			chat_bubble_offscreen_x = 0
+			chat_bubble_position_y = get_viewport().get_visible_rect().size.y as int - 150
+			character_portrait = null
+			character_nameplate = null
+			chat_text = system_chat_text
+			finished_indicator = system_finished_indicator
+
 	if bubble_on_screen:
 		queue_free()
 		return
@@ -81,6 +128,9 @@ func _process(delta: float):
 	if state_machine.current_state != null:
 		state_machine._process(delta)
 
+func _gui_input(event: InputEvent):
+	Debug._print("GUI input received in chat bubble.")
+	emit_signal("input_received", event)
 
 func _unhandled_input(event: InputEvent):
 	emit_signal("input_received", event)
@@ -99,14 +149,20 @@ func reset_chat_bubble():
 
 
 func set_portrait_texture(texture: Texture2D):
+	if bubble_type == BubbleType.SYSTEM:
+		return
 	character_portrait.texture = texture
-
+	if bubble_type == BubbleType.LEFT:
+		character_portrait.flip_h = true
+	else:
+		character_portrait.flip_h = false
 
 @warning_ignore("SHADOWED_VARIABLE_BASE_CLASS")
 
 
 func set_character_name(name: String):
-	character_nameplate.text = name
+	if character_nameplate:
+		character_nameplate.text = name
 
 
 #endregion Class Methods
@@ -223,6 +279,7 @@ func _ready_idle_state() -> State:
 			or Input.is_action_just_pressed_by_event("ui_cancel", _event)
 		):
 			get_tree().root.set_input_as_handled()
+			accept_event()
 			emit_signal.call_deferred("next_message_requested")
 	return state
 
@@ -253,10 +310,10 @@ func _ready_presenting_state():
 
 	state._on_input = func(_event):
 		if Input.is_action_just_pressed_by_event("ui_accept", _event):
-			get_tree().root.set_input_as_handled()
+			accept_event()
 			_current_chat_speed = Settings.ChatSpeed.SUPER
 		if _event.is_action_just_pressed_by_event("ui_cancel"):
-			get_tree().root.set_input_as_handled()
+			accept_event()
 			_current_chat_speed = Settings.ChatSpeed.INSTANT
 	return state
 #endregion Presenting State
