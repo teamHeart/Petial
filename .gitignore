@@ -8,4 +8,4 @@
 /Movies/
 *.import
 godot4
-/addons/godotsteam/win64/*lib*
+addons/godotsteam/win64/*lib*
