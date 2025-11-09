@@ -4,10 +4,11 @@ extends Node2D
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:  #():
 	# Initialize the scene
-	var fs = FeyscriptInterpreter.get_instance()
-	fs.run_script("res://src/util/Feyscript/test/test_scripts/set.fey")
-	print(fs._script)
-	print(fs._variables)
+	# var fs = FeyscriptInterpreter.get_instance()
+	# fs.run_script("res://src/util/Feyscript/test/test_scripts/set.fey")
+	# print(fs._script)
+	# print(fs._variables)
+	pass
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

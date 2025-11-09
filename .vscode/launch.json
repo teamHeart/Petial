@@ -11,7 +11,7 @@
             "request": "launch",
             "project": "${workspaceFolder}",
             "scene": "main",
-            "editor_path": "c:\\Program Files (x86)\\Steam\\steamapps\\common\\Godot Engine\\godot.windows.opt.tools.64.exe",
+            "editor_path": "c:\\Program Files\\Godot Engine\\Godot_v4.5-stable_win64_console.exe"
         },
         {
             "name": "GDScript: Launch Pinned Scene",
@@ -19,7 +19,7 @@
             "request": "launch",
             "project": "${workspaceFolder}",
             "scene": "pinned",
-            "editor_path": "c:\\Program Files (x86)\\Steam\\steamapps\\common\\Godot Engine\\godot.windows.opt.tools.64.exe",
+            "editor_path": "c:\\Program Files\\Godot Engine\\Godot_v4.5-stable_win64_console.exe",
         },
         {
             "name": "GDScript: Attach to Running Instance",
@@ -33,7 +33,7 @@
             "request": "launch",
             "project": "${workspaceFolder}",
             "scene": "current",
-            "editor_path": "c:\\Program Files (x86)\\Steam\\steamapps\\common\\Godot Engine\\godot.windows.opt.tools.64.exe"
+            "editor_path": "c:\\Program Files\\Godot Engine\\Godot_v4.5-stable_win64_console.exe"
         }
     ]
 }

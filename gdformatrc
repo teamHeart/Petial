@@ -1,5 +1,5 @@
 excluded_directories: !!set
   .git: null
-line_length: 120
+line_length: 100
 safety_checks: null
 use_spaces: null

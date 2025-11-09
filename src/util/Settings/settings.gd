@@ -7,7 +7,7 @@ enum ChatSpeed {
 	SUPER = 1,
 	FAST = 2,
 	NORMAL = 4,
-	SLOW = 8,
+	SLOW = 6,
 }
 
-static var chat_speed: ChatSpeed = ChatSpeed.NORMAL
+static var chat_speed: ChatSpeed = ChatSpeed.FAST
