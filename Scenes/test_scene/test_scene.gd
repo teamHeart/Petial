@@ -28,24 +28,27 @@ func make_bubble():
 	# bb.set_portrait_texture(load("res://img/Temp Images/Nature_portraits.png"))
 	var bubble_instance = chat_bubble.instantiate()
 	bubble_instance.bubble_type = ChatBubble.BubbleType.LEFT
-	bubble_instance.full_text.clear()
-	bubble_instance.full_text.push_back("012345678901234567890123456789012345678901234567890123456789")
-	# bubble_instance.full_text.push_back("Hello there! This is a test chat bubble.")
-	# bubble_instance.full_text.push_back("Here's another line of dialogue to display.")
-	# bubble_instance.full_text.push_back("Camera shake effects are fun, aren't they?")
-	# bubble_instance.full_text.push_back("We can have multiple lines in a single bubble.\nIsn't that great?")
-	# bubble_instance.full_text.push_back(
-	# 	"Want fun text effects? [rainbow freq=1.0 sat=0.8 val=0.8 speed=1.0]We can add those too![/rainbow]"
-	# )
-	# bubble_instance.full_text.push_back("We can even have [OoOoOo]custom effects[/OoOoOo] applied to the text!")
-	# bubble_instance.full_text.push_back("This is the final message in this bubble.")
+	bubble_instance.full_text.push_back("Hello there! This is a test chat bubble.")
+	bubble_instance.full_text.push_back("Here's another line of dialogue to display.")
+	bubble_instance.full_text.push_back("Camera shake effects are fun, aren't they?")
+	bubble_instance.full_text.push_back("We can have multiple lines in a single bubble.[br]Isn't that great?")
+	bubble_instance.full_text.push_back(
+		"Want fun text effects? [rainbow freq=1.0 sat=0.8 val=0.8 speed=1.0]We can add those too![/rainbow]"
+	)
+	bubble_instance.full_text.push_back("We can even have [OoOoOo]custom effects[/OoOoOo] applied to the text!")
+	bubble_instance.full_text.push_back("This is the final message in this bubble.")
 	add_child(bubble_instance)
 	bubble_instance.connect("appeared", func(): start_time = Time.get_ticks_msec())
-	bubble_instance.connect("fully_displayed", func():
-		stop_time = Time.get_ticks_msec()
-		print("Time to display full text: %d ms" % (stop_time - start_time))
-		)
+	bubble_instance.connect(
+		"fully_displayed",
+		func():
+			stop_time = Time.get_ticks_msec()
+			print("Time to display full text: %d ms" % (stop_time - start_time))
+	)
 	bubble_instance.chat_text.install_effect(OoOoOo.new())
 	bubble_instance.set_character_name("Nature Spirit")
 	bubble_instance.set_portrait_texture(load("res://img/Temp Images/Nature_portraits.png"))
-	bubble_instance.chat_speed = Settings.ChatSpeed.SLOW
+
+func _unhandled_input(event: InputEvent) -> void:
+	if Input.is_action_just_pressed_by_event("Cancel", event):
+		get_tree().quit()

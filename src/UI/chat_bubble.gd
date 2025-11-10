@@ -77,7 +77,7 @@ func _ready():
 	match bubble_type:
 		BubbleType.LEFT:
 			left_chat_box.visible = true
-			chat_bubble_offscreen_x = -get_viewport().get_visible_rect().size.x as int
+			chat_bubble_offscreen_x = - get_viewport().get_visible_rect().size.x as int
 			chat_bubble_position_y = get_viewport().get_visible_rect().size.y as int - 150
 			character_portrait = left_character_portrait
 			character_nameplate = left_character_nameplate
@@ -101,9 +101,6 @@ func _ready():
 		# 	finished_indicator = system_finished_indicator
 
 	if bubble_on_screen:
-		queue_free()
-		return
-	if full_text.size() == 0:
 		queue_free()
 		return
 	bubble_on_screen = true
@@ -165,8 +162,6 @@ func set_portrait_texture(texture: Texture2D):
 
 
 @warning_ignore("SHADOWED_VARIABLE_BASE_CLASS")
-
-
 func set_character_name(name: String):
 	if character_nameplate:
 		character_nameplate.text = name
