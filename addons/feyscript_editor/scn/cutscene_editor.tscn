@@ -1,0 +1,103 @@
+[gd_scene load_steps=11 format=3 uid="uid://byvbhqbtkawt1"]
+
+[ext_resource type="Theme" uid="uid://cfkmve5bc2f5k" path="res://util/Themes/cutscene_editor.tres" id="1_o1i6u"]
+[ext_resource type="Script" uid="uid://cc32n0ec28n46" path="res://addons/feyscript_editor/src/cutscene_editor.gd" id="2_6354f"]
+[ext_resource type="Texture2D" uid="uid://cyjabe48op5t8" path="res://img/UI/add.png" id="2_ht8ul"]
+[ext_resource type="Texture2D" uid="uid://0yg03rn0a8u1" path="res://img/UI/delete.png" id="3_6354f"]
+[ext_resource type="Texture2D" uid="uid://m03w4b2iymus" path="res://img/UI/scissor.png" id="4_515so"]
+[ext_resource type="Texture2D" uid="uid://dou8qcdnu6cdx" path="res://img/UI/copy.png" id="5_v3ssb"]
+[ext_resource type="Texture2D" uid="uid://co2d4pu06j3ms" path="res://img/UI/paste.png" id="6_mtvbr"]
+[ext_resource type="Texture2D" uid="uid://dc7u3ms2hqcw0" path="res://img/UI/clapboard.png" id="7_ci4lr"]
+[ext_resource type="Texture2D" uid="uid://cibhvwmyl0qta" path="res://img/UI/diskette.png" id="8_dp4n2"]
+[ext_resource type="Texture2D" uid="uid://bb68b20rcnhc5" path="res://img/UI/close.png" id="9_5g4f8"]
+
+[node name="CutsceneEditor" type="VBoxContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_o1i6u")
+script = ExtResource("2_6354f")
+
+[node name="ToolBar" type="PanelContainer" parent="."]
+layout_mode = 2
+
+[node name="Margin" type="MarginContainer" parent="ToolBar"]
+layout_mode = 2
+
+[node name="HBox" type="HBoxContainer" parent="ToolBar/Margin"]
+layout_mode = 2
+
+[node name="HBoxLeft" type="HBoxContainer" parent="ToolBar/Margin/HBox"]
+layout_mode = 2
+
+[node name="NewNodeButton" type="Button" parent="ToolBar/Margin/HBox/HBoxLeft"]
+layout_mode = 2
+theme_override_constants/icon_max_width = 24
+text = "New Node"
+icon = ExtResource("2_ht8ul")
+
+[node name="DeleteNodeButton" type="Button" parent="ToolBar/Margin/HBox/HBoxLeft"]
+layout_mode = 2
+theme_override_constants/icon_max_width = 24
+text = "Delete Node"
+icon = ExtResource("3_6354f")
+
+[node name="VSeparator" type="VSeparator" parent="ToolBar/Margin/HBox/HBoxLeft"]
+layout_mode = 2
+
+[node name="CutButton" type="Button" parent="ToolBar/Margin/HBox/HBoxLeft"]
+layout_mode = 2
+theme_override_constants/icon_max_width = 24
+text = "Cut"
+icon = ExtResource("4_515so")
+
+[node name="CopyButton" type="Button" parent="ToolBar/Margin/HBox/HBoxLeft"]
+layout_mode = 2
+theme_override_constants/icon_max_width = 24
+text = "Copy"
+icon = ExtResource("5_v3ssb")
+
+[node name="PasteButton" type="Button" parent="ToolBar/Margin/HBox/HBoxLeft"]
+layout_mode = 2
+theme_override_constants/icon_max_width = 24
+text = "Paste"
+icon = ExtResource("6_mtvbr")
+
+[node name="HBoxRight" type="HBoxContainer" parent="ToolBar/Margin/HBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 2
+
+[node name="TestSceneButton" type="Button" parent="ToolBar/Margin/HBox/HBoxRight"]
+layout_mode = 2
+theme_override_constants/icon_max_width = 24
+text = "Test Scene"
+icon = ExtResource("7_ci4lr")
+
+[node name="VSeparator2" type="VSeparator" parent="ToolBar/Margin/HBox/HBoxRight"]
+layout_mode = 2
+
+[node name="SaveButton" type="Button" parent="ToolBar/Margin/HBox/HBoxRight"]
+layout_mode = 2
+theme_override_constants/icon_max_width = 24
+text = "Save"
+icon = ExtResource("8_dp4n2")
+
+[node name="SaveAsButton" type="Button" parent="ToolBar/Margin/HBox/HBoxRight"]
+layout_mode = 2
+theme_override_constants/icon_max_width = 24
+text = "Save As..."
+icon = ExtResource("8_dp4n2")
+
+[node name="CloseButton" type="Button" parent="ToolBar/Margin/HBox/HBoxRight"]
+layout_mode = 2
+theme_override_constants/icon_max_width = 24
+text = "Close"
+icon = ExtResource("9_5g4f8")
+
+[node name="GraphEdit" type="GraphEdit" parent="."]
+layout_mode = 2
+size_flags_vertical = 3
+grid_pattern = 1

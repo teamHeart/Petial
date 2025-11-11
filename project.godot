@@ -46,7 +46,7 @@ naming/script_name_casing=2
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/TileMapDual/plugin.cfg", "res://addons/cba/plugin.cfg", "res://addons/gdLinter/plugin.cfg", "res://addons/signal_lens/plugin.cfg", "res://addons/simple_gdscript_formatter/plugin.cfg", "res://addons/steam_devkit_notifier/plugin.cfg", "res://addons/wingman/plugin.cfg")
+enabled=PackedStringArray("res://addons/TileMapDual/plugin.cfg", "res://addons/feyscript_editor/plugin.cfg", "res://addons/signal_lens/plugin.cfg", "res://addons/steam_devkit_notifier/plugin.cfg", "res://addons/wingman/plugin.cfg")
 
 [input]
 

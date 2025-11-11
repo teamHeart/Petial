@@ -8,5 +8,5 @@
 			"color": "#fabcde"
 		} // Black ruler at 120 characters
 	],
-	"godotTools.editorPath.godot4": "c:\\Program Files\\Godot Engine\\Godot_v4.5-stable_win64_console.exe"
+	"godotTools.editorPath.godot4": "\"C:\\Program Files\\Godot_v4.5-stable_win64.exe\""
 }

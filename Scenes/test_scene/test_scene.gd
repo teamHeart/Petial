@@ -35,7 +35,8 @@ func make_bubble():
 	bubble_instance.full_text.push_back(
 		"Want fun text effects? [rainbow freq=1.0 sat=0.8 val=0.8 speed=1.0]We can add those too![/rainbow]"
 	)
-	bubble_instance.full_text.push_back("We can even have [OoOoOo]custom effects[/OoOoOo] applied to the text!")
+	bubble_instance.full_text.push_back("We can even have [OoOoOo]custom effects[/OoOoOo] applied to the text! Just tell Claire what you want and she will do her best to make it!❤")
+
 	bubble_instance.full_text.push_back("This is the final message in this bubble.")
 	add_child(bubble_instance)
 	bubble_instance.connect("appeared", func(): start_time = Time.get_ticks_msec())
