@@ -1,5 +1,5 @@
 @tool
-extends GraphNode
+extends FeyscriptNode
 #region Declarations
 
 @onready var data_container: HBoxContainer = $VBoxContainer/DataContainer
@@ -25,3 +25,5 @@ func _ready():
             2:
                 p1.visible = false
     )
+
+    set_slot(0, true, FSNodeType.CUE, Color.DARK_GRAY, true, FSNodeType.DIALOGUE, Color.BLUE)
