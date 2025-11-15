@@ -19,7 +19,11 @@ static var bubble_on_screen: bool = false
 @export var bubble_type: BubbleType = BubbleType.LEFT
 @export var full_text: Array[String] = []
 @export var character_name: String
-@export var character_portrait_texture: Texture2D
+@export var character_portrait_texture: Texture2D:
+	set(value):
+		character_portrait_texture = value
+		if character_portrait:
+			character_portrait.texture = character_portrait_texture
 @export var _current_text_index: int = 0
 @export var chat_speed: Settings.ChatSpeed
 
