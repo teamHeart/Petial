@@ -16,3 +16,4 @@ func _on_preview_toggled(toggled_on: bool) -> void:
 		preview_pane.visible = true
 	else:
 		preview_pane.visible = false
+

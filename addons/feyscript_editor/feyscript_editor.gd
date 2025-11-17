@@ -17,13 +17,12 @@ func _disable_plugin() -> void:
 func _enter_tree() -> void:
 	# Initialization of the plugin goes here.
 	editor_instance = editor_panel.instantiate()
-	add_control_to_dock(EditorPlugin.DOCK_SLOT_RIGHT_UL, editor_instance)
+	add_control_to_bottom_panel(editor_instance, "Feyscript Editor")
 	pass
 
 
 func _exit_tree() -> void:
 	# Clean-up of the plugin goes here.
-	remove_control_from_docks(editor_instance)
 	remove_control_from_bottom_panel(editor_instance)
 	editor_instance.free()
 	pass
