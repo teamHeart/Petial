@@ -23,6 +23,10 @@ defense = 7
 max_hp = 40
 speed = 6
 move_speed = 3
+portraits = Dictionary[String, Texture2D]({
+"Happy": ExtResource("1_ctwut"),
+"Sad": ExtResource("1_ctwut")
+})
 animation = SubResource("SpriteFrames_5gwv4")
 turn_order_sprite = ExtResource("1_ctwut")
 id = 3

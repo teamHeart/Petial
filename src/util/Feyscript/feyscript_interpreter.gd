@@ -126,13 +126,7 @@ func _process_command(command: Dictionary) -> void:  # ():
 			_variables[command["variable"]] = command["value"]
 		"print":
 			# Print a literal or a previously set variable value
-			print(
-				(
-					_variables[command["message"]]
-					if command["message"] in _variables
-					else command["message"]
-				)
-			)
+			print(_variables[command["message"]] if command["message"] in _variables else command["message"])
 		"end":
 			_ended = true
 			_script.clear()

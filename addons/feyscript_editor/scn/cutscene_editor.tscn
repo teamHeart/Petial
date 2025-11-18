@@ -1,0 +1,212 @@
+[gd_scene load_steps=9 format=3 uid="uid://byvbhqbtkawt1"]
+
+[ext_resource type="Theme" uid="uid://b2xka5pehshj5" path="res://util/Themes/cutscene_editor.tres" id="1_o1i6u"]
+[ext_resource type="Script" uid="uid://cc32n0ec28n46" path="res://addons/feyscript_editor/src/cutscene_editor.gd" id="2_6354f"]
+[ext_resource type="Texture2D" uid="uid://brbd6jmnbt8t6" path="res://addons/feyscript_editor/img/left-arrow.png" id="3_e5m0n"]
+[ext_resource type="Texture2D" uid="uid://c10ewu70cwq8t" path="res://addons/feyscript_editor/img/right-arrow.png" id="4_wq3fb"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_e5m0n"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_e5m0n"]
+bg_color = Color(0.28235295, 0.28235295, 0.28235295, 1)
+border_width_left = 1
+border_color = Color(0.28235295, 0.28235295, 0.28235295, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_noh47"]
+bg_color = Color(0.20784314, 0.20784314, 0.20784314, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.28235295, 0.28235295, 0.28235295, 1)
+border_blend = true
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_noh47"]
+
+[node name="Control" type="Control"]
+clip_contents = true
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource("1_o1i6u")
+script = ExtResource("2_6354f")
+
+[node name="Hb" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 0
+
+[node name="SceneList" type="VBoxContainer" parent="Hb"]
+layout_mode = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="Hb/SceneList"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Hb/SceneList/PanelContainer"]
+layout_mode = 2
+
+[node name="Button" type="Button" parent="Hb/SceneList/PanelContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/icon_max_width = 24
+text = "New Scene"
+flat = true
+
+[node name="PanelContainer2" type="PanelContainer" parent="Hb/SceneList"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="ItemList" type="ItemList" parent="Hb/SceneList/PanelContainer2"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_e5m0n")
+
+[node name="VSeparator" type="VSeparator" parent="Hb"]
+layout_mode = 2
+theme_override_constants/separation = 1
+theme_override_styles/separator = SubResource("StyleBoxFlat_e5m0n")
+
+[node name="CutsceneEditor" type="VBoxContainer" parent="Hb"]
+clip_contents = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("1_o1i6u")
+
+[node name="ToolBar" type="PanelContainer" parent="Hb/CutsceneEditor"]
+layout_mode = 2
+
+[node name="HBox" type="HBoxContainer" parent="Hb/CutsceneEditor/ToolBar"]
+layout_mode = 2
+
+[node name="Button" type="Button" parent="Hb/CutsceneEditor/ToolBar/HBox"]
+layout_mode = 2
+theme_override_constants/icon_max_width = 16
+icon = ExtResource("3_e5m0n")
+
+[node name="Button2" type="Button" parent="Hb/CutsceneEditor/ToolBar/HBox"]
+layout_mode = 2
+theme_override_constants/icon_max_width = 16
+icon = ExtResource("4_wq3fb")
+
+[node name="NewNodeButton" type="Button" parent="Hb/CutsceneEditor/ToolBar/HBox"]
+layout_mode = 2
+theme_override_constants/icon_max_width = 24
+text = "New Node"
+
+[node name="DeleteNodeButton" type="Button" parent="Hb/CutsceneEditor/ToolBar/HBox"]
+layout_mode = 2
+theme_override_constants/icon_max_width = 24
+text = "Delete Node"
+
+[node name="VSeparator" type="VSeparator" parent="Hb/CutsceneEditor/ToolBar/HBox"]
+layout_mode = 2
+
+[node name="CutButton" type="Button" parent="Hb/CutsceneEditor/ToolBar/HBox"]
+layout_mode = 2
+theme_override_constants/icon_max_width = 24
+text = "Cut"
+
+[node name="CopyButton" type="Button" parent="Hb/CutsceneEditor/ToolBar/HBox"]
+layout_mode = 2
+theme_override_constants/icon_max_width = 24
+text = "Copy"
+
+[node name="PasteButton" type="Button" parent="Hb/CutsceneEditor/ToolBar/HBox"]
+layout_mode = 2
+theme_override_constants/icon_max_width = 24
+text = "Paste"
+
+[node name="Control" type="Control" parent="Hb/CutsceneEditor/ToolBar/HBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="TestSceneButton" type="Button" parent="Hb/CutsceneEditor/ToolBar/HBox"]
+layout_mode = 2
+theme_override_constants/icon_max_width = 24
+text = "Test Scene"
+
+[node name="VSeparator2" type="VSeparator" parent="Hb/CutsceneEditor/ToolBar/HBox"]
+layout_mode = 2
+
+[node name="SaveButton" type="Button" parent="Hb/CutsceneEditor/ToolBar/HBox"]
+layout_mode = 2
+theme_override_constants/icon_max_width = 24
+text = "Save"
+
+[node name="SaveAsButton" type="Button" parent="Hb/CutsceneEditor/ToolBar/HBox"]
+layout_mode = 2
+theme_override_constants/icon_max_width = 24
+text = "Save As..."
+
+[node name="CloseButton" type="Button" parent="Hb/CutsceneEditor/ToolBar/HBox"]
+layout_mode = 2
+theme_override_constants/icon_max_width = 24
+text = "Close"
+
+[node name="GraphEdit" type="GraphEdit" parent="Hb/CutsceneEditor"]
+z_index = -2
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 1
+scroll_offset = Vector2(-93, -489)
+grid_pattern = 1
+right_disconnects = true
+type_names = {
+0: "Misc",
+1: "Action",
+2: "Dialogue",
+3: "Branch",
+4: "Start",
+5: "End",
+6: "Cue",
+7: "Text",
+8: "Texture",
+9: "Actor",
+10: "Portrait",
+11: "Sound",
+12: "Music",
+13: "Effect",
+14: "Bubble Type"
+}
+show_zoom_label = true
+
+[node name="C" type="Control" parent="."]
+visible = false
+z_index = 1
+anchors_preset = 0
+offset_left = 313.0
+offset_top = 162.0
+offset_right = 2233.0
+offset_bottom = 162.0
+
+[node name="PC" type="PanelContainer" parent="C"]
+layout_mode = 0
+offset_right = 216.0
+offset_bottom = 129.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_noh47")
+
+[node name="MC" type="MarginContainer" parent="C/PC"]
+layout_mode = 2
+mouse_filter = 0
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_right = 4
+
+[node name="NewNodeList" type="ItemList" parent="C/PC/MC"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/v_separation = 4
+theme_override_constants/outline_size = 8
+theme_override_styles/panel = SubResource("StyleBoxEmpty_noh47")
+allow_reselect = true
+allow_search = false
+item_count = 3
+item_0/text = "Dialogue Node"
+item_1/text = "Text Node"
+item_2/text = "Actor"

@@ -38,16 +38,21 @@ func change_state(new_state: State) -> bool:  # ():
 	return changed
 
 
-func _process(_delta):
+func process(_delta):
 	if current_state:
 		current_state.process(_delta)
 
 
-# func _physics_process(_delta):
-# 	if current_state:
-# 		current_state.physics_process(_delta)
+func physics_process(_delta):
+	if current_state:
+		current_state.physics_process(_delta)
 
 
-func _input(_event):
+func input(_event):
 	if current_state:
 		current_state.input(_event)
+
+
+func unhandled_input(_event):
+	if current_state:
+		current_state.unhandled_input(_event)

@@ -1,5 +1,12 @@
 {
 	"githubPullRequests.ignoredPullRequestBranches": [
 		"main"
-	]
+	],
+	"editor.rulers": [
+		{
+			"column": 100,
+			"color": "#fabcde"
+		} // Black ruler at 120 characters
+	],
+	"godotTools.editorPath.godot4": "c:\\Program Files\\Godot Engine\\Godot_v4.5-stable_win64.exe"
 }

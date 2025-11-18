@@ -16,7 +16,8 @@
 [ext_resource type="Script" uid="uid://dfb6jav4wt782" path="res://src/Battle/turn_order_display.gd" id="13_xdap8"]
 [ext_resource type="Script" uid="uid://dsd6ntixc03ia" path="res://src/Battle/turn_order_container.gd" id="14_f856b"]
 [ext_resource type="Theme" uid="uid://c6ym5lmrssndh" path="res://util/Themes/button_theme.tres" id="15_778cw"]
-[ext_resource type="Script" uid="uid://cd58dt4mmnmau" path="res://src/util/finite_state_machine.gd" id="17_vuvll"]
+[ext_resource type="Script" uid="uid://cogwxe4u0carl" path="res://src/util/Finite State Machine/finite_state_machine.gd" id="17_vuvll"]
+
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_f4ggb"]
 

@@ -1,8 +1,45 @@
-[gd_scene load_steps=4 format=3 uid="uid://c3g378l17u1r0"]
+[gd_scene load_steps=16 format=3 uid="uid://c3g378l17u1r0"]
 
 [ext_resource type="Script" uid="uid://djmt3yoihkbb5" path="res://Scenes/test_scene/test_scene.gd" id="1_tf2av"]
+[ext_resource type="Shader" uid="uid://biyj2mw3borgt" path="res://Shaders/water_distort.gdshader" id="2_dyo71"]
 [ext_resource type="Texture2D" uid="uid://cxfu0j2vu3kwg" path="res://img/Temp Images/Petial_World_Map.png" id="2_lvvqt"]
 [ext_resource type="Material" uid="uid://dqidriqvcbv83" path="res://Materials/dappled_light_material.tres" id="3_lvvqt"]
+[ext_resource type="Shader" uid="uid://ctsf2ys5gdste" path="res://Shaders/blink.gdshader" id="4_uy1to"]
+[ext_resource type="Texture2D" uid="uid://b1jcjreuwhnf0" path="res://img/Temp Images/Blue_1.png" id="5_x0nsy"]
+[ext_resource type="Script" uid="uid://bsfloeyi18kxa" path="res://Scenes/test_scene/blue_1.gd" id="6_x0nsy"]
+[ext_resource type="Texture2D" uid="uid://qsy5xm7usmi" path="res://img/Temp Images/light.png" id="8_gr86d"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_dyo71"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_gr86d"]
+noise = SubResource("FastNoiseLite_dyo71")
+seamless = true
+seamless_blend_skirt = 1.0
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_8pl5r"]
+seed = 7
+metadata/_preview_in_3d_space_ = true
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_of2bk"]
+noise = SubResource("FastNoiseLite_8pl5r")
+seamless = true
+seamless_blend_skirt = 1.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_gr86d"]
+shader = ExtResource("2_dyo71")
+shader_parameter/noise_1 = SubResource("NoiseTexture2D_gr86d")
+shader_parameter/noise_2 = SubResource("NoiseTexture2D_of2bk")
+shader_parameter/time_scale = 1.0
+shader_parameter/distortion_strength = 0.0125
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_dyo71"]
+shader = ExtResource("4_uy1to")
+shader_parameter/blink_intensity = 0.0
+shader_parameter/blink_color = Color(1, 1, 1, 1)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_8pl5r"]
+cull_mode = 2
+polygon = PackedVector2Array(-12.738831, -14, -3.6396484, -20, 5.4595337, -20, 12.738861, -14, 16.37854, -4, 12.738861, 2, 7.279358, 6, 12.738861, 12, 12.738861, 16, 7.279358, 20, 3.639679, 28, -3.6396484, 28, -7.2793274, 20, -12.738831, 16, -12.738831, 12, -7.2793274, 6, -12.738831, 2, -16.37851, -6)
 
 [node name="TestScene" type="Node2D"]
 script = ExtResource("1_tf2av")
@@ -11,8 +48,6 @@ camera_shake_intensity = 1.0
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture_filter = 1
 texture_repeat = 1
-material = ExtResource("3_lvvqt")
-scale = Vector2(0.57, 0.57)
 texture = ExtResource("2_lvvqt")
 centered = false
 
@@ -21,8 +56,8 @@ material = ExtResource("3_lvvqt")
 anchor_mode = 0
 
 [node name="Timer" type="Timer" parent="."]
-wait_time = 3.0
 one_shot = true
+autostart = true
 
 [node name="Button" type="Button" parent="."]
 offset_left = 745.0
@@ -31,11 +66,57 @@ offset_right = 895.0
 offset_bottom = 112.0
 text = "Make Chat"
 
-[node name="ColorRect" type="ColorRect" parent="."]
-visible = false
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
 material = ExtResource("3_lvvqt")
-offset_right = 2046.0
-offset_bottom = 1150.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 color = Color(0, 0, 0, 1)
+
+[node name="WavyLayer" type="CanvasLayer" parent="."]
+
+[node name="ColorRect" type="ColorRect" parent="WavyLayer"]
+material = SubResource("ShaderMaterial_gr86d")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.47843137, 0.16078432, 0.45882353, 1)
+
+[node name="CanvasModulate" type="CanvasModulate" parent="."]
+visible = false
+color = Color(0.48962224, 0.48962224, 0.48962218, 1)
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+visible = false
+position = Vector2(636, 155)
+scale = Vector2(5.0937505, 1.2890625)
+color = Color(1, 0.5019608, 0, 1)
+energy = 1.63
+range_item_cull_mask = 3
+shadow_enabled = true
+shadow_color = Color(0.8464035, 1.347661e-06, 0.46126688, 0)
+texture = ExtResource("8_gr86d")
+
+[node name="Node2D" type="Node2D" parent="."]
+visible = false
+position = Vector2(882, 163)
+scale = Vector2(4, 2)
+
+[node name="Blue1" type="Sprite2D" parent="Node2D"]
+light_mask = 3
+material = SubResource("ShaderMaterial_dyo71")
+texture = ExtResource("5_x0nsy")
+script = ExtResource("6_x0nsy")
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="Node2D"]
+occluder = SubResource("OccluderPolygon2D_8pl5r")
+
+[connection signal="pressed" from="Button" to="Node2D/Blue1" method="_on_button_pressed"]

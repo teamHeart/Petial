@@ -1,0 +1,27 @@
+[gd_scene load_steps=2 format=3 uid="uid://gehk3rcfxapf"]
+
+[ext_resource type="Script" uid="uid://teukbqr7hdb2" path="res://addons/feyscript_editor/src/Nodes/text_node.gd" id="1_hdwx3"]
+
+[node name="TextNode" type="GraphNode"]
+offset_right = 284.0
+offset_bottom = 211.0
+title = "Text Node"
+ignore_invalid_connection_type = true
+slot/0/left_enabled = false
+slot/0/left_type = 0
+slot/0/left_color = Color(1, 1, 1, 1)
+slot/0/left_icon = null
+slot/0/right_enabled = true
+slot/0/right_type = 7
+slot/0/right_color = Color(0, 1, 0, 1)
+slot/0/right_icon = null
+slot/0/draw_stylebox = true
+script = ExtResource("1_hdwx3")
+node_type = 6
+
+[node name="TextEdit" type="TextEdit" parent="."]
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 1
+placeholder_text = "...
+What's my line again?"

@@ -4,7 +4,7 @@
 		{
 			"label": "Launch Godot",
 			"type": "process",
-			"command": "c:\\Program Files\\Godot Engine\\Godot_v4.5-stable_win64.exe",
+			"command": "c:\\Program Files\\Godot Engine\\Godot_v4.5-stable_win64_console.exe",
 			"args": [
 				"--path",
 				"${workspaceFolder}",
@@ -27,8 +27,27 @@
 			],
 			"group": "test"
 		},
+		// region Format code
 		{
-			"label": "Format Code",
+			"label": "Format File",
+			"type": "process",
+			"command": "gdformat",
+			"args": [
+				"${file}"
+			],
+			"presentation": {
+				"panel": "new",
+				"showReuseMessage": false,
+				"clear": false,
+				"group": "gd",
+				"reveal": "silent",
+				"close": false
+			},
+			"problemMatcher": []
+		},
+		// region Format entire project
+		{
+			"label": "Format Project",
 			"type": "process",
 			"command": "gdformat",
 			"args": [
@@ -45,7 +64,36 @@
 			"problemMatcher": []
 		},
 		{
-			"label": "Lint Code",
+			"label": "Lint File",
+			"type": "process",
+			"command": "gdlint",
+			"args": [
+				"${file}"
+			],
+			"presentation": {
+				"panel": "new",
+				"showReuseMessage": false,
+				"clear": false,
+				"group": "gd",
+				"reveal": "silent",
+				"close": false
+			},
+			"problemMatcher": {
+				"fileLocation": [
+					"absolute"
+				],
+				"pattern": {
+					"regexp": "^(.*):(\\d+):(\\d+): (warning|error): (.*)$",
+					"file": 1,
+					"line": 2,
+					"column": 3,
+					"severity": 4,
+					"message": 5
+				}
+			}
+		},
+		{
+			"label": "Lint Project",
 			"type": "process",
 			"command": "gdlint",
 			"args": [
@@ -72,6 +120,6 @@
 					"message": 5
 				}
 			}
-		}
+		},
 	]
 }

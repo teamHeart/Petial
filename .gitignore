@@ -2,9 +2,10 @@
 .godot/
 /android/
 *.code-workspace
-.vscode/settings.json
+/.vscode/settings.json
 .editorconfig
 *.tmp
 /Movies/
 *.import
 godot4
+**/godotsteam/win64/*lib*.dll

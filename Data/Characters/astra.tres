@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="DBAlly" load_steps=6 format=3 uid="uid://fs3uprg81xxk"]
+[gd_resource type="Resource" script_class="DBAlly" load_steps=7 format=3 uid="uid://fs3uprg81xxk"]
 
 [ext_resource type="Texture2D" uid="uid://bfxrbki40j5yv" path="res://img/Temp Images/Astra_1.png" id="1_8vogn"]
 [ext_resource type="Script" uid="uid://ct83xewko01pm" path="res://Data/util/ally.gd" id="1_oei81"]
@@ -19,6 +19,10 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="Curve" id="Curve_8vogn"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1e-05, 0), 2.2966738, 2.2966738, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 3
+
 [resource]
 script = ExtResource("1_oei81")
 level = 1
@@ -27,6 +31,7 @@ defense = 10
 max_hp = 100
 speed = 10
 move_speed = 3
+exp_curve = SubResource("Curve_8vogn")
 animation = SubResource("SpriteFrames_2qvlx")
 turn_order_sprite = ExtResource("1_8vogn")
 name = "Astra"
