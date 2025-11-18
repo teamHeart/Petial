@@ -1,8 +1,8 @@
 @tool
 extends Control
 
-const dialogue_node_scene = preload("uid://bbduuy5sybcae")
-const text_node_scene = preload("uid://gehk3rcfxapf")
+const dialogue_node_scene = preload("res://addons/feyscript_editor/scn/Nodes/dialogue_node.tscn")
+const text_node_scene = preload("res://addons/feyscript_editor/scn/Nodes/text_node.tscn")
 
 
 #region Declarations

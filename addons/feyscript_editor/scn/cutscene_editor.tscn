@@ -1,7 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://byvbhqbtkawt1"]
+[gd_scene load_steps=9 format=3 uid="uid://byvbhqbtkawt1"]
 
 [ext_resource type="Theme" uid="uid://b2xka5pehshj5" path="res://util/Themes/cutscene_editor.tres" id="1_o1i6u"]
 [ext_resource type="Script" uid="uid://cc32n0ec28n46" path="res://addons/feyscript_editor/src/cutscene_editor.gd" id="2_6354f"]
+[ext_resource type="Texture2D" uid="uid://brbd6jmnbt8t6" path="res://addons/feyscript_editor/img/left-arrow.png" id="3_e5m0n"]
+[ext_resource type="Texture2D" uid="uid://c10ewu70cwq8t" path="res://addons/feyscript_editor/img/right-arrow.png" id="4_wq3fb"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_e5m0n"]
 
@@ -83,6 +85,16 @@ layout_mode = 2
 [node name="HBox" type="HBoxContainer" parent="Hb/CutsceneEditor/ToolBar"]
 layout_mode = 2
 
+[node name="Button" type="Button" parent="Hb/CutsceneEditor/ToolBar/HBox"]
+layout_mode = 2
+theme_override_constants/icon_max_width = 16
+icon = ExtResource("3_e5m0n")
+
+[node name="Button2" type="Button" parent="Hb/CutsceneEditor/ToolBar/HBox"]
+layout_mode = 2
+theme_override_constants/icon_max_width = 16
+icon = ExtResource("4_wq3fb")
+
 [node name="NewNodeButton" type="Button" parent="Hb/CutsceneEditor/ToolBar/HBox"]
 layout_mode = 2
 theme_override_constants/icon_max_width = 24
@@ -143,7 +155,7 @@ z_index = -2
 layout_mode = 2
 size_flags_vertical = 3
 mouse_filter = 1
-scroll_offset = Vector2(-958, -9)
+scroll_offset = Vector2(-93, -489)
 grid_pattern = 1
 right_disconnects = true
 type_names = {

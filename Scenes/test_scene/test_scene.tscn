@@ -67,7 +67,6 @@ offset_bottom = 112.0
 text = "Make Chat"
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
-visible = false
 
 [node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
 material = ExtResource("3_lvvqt")
@@ -80,7 +79,6 @@ mouse_filter = 2
 color = Color(0, 0, 0, 1)
 
 [node name="WavyLayer" type="CanvasLayer" parent="."]
-visible = false
 
 [node name="ColorRect" type="ColorRect" parent="WavyLayer"]
 material = SubResource("ShaderMaterial_gr86d")
