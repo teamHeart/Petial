@@ -44,6 +44,10 @@ We makin' a game, my dudez!
 * **Claire** *(She/Her)* \
   Programming and stuff \
   Fave Bug: Orchid Mantis
+
+* **Julia** *(She/Her)* \
+  Programming, combat stuffs? \
+  Fav bug: Rosy maple moth! (Or the cute lil jumping spiders, if spiders count)
   
 * **Amanda** *(She/They)* \
   Programming Support \
